@@ -1,0 +1,416 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero__scanlines" aria-hidden="true"></div>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__content reveal">
+      <div class="badge-tag">
+        <i class="fa-solid fa-satellite-dish"></i> Được tin cậy trên 5 châu lục
+      </div>
+      <h1 class="hero__title">
+        <span id="typedText" class="typed-text">Kỹ sư đường bộ tự chủ AI</span><span class="typed-cursor" aria-hidden="true">|</span>
+      </h1>
+      <p class="hero__desc">
+        Giám sát đường bộ được hỗ trợ bởi AI giúp tự động phát hiện lỗi, đánh giá tình trạng mặt đường và cung cấp những thông tin hữu ích để bảo trì hạ tầng và quản lý tài sản thông minh hơn.
+      </p>
+      <div class="hero__actions">
+        <a href="#agents" class="btn btn--primary">
+          Khám phá tác nhân AI <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="{% url 'contact' %}" class="btn btn--outline">
+          <i class="fa-solid fa-play"></i> Đặt lịch Demo
+        </a>
+      </div>
+      <div class="hero__meta">
+        <div class="hero__meta-item"><strong>1.000+ km</strong><span>Đoạn đường đã quét</span></div>
+        <div class="hero__meta-divider" aria-hidden="true"></div>
+        <div class="hero__meta-item"><strong>95%</strong><span>Độ chính xác AI</span></div>
+        <div class="hero__meta-divider" aria-hidden="true"></div>
+        <div class="hero__meta-item"><strong>24/7</strong><span>Giám sát thời gian thực</span></div>
+      </div>
+    </div>
+
+    <div class="hero__visual reveal">
+      <div class="scan-card">
+        <div class="scan-card__header">
+          <div class="window-dots">
+            <span class="dot dot--red"></span>
+            <span class="dot dot--yellow"></span>
+            <span class="dot dot--green"></span>
+          </div>
+          <span class="scan-card__title"><i class="fa-solid fa-brain"></i> ROAD-VISION-AI · DEMO TƯƠNG TÁC</span>
+          <span class="status-pill"><span class="status-pulse"></span> LIVE</span>
+        </div>
+        <div class="scan-card__tabs">
+          <button class="scan-tab active" data-route="ct01">Cao tốc Bắc-Nam</button>
+          <button class="scan-tab" data-route="ql1a">Quốc lộ 1A</button>
+          <button class="scan-tab" data-route="dothi">Đường Đô thị</button>
+        </div>
+        <div class="scan-card__body">
+          <div class="scan-viewport" id="scanViewport">
+            <div class="scan-laser"></div>
+            <div id="bboxContainer">
+              <div class="bbox bbox--crack" style="top: 22%; left: 14%; width: 36%; height: 28%;">
+                <span class="bbox__label"><i class="fa-solid fa-burst"></i> Vết nứt dọc (96.4%)</span>
+              </div>
+              <div class="bbox bbox--pothole" style="top: 54%; left: 50%; width: 40%; height: 32%;">
+                <span class="bbox__label"><i class="fa-solid fa-circle-exclamation"></i> Ổ gà cấp 2 (92.1%)</span>
+              </div>
+            </div>
+            <div class="scan-overlay-info" id="scanInfo">
+              <span><i class="fa-solid fa-route"></i> Tuyến: CT01 - Km120+400</span>
+              <span><i class="fa-solid fa-gauge-high"></i> Tốc độ quét: 80 km/h</span>
+            </div>
+          </div>
+          <div class="scan-log" id="scanLog">
+            <div class="scan-log__line"><span class="log-time">[14:32:01]</span> <span class="log-info">SYS:</span> Đang quét tuyến Cao tốc Bắc - Nam (CT01)...</div>
+            <div class="scan-log__line"><span class="log-time">[14:32:02]</span> <span class="log-warn">DETECT:</span> Phát hiện vết nứt dọc tại Km120+400 (Độ tin cậy: 96.4%)</div>
+          </div>
+          <div class="scan-card__footer">
+            <div class="metric"><span class="metric__label">Tốc độ xử lý</span><span class="metric__val" id="metricFps">60 FPS</span></div>
+            <div class="metric"><span class="metric__label">Mã hóa GIS</span><span class="metric__val text-accent">VN-2000 / WGS-84</span></div>
+            <div class="metric"><span class="metric__label">Tình trạng mặt đường</span><span class="metric__val text-success" id="metricQuality">Tốt (PCI: 85)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#overview" class="scroll-cue" aria-label="Cuộn xuống khám phá">
+    <span class="scroll-cue__wheel"></span>
+  </a>
+</section>
+
+<!-- Global Presence -->
+<section class="global-presence">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-globe"></i> Hiện diện toàn cầu</p>
+      <h2>Được tin cậy bởi các đối tác <span class="text-accent">trên toàn thế giới</span></h2>
+    </div>
+  </div>
+  <div class="gp-map reveal">
+    <div class="gp-map__globe"><i class="fa-solid fa-earth-asia"></i></div>
+    <div class="gp-map__dots">
+      <span class="gp-dot gp-dot--primary" style="top:25%;left:15%;" title="Canada"><span class="gp-dot__label">Canada</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:35%;left:16%;" title="USA"><span class="gp-dot__label">USA</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:43%;left:14%;" title="Mexico"><span class="gp-dot__label">Mexico</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:60%;left:26%;" title="Brazil"><span class="gp-dot__label">Brazil</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:70%;left:24%;" title="Chile"><span class="gp-dot__label">Chile</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:69%;left:27%;" title="Argentina"><span class="gp-dot__label">Argentina</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:23%;left:42%;" title="UK"><span class="gp-dot__label">UK</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:26%;left:46%;" title="Germany"><span class="gp-dot__label">Germany</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:22%;left:70%;" title="Russia"><span class="gp-dot__label">Russia</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:33%;left:58%;" title="Qatar"><span class="gp-dot__label">Qatar</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:41%;left:57%;" title="Saudi Arabia"><span class="gp-dot__label">Saudi Arabia</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:40%;left:69%;" title="India"><span class="gp-dot__label">India</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:69%;left:51%;" title="South Africa"><span class="gp-dot__label">South Africa</span></span>
+      <span class="gp-dot gp-dot--accent" style="top:55%;left:54%;" title="Kenya"><span class="gp-dot__label">Kenya</span></span>
+      <span class="gp-dot gp-dot--primary" style="top:66%;left:84%;" title="Australia"><span class="gp-dot__label">Australia</span></span>
+    </div>
+    <p class="gp-map__caption">TADIC AI hoạt động trên khắp 15+ quốc gia thuộc Bắc Mỹ, Nam Mỹ, Châu Âu, Trung Đông, Châu Phi và Châu Á.</p>
+  </div>
+  <div class="gp-partners reveal">
+    <p class="gp-partners__label">ĐƯỢC TIN CẬY BỞI CÁC TỔ CHỨC HÀNG ĐẦU</p>
+    <div class="gp-marquee">
+      <div class="gp-marquee__fade-left"></div>
+      <div class="gp-marquee__fade-right"></div>
+      <div class="gp-marquee__track">
+        <div class="gp-logo"><i class="fa-solid fa-building-columns"></i> Cục Đường bộ VN</div>
+        <div class="gp-logo"><i class="fa-solid fa-city"></i> Sở GTVT Hà Nội</div>
+        <div class="gp-logo"><i class="fa-solid fa-landmark"></i> Sở GTVT TP.HCM</div>
+        <div class="gp-logo"><i class="fa-solid fa-bridge"></i> Ban QLDA Đường bộ</div>
+        <div class="gp-logo"><i class="fa-solid fa-industry"></i> Tổng Cty XDCT</div>
+        <div class="gp-logo"><i class="fa-solid fa-train"></i> Đường sắt VN</div>
+        <div class="gp-logo"><i class="fa-solid fa-road"></i> Tập đoàn CIENCO4</div>
+        <div class="gp-logo"><i class="fa-solid fa-hard-hat"></i> Cienco 5</div>
+        <div class="gp-logo"><i class="fa-solid fa-microchip"></i> VNPT</div>
+        <div class="gp-logo"><i class="fa-solid fa-cloud"></i> Viettel IDC</div>
+        <div class="gp-logo"><i class="fa-solid fa-building-columns"></i> Cục Đường bộ VN</div>
+        <div class="gp-logo"><i class="fa-solid fa-city"></i> Sở GTVT Hà Nội</div>
+        <div class="gp-logo"><i class="fa-solid fa-landmark"></i> Sở GTVT TP.HCM</div>
+        <div class="gp-logo"><i class="fa-solid fa-bridge"></i> Ban QLDA Đường bộ</div>
+        <div class="gp-logo"><i class="fa-solid fa-industry"></i> Tổng Cty XDCT</div>
+        <div class="gp-logo"><i class="fa-solid fa-train"></i> Đường sắt VN</div>
+        <div class="gp-logo"><i class="fa-solid fa-road"></i> Tập đoàn CIENCO4</div>
+        <div class="gp-logo"><i class="fa-solid fa-hard-hat"></i> Cienco 5</div>
+        <div class="gp-logo"><i class="fa-solid fa-microchip"></i> VNPT</div>
+        <div class="gp-logo"><i class="fa-solid fa-cloud"></i> Viettel IDC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Overview / Challenges -->
+<section class="about" id="overview">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-triangle-exclamation"></i> Thách thức</p>
+      <h2>Kỹ thuật đường bộ <span class="text-accent">không theo kịp quy mô</span></h2>
+      <p class="section-head__desc">
+        Kích thước mạng lưới vượt quá khả năng vận hành thủ công. Nếu không có dữ liệu thời gian thực và bảo trì dự đoán, chi phí sửa chữa phản ứng sẽ cao gấp 10 lần.
+      </p>
+    </div>
+    <div class="about__grid">
+      {% for card in about_cards %}
+      <article class="about-card reveal">
+        <div class="about-card__icon"><i class="fa-solid {{ card.icon }}"></i></div>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="text-center" style="margin-top:32px;">
+      <a href="{% url 'about' %}" class="btn btn--outline">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-robot"></i> Cách thức hoạt động</p>
+      <h2>Gặp gỡ <span class="text-accent">Kỹ sư đường bộ tự chủ</span> của bạn</h2>
+      <p class="section-head__desc">Từ thu thập dữ liệu đến những hiểu biết có thể hành động — chỉ trong bốn bước.</p>
+    </div>
+    <div class="timeline-wrapper">
+      <ol class="timeline">
+        {% for step in process_steps %}
+        <li class="timeline__item reveal">
+          <div class="timeline__marker">
+            <div class="timeline__icon"><i class="fa-solid {{ step.icon }}"></i></div>
+            <span class="timeline__number">{{ step.number }}</span>
+          </div>
+          <div class="timeline__content">
+            <span class="timeline__tag">Bước {{ forloop.counter }}</span>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+    <div class="text-center" style="margin-top:32px;">
+      <a href="{% url 'process' %}" class="btn btn--outline">Tìm hiểu quy trình <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- AI Agents -->
+<section class="products" id="agents">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-microchip"></i> Tác nhân AI Chuyên biệt</p>
+      <h2>Triển khai các <span class="text-accent">Tác nhân AI Chuyên biệt</span></h2>
+      <p class="section-head__desc">Các tác nhân AI tự động, am hiểu tiêu chuẩn trên toàn bộ vòng đời đường bộ — từ giám sát mặt đường đến tự động hóa quy trình.</p>
+    </div>
+
+    {% regroup products by category_group as product_groups %}
+    {% for group in product_groups %}
+    <div class="category-head reveal">
+      <div class="category-head__line"></div>
+      <h3>
+        {% if group.grouper == 'road_network' %}<i class="fa-solid fa-map"></i> Giám sát Mạng lưới Đường bộ
+        {% elif group.grouper == 'road_safety' %}<i class="fa-solid fa-shield-halved"></i> An toàn Giao thông
+        {% elif group.grouper == 'workflow' %}<i class="fa-solid fa-arrow-right-arrow-left"></i> Tự động hóa Quy trình
+        {% endif %}
+      </h3>
+      <div class="category-head__line"></div>
+    </div>
+
+    <div class="products__grid">
+      {% for product in group.list %}
+      <article class="product-card reveal">
+        <div class="product-card__header">
+          <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
+          <span class="product-card__tag">{{ product.tag }}</span>
+          <span class="status-badge status-badge--{{ product.status }}">{{ product.get_status_display }}</span>
+        </div>
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description|truncatewords:35 }}</p>
+        <button class="btn-link open-product-modal" data-product="{{ product.key }}">
+          Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </article>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats" id="scale">
+  <div class="container">
+    <div class="section-head reveal" style="color:#fff;">
+      <p class="eyebrow" style="color:var(--color-accent);"><i class="fa-solid fa-chart-simple"></i> Thông số nổi bật</p>
+      <h2 style="color:#fff;">Xây dựng khác biệt. <span class="text-accent">Mở rộng quy mô.</span></h2>
+    </div>
+    <div class="stats__grid">
+      {% for stat in stats %}
+      <div class="stat-item reveal">
+        <div class="stat-item__icon"><i class="fa-solid {{ stat.icon }}"></i></div>
+        <span class="stat-item__number" data-target="{{ stat.target_value }}" data-suffix="{{ stat.suffix }}">0</span>
+        <span class="stat-item__label">{{ stat.label }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="gp-badges reveal">
+      <span class="gp-badge"><i class="fa-solid fa-shield"></i> Tiêu chuẩn IRC</span>
+      <span class="gp-badge"><i class="fa-solid fa-shield"></i> Tiêu chuẩn AASHTO</span>
+      <span class="gp-badge"><i class="fa-solid fa-shield"></i> Chuẩn GIS VN-2000</span>
+      <span class="gp-badge"><i class="fa-solid fa-shield"></i> API-First</span>
+      <span class="gp-badge"><i class="fa-solid fa-shield"></i> Edge AI Ready</span>
+      <span class="gp-badge"><i class="fa-solid fa-shield"></i> Cloud Native</span>
+    </div>
+  </div>
+</section>
+
+<!-- User Personas -->
+<section class="personas">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-users"></i> Đối tượng</p>
+      <h2>Dành cho những ai <span class="text-accent">kiến tạo hạ tầng</span></h2>
+    </div>
+    <div class="personas__grid">
+      <div class="persona-card reveal">
+        <div class="persona-card__icon"><i class="fa-solid fa-hard-hat"></i></div>
+        <h3>Nhà thầu xây dựng</h3>
+        <p>Giám sát chất lượng & tiến độ thi công với dữ liệu AI thời gian thực.</p>
+      </div>
+      <div class="persona-card reveal">
+        <div class="persona-card__icon"><i class="fa-solid fa-road"></i></div>
+        <h3>Đơn vị vận hành</h3>
+        <p>Phân tích tình trạng mặt đường & lưu lượng giao thông liên tục 24/7.</p>
+      </div>
+      <div class="persona-card reveal">
+        <div class="persona-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Quản lý tài sản</h3>
+        <p>Quản lý vòng đời tài sản hạ tầng với dữ liệu GIS số tập trung.</p>
+      </div>
+      <div class="persona-card reveal">
+        <div class="persona-card__icon"><i class="fa-solid fa-handshake"></i></div>
+        <h3>Nhà tư vấn</h3>
+        <p>Mở rộng quy mô dịch vụ khảo sát & đánh giá mà không cần tăng nhân sự.</p>
+      </div>
+      <div class="persona-card reveal">
+        <div class="persona-card__icon"><i class="fa-solid fa-chart-pie"></i></div>
+        <h3>Nhà đầu tư</h3>
+        <p>Thẩm định & theo dõi danh mục đầu tư hạ tầng với dữ liệu khách quan.</p>
+      </div>
+      <div class="persona-card reveal">
+        <div class="persona-card__icon"><i class="fa-solid fa-landmark"></i></div>
+        <h3>Cơ quan nhà nước</h3>
+        <p>Hiển thị toàn cảnh mạng lưới phục vụ quy hoạch, đầu tư và ngân sách.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-award"></i> Lợi thế cạnh tranh</p>
+      <h2>Vì sao các đối tác <span class="text-accent">tin tưởng TADIC</span></h2>
+    </div>
+    <div class="why__grid">
+      {% for item in why_us|slice:":3" %}
+      <div class="why-card reveal">
+        <div class="why-card__icon-wrap"><i class="fa-solid {{ item.icon }}"></i></div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center" style="margin-top:32px;">
+      <a href="{% url 'why' %}" class="btn btn--outline">Xem tất cả lợi thế <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Partners & Testimonials -->
+<section class="partners" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow"><i class="fa-solid fa-handshake-simple"></i> Đồng hành &amp; Tin tưởng</p>
+      <h2>Đối tác &amp; Khách hàng <span class="text-accent">của TADIC</span></h2>
+    </div>
+  </div>
+  <div class="gp-marquee gp-marquee--partners reveal">
+    <div class="gp-marquee__fade-left"></div>
+    <div class="gp-marquee__fade-right"></div>
+    <div class="gp-marquee__track">
+      {% for partner in partners %}
+      <div class="gp-logo"><i class="fa-solid {{ partner.icon_class }}"></i> {{ partner.name }}</div>
+      {% endfor %}
+      {% for partner in partners %}
+      <div class="gp-logo"><i class="fa-solid {{ partner.icon_class }}"></i> {{ partner.name }}</div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="container">
+    <div class="testimonial reveal">
+      <div class="testimonial__quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+      <div class="testimonial__track" id="testimonialTrack">
+        {% for testimonial in testimonials %}
+        <blockquote class="testimonial__slide">
+          <p>"{{ testimonial.quote }}"</p>
+          <footer>
+            <strong>{{ testimonial.author_name }}</strong>
+            <span>{{ testimonial.author_title }}</span>
+          </footer>
+        </blockquote>
+        {% endfor %}
+      </div>
+      <div class="testimonial__dots" id="testimonialDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container cta__inner reveal">
+    <div class="cta__icon"><i class="fa-solid fa-rocket"></i></div>
+    <h2>Sẵn sàng chuyển đổi số hạ tầng giao thông?</h2>
+    <p>Liên hệ ngay với chuyên gia TADIC để nhận tư vấn giải pháp AI phù hợp và trải nghiệm Demo trực tiếp trên tuyến đường của bạn.</p>
+    <a href="{% url 'contact' %}" class="btn btn--accent btn--lg">
+      <i class="fa-solid fa-paper-plane"></i> Liên hệ ngay
+    </a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block page_data %}
+<script>
+window.PRODUCT_DATA = {
+  {% for product in products %}
+  "{{ product.key }}": {
+    title: "{{ product.title|escapejs }}",
+    subtitle: "{{ product.subtitle|escapejs }}",
+    icon: "{{ product.icon }}",
+    tag: "{{ product.tag }}",
+    desc: `{{ product.description|escapejs }}`,
+    features: {{ product.features|safe }},
+  },
+  {% endfor %}
+};
+window.NEWS_DATA = {
+  {% for article in news_articles %}
+  "{{ article.slug }}": {
+    title: "{{ article.title|escapejs }}",
+    date: "{{ article.date|date:'d/m/Y' }}",
+    author: "{{ article.author|escapejs }}",
+    image: "{{ article.image_url }}",
+    content: `{{ article.content|escapejs }}`,
+  },
+  {% endfor %}
+};
+</script>
+{% endblock %}
