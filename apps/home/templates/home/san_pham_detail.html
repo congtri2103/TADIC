@@ -4,110 +4,97 @@
 
 {% block content %}
 
-<!-- Breadcrumb -->
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Trang chủ</a>
-      <i class="fa-solid fa-chevron-right"></i>
-      <a href="/san-pham/">Sản phẩm</a>
-      <i class="fa-solid fa-chevron-right"></i>
+      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="{% url 'san_pham_list' %}">Sản phẩm</a><i class="fa-solid fa-chevron-right"></i>
       <span>{{ product.title }}</span>
     </nav>
   </div>
 </div>
 
-<section class="section">
-  <div class="container">
-    <div style="display:grid; grid-template-columns: 2fr 1fr; gap:60px;">
-      
-      <!-- Content Main -->
-      <div>
-        <div class="d-flex align-center gap-16 mb-24">
-          <div class="product-card__icon" style="background:rgba(13, 179, 158, 0.1); color:var(--teal);"><i class="fa-solid {{ product.icon }}"></i></div>
-          <div>
-            <span class="status--{{ product.status }}" style="display:inline-block;margin-bottom:8px;">
-              {% if product.status == 'live' %}Sẵn sàng triển khai{% elif product.status == 'beta' %}Bản Beta (Thử nghiệm){% else %}Đang phát triển (Sắp ra mắt){% endif %}
-            </span>
-            <div style="font-size:.85rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;">{{ product.get_category_group_display }}</div>
-          </div>
-        </div>
-
-        <h1 style="font-size:2.5rem; margin-bottom:12px; color:var(--navy);">{{ product.title }}</h1>
-        <p style="font-size:1.2rem; color:var(--text-muted); margin-bottom:40px;">{{ product.subtitle }}</p>
-
-        <div class="mb-32">
-          <h2 style="font-size:1.5rem; margin-bottom:20px; color:var(--navy);"><i class="fa-solid fa-layer-group text-teal" style="margin-right:10px;"></i> Mô tả giải pháp</h2>
-          <div style="font-size:1.05rem; line-height:1.8; color:var(--text-main);">
-            {{ product.description|linebreaks }}
-          </div>
-        </div>
-
-        {% if product.features %}
-        <div class="mb-32">
-          <h2 style="font-size:1.5rem; margin-bottom:20px; color:var(--navy);"><i class="fa-solid fa-star text-teal" style="margin-right:10px;"></i> Tính năng nổi bật</h2>
-          <ul style="list-style:none; padding:0;">
-            <li style="margin-bottom:15px; display:flex; gap:10px;">
-              <i class="fa-solid fa-check text-teal" style="margin-top:5px;"></i>
-              <span>Phân tích tự động dữ liệu bằng Trí tuệ Nhân tạo (Deep Learning) thay vì đo đạc thủ công.</span>
-            </li>
-            <li style="margin-bottom:15px; display:flex; gap:10px;">
-              <i class="fa-solid fa-check text-teal" style="margin-top:5px;"></i>
-              <span>Xuất báo cáo trực quan dưới dạng bản đồ GIS và file PDF/Excel tiêu chuẩn.</span>
-            </li>
-            <li style="margin-bottom:15px; display:flex; gap:10px;">
-              <i class="fa-solid fa-check text-teal" style="margin-top:5px;"></i>
-              <span>Tích hợp dễ dàng vào các hệ thống quản lý giao thông thông minh (ITS) sẵn có.</span>
-            </li>
-          </ul>
-        </div>
-        {% endif %}
-      </div>
-
-      <!-- Sidebar -->
-      <div>
-        <div style="background:var(--bg-gray); padding:30px; border-radius:var(--radius-md); border:1px solid var(--border-light); position:sticky; top:100px;">
-          <h3 style="color:var(--navy);">Bạn muốn ứng dụng {{ product.title }}?</h3>
-          <p style="font-size:.95rem;color:var(--text-muted);margin-bottom:25px;">Đội ngũ kỹ sư TADIC sẵn sàng demo thực tế giải pháp này trên chính dữ liệu tuyến đường của bạn.</p>
-          <a href="#" class="btn btn--primary" style="width:100%;justify-content:center;margin-bottom:15px;" data-contact-modal>
-            Đăng ký Demo ngay
-          </a>
-          <a href="/lien-he/" class="btn btn--outline" style="width:100%;justify-content:center;">
-            Liên hệ phòng kinh doanh
-          </a>
-
-          <div style="margin-top:30px;padding-top:20px;border-top:1px solid var(--border-light);">
-            <div style="font-size:.85rem;font-weight:600;color:var(--text-muted);margin-bottom:15px;">PHÙ HỢP CHO:</div>
-            <div class="d-flex gap-8" style="flex-wrap:wrap;">
-              <span class="product-card__tag" style="margin:0;background:#fff;border:1px solid var(--border-light);">Sở GTVT</span>
-              <span class="product-card__tag" style="margin:0;background:#fff;border:1px solid var(--border-light);">Ban Quản lý Dự án</span>
-              <span class="product-card__tag" style="margin:0;background:#fff;border:1px solid var(--border-light);">Nhà thầu bảo trì BOT</span>
-            </div>
-          </div>
+<section class="product-detail-hero">
+  <div class="product-detail-hero__grid" aria-hidden="true"></div>
+  <div class="container product-detail-hero__inner">
+    <div class="product-detail-hero__content reveal">
+      <div class="product-detail-hero__meta">
+        <span class="product-detail-hero__icon"><i class="fa-solid {{ product.icon }}"></i></span>
+        <div>
+          <span class="product-card__status status--{{ product.status }}">
+            {% if product.status == 'live' %}Sẵn sàng triển khai{% elif product.status == 'beta' %}Bản Beta (Thử nghiệm){% else %}Đang phát triển (Sắp ra mắt){% endif %}
+          </span>
+          <small>{{ product.get_category_group_display }}</small>
         </div>
       </div>
-      
+      <h1>{{ product.title }}</h1>
+      <p>{{ product.subtitle }}</p>
     </div>
-
-    <!-- Related Products -->
-    {% if related %}
-    <div style="margin-top:80px; padding-top:50px; border-top:1px solid var(--border-light);">
-      <h3 style="color:var(--navy); margin-bottom:30px;">Các giải pháp AI cùng nhóm</h3>
-      <div class="grid-3">
-        {% for rel in related %}
-        <div class="product-card">
-          <div class="product-card__top">
-            <div class="product-card__icon"><i class="fa-solid {{ rel.icon }}"></i></div>
-          </div>
-          <h3>{{ rel.title }}</h3>
-          <a href="/san-pham/{{ rel.key }}/" class="link-arrow mt-16">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        {% endfor %}
-      </div>
+    <div class="product-detail-hero__visual reveal" aria-hidden="true">
+      <span class="product-detail-hero__ring"></span>
+      <i class="fa-solid {{ product.icon }}"></i>
     </div>
-    {% endif %}
-
   </div>
 </section>
+
+<section class="section section--white">
+  <div class="container detail-layout">
+    <div class="detail-content">
+      <section class="detail-block reveal">
+        <div class="detail-block__heading"><span>01</span><h2>Mô tả giải pháp</h2></div>
+        <div class="rich-copy">{{ product.description|linebreaks }}</div>
+      </section>
+
+      {% if product.features %}
+      <section class="detail-block reveal">
+        <div class="detail-block__heading"><span>02</span><h2>Tính năng nổi bật</h2></div>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-check"></i><span>Phân tích tự động dữ liệu bằng Trí tuệ Nhân tạo (Deep Learning) thay vì đo đạc thủ công.</span></li>
+          <li><i class="fa-solid fa-check"></i><span>Xuất báo cáo trực quan dưới dạng bản đồ GIS và file PDF/Excel tiêu chuẩn.</span></li>
+          <li><i class="fa-solid fa-check"></i><span>Tích hợp dễ dàng vào các hệ thống quản lý giao thông thông minh (ITS) sẵn có.</span></li>
+          {% for feature in product.features %}
+          <li><i class="fa-solid fa-check"></i><span>{{ feature }}</span></li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    </div>
+
+    <aside class="detail-sidebar reveal">
+      <div class="consult-card">
+        <span class="consult-card__icon"><i class="fa-regular fa-comments"></i></span>
+        <h3>Bạn muốn ứng dụng {{ product.title }}?</h3>
+        <p>Đội ngũ kỹ sư TADIC sẵn sàng demo thực tế giải pháp này trên chính dữ liệu tuyến đường của bạn.</p>
+        <a href="{% url 'lien_he' %}" class="btn btn--primary btn--full" data-contact-modal>Đăng ký Demo ngay <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="{% url 'lien_he' %}" class="btn btn--outline btn--full">Liên hệ phòng kinh doanh</a>
+        <div class="consult-card__fit">
+          <strong>PHÙ HỢP CHO:</strong>
+          <div class="tag-list"><span>Sở GTVT</span><span>Ban Quản lý Dự án</span><span>Nhà thầu bảo trì BOT</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% if related %}
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-layout section-layout--align-end">
+      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC.AI</p><h2>Các giải pháp AI cùng nhóm</h2></div>
+      <a href="{% url 'san_pham_list' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="grid-3">
+      {% for rel in related %}
+      <article class="product-card reveal">
+        <div class="product-card__top"><div class="product-card__icon"><i class="fa-solid {{ rel.icon }}"></i></div></div>
+        <h3>{{ rel.title }}</h3>
+        <p>{{ rel.subtitle }}</p>
+        <a href="{% url 'san_pham_detail' rel.key %}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 {% endblock %}

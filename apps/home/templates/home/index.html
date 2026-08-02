@@ -5,25 +5,53 @@
 
 <!-- Hero Section -->
 <section class="hero">
+  <div class="hero__mesh" aria-hidden="true"></div>
   <div class="container hero__grid">
     <div class="hero__content reveal">
+      <p class="eyebrow"><span></span> TADIC.AI</p>
       <h1>Nền tảng AI đột phá cho Quản lý Hạ tầng Giao thông</h1>
-      <p>Số hóa tài sản đường bộ, tự động hóa quy trình kiểm định, và thiết lập mô hình bảo trì dự báo với độ chính xác
-        đạt >96%.</p>
-      <div class="d-flex gap-16" style="flex-wrap: wrap;">
-        <a href="/san-pham/" class="btn btn--primary">Khám phá Giải pháp</a>
-        <a href="#" class="btn btn--outline" data-contact-modal>Yêu cầu Demo</a>
+      <p>Số hóa tài sản đường bộ, tự động hóa quy trình kiểm định, và thiết lập mô hình bảo trì dự báo với độ chính xác đạt &gt;96%.</p>
+      <div class="hero__actions">
+        <a href="{% url 'san_pham_list' %}" class="btn btn--primary btn--lg">Khám phá Giải pháp <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="{% url 'lien_he' %}" class="btn btn--ghost btn--lg" data-contact-modal><i class="fa-regular fa-circle-play"></i> Yêu cầu Demo</a>
       </div>
     </div>
-    <div class="hero__img reveal">
-      <img src="{% static 'images/hero-ai.jpg' %}" alt="Hệ thống AI quản lý giao thông TADIC"
-        style="border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);">
+
+    <div class="hero-visual reveal" aria-label="Minh họa hệ thống AI quản lý hạ tầng giao thông TADIC">
+      <div class="hero-visual__frame">
+        <div class="hero-visual__bar">
+          <div class="hero-visual__brand"><i class="fa-solid fa-road"></i> TADIC.AI</div>
+          <div class="hero-visual__controls" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="hero-visual__body">
+          <div class="hero-map" aria-hidden="true">
+            <span class="hero-map__road hero-map__road--1"></span>
+            <span class="hero-map__road hero-map__road--2"></span>
+            <span class="hero-map__road hero-map__road--3"></span>
+            <span class="hero-map__pin hero-map__pin--1"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="hero-map__pin hero-map__pin--2"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="hero-map__pin hero-map__pin--3"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="hero-map__scan"></span>
+          </div>
+          <div class="hero-metrics">
+            {% for stat in stats|slice:":3" %}
+            <div class="hero-metric">
+              <span class="hero-metric__icon"><i class="fa-solid {{ stat.icon }}"></i></span>
+              <div><strong>{{ stat.target_value }}{{ stat.suffix }}</strong><small>{{ stat.label }}</small></div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <span class="hero-visual__orbit hero-visual__orbit--one" aria-hidden="true"><i class="fa-solid fa-satellite"></i></span>
+      <span class="hero-visual__orbit hero-visual__orbit--two" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
     </div>
   </div>
+  <div class="hero__scroll" aria-hidden="true"><span></span></div>
 </section>
 
 <!-- Bài toán & Thách thức -->
-<section class="section">
+<section class="section section--white">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-triangle-exclamation"></i> Thách thức</p>
@@ -32,22 +60,27 @@
     </div>
     <div class="grid-3 reveal-group">
       {% for card in about_cards %}
-      <div class="value-card reveal">
-        <div class="value-card__icon"><i class="fa-solid {{ card.icon }}"></i></div>
+      <article class="value-card reveal">
+        <div class="value-card__top">
+          <div class="value-card__icon"><i class="fa-solid {{ card.icon }}"></i></div>
+          <span class="value-card__index">0{{ forloop.counter }}</span>
+        </div>
         <h3>{{ card.title }}</h3>
         <p>{{ card.description }}</p>
-      </div>
+      </article>
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- Stats / Con số nổi bật -->
-<section class="section" style="padding:40px 0;">
+<section class="stats-section">
+  <div class="stats-section__grid" aria-hidden="true"></div>
   <div class="container">
     <div class="stats-wrap reveal">
       {% for stat in stats %}
       <div class="stat-item">
+        <span class="stat-item__icon"><i class="fa-solid {{ stat.icon }}"></i></span>
         <div class="stat-item__num" data-target="{{ stat.target_value }}" data-suffix="{{ stat.suffix }}">0</div>
         <div class="stat-item__label">{{ stat.label }}</div>
       </div>
@@ -57,115 +90,111 @@
 </section>
 
 <!-- Quy trình (Process) -->
-<section class="section section--gray">
+<section class="section section--soft">
   <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow"><i class="fa-solid fa-diagram-project"></i> Quy trình</p>
-      <h2>Chu trình 4 bước tự động hóa</h2>
-      <p class="section-head__desc">Từ thu thập dữ liệu hiện trường đến ra quyết định bảo trì, mọi thứ được xử lý khép
-        kín trên nền tảng TADIC.</p>
+    <div class="section-layout">
+      <div class="section-head reveal">
+        <p class="eyebrow"><i class="fa-solid fa-diagram-project"></i> Quy trình</p>
+        <h2>Chu trình 4 bước tự động hóa</h2>
+        <p class="section-head__desc">Từ thu thập dữ liệu hiện trường đến ra quyết định bảo trì, mọi thứ được xử lý khép kín trên nền tảng TADIC.</p>
+      </div>
+      <div class="section-side-note reveal" aria-hidden="true"><i class="fa-solid fa-route"></i></div>
     </div>
     <div class="process-steps">
       {% for step in process_steps %}
-      <div class="process-step reveal">
-        <div class="process-step__num">{{ step.number }}</div>
-        <div>
-          <h3><i class="fa-solid {{ step.icon }}" style="color:var(--teal);margin-right:8px;"></i>{{ step.title }}</h3>
+      <article class="process-step reveal">
+        <div class="process-step__rail"><span>{{ step.number }}</span></div>
+        <div class="process-step__content">
+          <div class="process-step__icon"><i class="fa-solid {{ step.icon }}"></i></div>
+          <h3>{{ step.title }}</h3>
           <p>{{ step.description }}</p>
         </div>
-      </div>
+      </article>
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- Sản phẩm AI -->
-<section class="section">
+<section class="section section--white">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-layer-group"></i> Hệ sinh thái TADIC.AI</p>
       <h2>Khám phá các Tác nhân AI chuyên dụng</h2>
     </div>
-    <div class="grid-4 reveal-group">
+    <div class="grid-4 product-grid reveal-group">
       {% for product in products %}
-      <div class="product-card reveal">
+      <article class="product-card reveal">
         <div class="product-card__top">
           <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
-          <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Live{% elif
-            product.status == 'beta' %}Beta{% else %}Mới{% endif %}</span>
+          <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Live{% elif product.status == 'beta' %}Beta{% else %}Mới{% endif %}</span>
         </div>
         <span class="product-card__tag">{{ product.tag }}</span>
         <h3>{{ product.title }}</h3>
         <p>{{ product.subtitle }}</p>
-        <a href="/san-pham/{{ product.key }}/" class="link-arrow" style="margin-top:auto;">
+        <a href="{% url 'san_pham_detail' product.key %}" class="link-arrow">
           Chi tiết <i class="fa-solid fa-arrow-right"></i>
         </a>
-      </div>
+      </article>
       {% endfor %}
     </div>
-    <div class="text-center mt-32 reveal">
-      <a href="/san-pham/" class="btn btn--outline">Xem toàn bộ 14 Giải pháp AI</a>
+    <div class="section-actions reveal">
+      <a href="{% url 'san_pham_list' %}" class="btn btn--outline">Xem toàn bộ 14 Giải pháp AI <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
 
 <!-- Tại sao chọn TADIC -->
-<section class="section section--gray">
+<section class="section section--navy">
+  <div class="section--navy__glow" aria-hidden="true"></div>
   <div class="container">
-    <div class="section-head section-head--center reveal">
+    <div class="section-head section-head--center section-head--light reveal">
       <p class="eyebrow"><i class="fa-solid fa-star"></i> Điểm khác biệt</p>
       <h2>Lợi thế Công nghệ của chúng tôi</h2>
     </div>
     <div class="grid-3 reveal-group">
       {% for item in why_us %}
-      <div class="value-card reveal">
-        <div class="value-card__icon"><i class="fa-solid {{ item.icon }}"></i></div>
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
-      </div>
+      <article class="technology-card reveal">
+        <div class="technology-card__icon"><i class="fa-solid {{ item.icon }}"></i></div>
+        <div><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div>
+      </article>
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- Dự án & Khách hàng -->
-<section class="section">
+<section class="section section--white">
   <div class="container">
-    <div class="section-head reveal"
-      style="display:flex; justify-content:space-between; align-items:flex-end; max-width:100%;">
-      <div style="max-width:600px;">
+    <div class="section-layout section-layout--align-end reveal">
+      <div class="section-head">
         <p class="eyebrow"><i class="fa-solid fa-briefcase"></i> Case Studies</p>
-        <h2 style="margin-bottom:0;">Dự án đã triển khai</h2>
+        <h2>Dự án đã triển khai</h2>
       </div>
-      <a href="/du-an/" class="btn btn--outline">Xem tất cả dự án</a>
+      <a href="{% url 'du_an' %}" class="btn btn--outline">Xem tất cả dự án <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
-    <div class="grid-2 reveal-group">
+    <div class="grid-2 project-grid reveal-group">
       {% for project in projects %}
-      <div class="project-card reveal">
+      <article class="project-card reveal">
         <div class="project-card__img">
           <img src="{{ project.image_url }}" alt="{{ project.title }}" loading="lazy">
+          <div class="project-card__overlay" aria-hidden="true"></div>
         </div>
         <div class="project-card__body">
-          <div class="mb-16">
-            {% for tag in project.tags.split %}
-            <span class="product-card__tag" style="margin-right:5px; margin-bottom:5px;">{{ tag|cut:"," }}</span>
-            {% endfor %}
-          </div>
+          <div class="tag-list" data-tags="{{ project.tags }}"><span class="product-card__tag">{{ project.tags }}</span></div>
           <h3>{{ project.title }}</h3>
           <p>{{ project.description|truncatewords:20 }}</p>
         </div>
-      </div>
+      </article>
       {% endfor %}
     </div>
 
-    <!-- Logos -->
-    <div class="mt-32 pt-32 reveal" style="border-top: 1px solid var(--border-light);">
-      <p class="text-center text-muted" style="font-weight:500;margin-bottom:20px;">Được tin tưởng bởi các Sở Giao thông
-        & Nhà thầu uy tín:</p>
-      <div class="d-flex" style="justify-content:center; gap:40px; flex-wrap:wrap; opacity:0.6;">
+    <div class="partners-panel reveal">
+      <p>Được tin tưởng bởi các Sở Giao thông &amp; Nhà thầu uy tín:</p>
+      <div class="partners-list">
         {% for partner in partners %}
-        <img src="{{ partner.logo_url }}" alt="{{ partner.name }}" style="height:40px; filter:grayscale(100%);">
+        <div class="partner-item"><i class="fa-solid {{ partner.icon_class }}"></i><span>{{ partner.name }}</span></div>
         {% endfor %}
       </div>
     </div>
@@ -173,7 +202,7 @@
 </section>
 
 <!-- Đánh giá khách hàng -->
-<section class="section">
+<section class="section section--soft">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-comments"></i> Phản hồi</p>
@@ -181,48 +210,41 @@
     </div>
     <div class="grid-3 reveal-group">
       {% for testimonial in testimonials %}
-      <div class="value-card reveal"
-        style="display:flex; flex-direction:column; justify-content:space-between; padding:30px;">
-        <div>
-          <div style="color:var(--warning); margin-bottom:15px;">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p style="font-style:italic; color:var(--text-main); line-height:1.6; margin-bottom:20px;">"{{
-            testimonial.content }}"</p>
+      <article class="testimonial-card reveal">
+        <i class="fa-solid fa-quote-left testimonial-card__quote" aria-hidden="true"></i>
+        <p>“{{ testimonial.quote }}”</p>
+        <div class="testimonial-card__author">
+          <span class="testimonial-card__avatar">{{ testimonial.author_name|first }}</span>
+          <div><h4>{{ testimonial.author_name }}</h4><small>{{ testimonial.author_title }}</small></div>
         </div>
-        <div style="border-top:1px solid var(--border-light); padding-top:15px;">
-          <h4 style="color:var(--navy); font-size:1.05rem;">{{ testimonial.name }}</h4>
-          <p style="font-size:0.85rem; color:var(--text-muted);">{{ testimonial.position }}</p>
-        </div>
-      </div>
+      </article>
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- Tin tức -->
-<section class="section section--gray">
+<section class="section section--white">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-newspaper"></i> Cập nhật</p>
-      <h2>Tin tức & Chuyển đổi số</h2>
+      <h2>Tin tức &amp; Chuyển đổi số</h2>
     </div>
     <div class="grid-3 reveal-group">
       {% for article in news_articles %}
-      <div class="news-card reveal">
-        <div class="news-card__img">
+      <article class="news-card reveal">
+        <a href="{% url 'tin_tuc_detail' article.slug %}" class="news-card__img">
           <img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">
-        </div>
+        </a>
         <div class="news-card__body">
           <div class="news-card__meta">
-            <span><i class="fa-regular fa-calendar" style="color:var(--teal);"></i> {{ article.date|date:"d/m/Y"
-              }}</span>
+            <span><i class="fa-regular fa-calendar"></i> {{ article.date|date:"d/m/Y" }}</span>
           </div>
-          <h3><a href="/tin-tuc/{{ article.slug }}/">{{ article.title }}</a></h3>
+          <h3><a href="{% url 'tin_tuc_detail' article.slug %}">{{ article.title }}</a></h3>
           <p>{{ article.summary|truncatewords:15 }}</p>
+          <a href="{% url 'tin_tuc_detail' article.slug %}" class="link-arrow">Đọc bài viết <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-      </div>
+      </article>
       {% endfor %}
     </div>
   </div>
@@ -230,12 +252,16 @@
 
 <!-- CTA -->
 <section class="cta-section">
-  <div class="container text-center reveal">
-    <h2>Bạn đã sẵn sàng để số hóa tài sản giao thông?</h2>
-    <p>Đội ngũ chuyên gia TADIC luôn sẵn sàng hỗ trợ khảo sát và demo trên dữ liệu tuyến đường của bạn.</p>
+  <div class="cta-section__pattern" aria-hidden="true"></div>
+  <div class="container cta-section__inner reveal">
+    <div>
+      <p class="eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> TADIC.AI</p>
+      <h2>Bạn đã sẵn sàng để số hóa tài sản giao thông?</h2>
+      <p>Đội ngũ chuyên gia TADIC luôn sẵn sàng hỗ trợ khảo sát và demo trên dữ liệu tuyến đường của bạn.</p>
+    </div>
     <div class="cta-actions">
-      <a href="#" class="btn btn--white" data-contact-modal>Đăng ký Demo Miễn phí</a>
-      <a href="/lien-he/" class="btn btn--white-outline">Xem thông tin Liên hệ</a>
+      <a href="{% url 'lien_he' %}" class="btn btn--white btn--lg" data-contact-modal>Đăng ký Demo Miễn phí <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="{% url 'lien_he' %}" class="btn btn--white-outline btn--lg">Xem thông tin Liên hệ</a>
     </div>
   </div>
 </section>

@@ -4,63 +4,50 @@
 
 {% block content %}
 
-<!-- Breadcrumb -->
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Trang chủ</a>
-      <i class="fa-solid fa-chevron-right"></i>
-      <span>Dự án</span>
+      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Dự án</span>
     </nav>
   </div>
 </div>
 
-<!-- Page Hero -->
-<section class="page-hero text-center">
-  <div class="container">
+<section class="page-hero">
+  <div class="page-hero__grid" aria-hidden="true"></div>
+  <div class="container page-hero__inner text-center reveal">
     <p class="eyebrow"><i class="fa-solid fa-briefcase"></i> Case Studies</p>
     <h1>Dự án tiêu biểu</h1>
-    <p style="max-width:800px; margin:0 auto; color:rgba(255,255,255,0.8);">Khám phá cách giải pháp AI của TADIC đang giúp tối ưu hóa công tác quản lý và bảo trì đường bộ trên khắp cả nước.</p>
+    <p>Khám phá cách giải pháp AI của TADIC đang giúp tối ưu hóa công tác quản lý và bảo trì đường bộ trên khắp cả nước.</p>
   </div>
 </section>
 
-<section class="section section--gray">
-  <div class="container">
-    <div style="display:flex; flex-direction:column; gap:40px;">
-      {% for project in projects %}
-      <div class="project-card reveal" id="project-{{ project.pk }}" style="flex-direction:row; min-height:400px; box-shadow:var(--shadow-md);">
-        <div class="project-card__img" style="width:50%; height:auto;">
-          <img src="{{ project.image_url }}" alt="{{ project.title }}" loading="lazy" style="height:100%;">
-        </div>
-        <div class="project-card__body" style="width:50%; padding:50px; justify-content:center;">
-          <div style="margin-bottom:20px;">
-            {% for tag in project.tags.split %}
-            <span class="product-card__tag" style="background:#fff; border:1px solid var(--border-light); margin-right:8px;">{{ tag|cut:"," }}</span>
-            {% endfor %}
-          </div>
-          <h3 style="font-size:2rem; margin-bottom:20px; color:var(--navy);">{{ project.title }}</h3>
-          <p style="font-size:1.1rem; color:var(--text-main); margin-bottom:30px; line-height:1.8;">{{ project.description }}</p>
-          <div>
-            <a href="#" class="btn btn--primary" data-contact-modal>Tư vấn giải pháp tương tự</a>
-          </div>
-        </div>
+<section class="section section--soft">
+  <div class="container project-showcase">
+    {% for project in projects %}
+    <article class="project-feature reveal {% cycle '' 'project-feature--reverse' %}" id="project-{{ project.pk }}">
+      <div class="project-feature__media">
+        <img src="{{ project.image_url }}" alt="{{ project.title }}" loading="lazy">
+        <span class="project-feature__number">0{{ forloop.counter }}</span>
       </div>
-      {% empty %}
-      <p class="text-center text-muted" style="padding:60px 0;">Đang cập nhật danh sách dự án tiêu biểu...</p>
-      {% endfor %}
-    </div>
+      <div class="project-feature__content">
+        <div class="tag-list" data-tags="{{ project.tags }}"><span>{{ project.tags }}</span></div>
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.description }}</p>
+        <a href="{% url 'lien_he' %}" class="btn btn--primary" data-contact-modal>Tư vấn giải pháp tương tự <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    {% empty %}
+    <div class="empty-state"><i class="fa-regular fa-folder-open"></i><p>Đang cập nhật danh sách dự án tiêu biểu...</p></div>
+    {% endfor %}
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
-  <div class="container text-center reveal">
-    <h2>Dự án tiếp theo có thể là của bạn?</h2>
-    <p>Hãy để chuyên gia của TADIC tư vấn lộ trình số hóa hạ tầng giao thông tối ưu nhất.</p>
+  <div class="cta-section__pattern" aria-hidden="true"></div>
+  <div class="container cta-section__inner reveal">
+    <div><h2>Dự án tiếp theo có thể là của bạn?</h2><p>Hãy để chuyên gia của TADIC tư vấn lộ trình số hóa hạ tầng giao thông tối ưu nhất.</p></div>
     <div class="cta-actions">
-      <a href="#" class="btn btn--white" data-contact-modal>
-        Yêu cầu báo giá / Đề cương
-      </a>
+      <a href="{% url 'lien_he' %}" class="btn btn--white btn--lg" data-contact-modal>Yêu cầu báo giá / Đề cương <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>

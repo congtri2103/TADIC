@@ -4,51 +4,43 @@
 
 {% block content %}
 
-<!-- Breadcrumb -->
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Trang chủ</a>
-      <i class="fa-solid fa-chevron-right"></i>
-      <span>Tin tức</span>
+      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Tin tức</span>
     </nav>
   </div>
 </div>
 
-<!-- Page Hero -->
-<section class="page-hero text-center">
-  <div class="container">
-    <p class="eyebrow"><i class="fa-solid fa-newspaper"></i> Blog & News</p>
-    <h1>Tin tức & Nghiên cứu</h1>
-    <p style="max-width:800px; margin:0 auto; color:rgba(255,255,255,0.8);">Nắm bắt xu hướng chuyển đổi số và công nghệ AI trong lĩnh vực quản lý hạ tầng giao thông.</p>
+<section class="page-hero">
+  <div class="page-hero__grid" aria-hidden="true"></div>
+  <div class="container page-hero__inner text-center reveal">
+    <p class="eyebrow"><i class="fa-solid fa-newspaper"></i> Blog &amp; News</p>
+    <h1>Tin tức &amp; Nghiên cứu</h1>
+    <p>Nắm bắt xu hướng chuyển đổi số và công nghệ AI trong lĩnh vực quản lý hạ tầng giao thông.</p>
   </div>
 </section>
 
-<section class="section section--gray">
+<section class="section section--soft">
   <div class="container">
-    <div class="grid-3">
+    <div class="grid-3 news-grid">
       {% for article in articles %}
-      <div class="news-card reveal">
-        <div class="news-card__img">
+      <article class="news-card reveal">
+        <a href="{% url 'tin_tuc_detail' article.slug %}" class="news-card__img">
           <img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">
-        </div>
+        </a>
         <div class="news-card__body">
           <div class="news-card__meta">
-            <span><i class="fa-regular fa-calendar text-teal"></i> {{ article.date|date:"d/m/Y" }}</span>
-            <span><i class="fa-regular fa-user text-teal"></i> {{ article.author }}</span>
+            <span><i class="fa-regular fa-calendar"></i> {{ article.date|date:"d/m/Y" }}</span>
+            <span><i class="fa-regular fa-user"></i> {{ article.author }}</span>
           </div>
-          <h3><a href="/tin-tuc/{{ article.slug }}/">{{ article.title }}</a></h3>
-          <p style="color:var(--text-muted); font-size:0.95rem;">{{ article.summary|truncatewords:25 }}</p>
-          <a href="/tin-tuc/{{ article.slug }}/" class="link-arrow mt-16">
-            Đọc bài viết <i class="fa-solid fa-arrow-right"></i>
-          </a>
+          <h2><a href="{% url 'tin_tuc_detail' article.slug %}">{{ article.title }}</a></h2>
+          <p>{{ article.summary|truncatewords:25 }}</p>
+          <a href="{% url 'tin_tuc_detail' article.slug %}" class="link-arrow">Đọc bài viết <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-      </div>
+      </article>
       {% empty %}
-      <div style="grid-column:1/-1; padding:60px 0; text-align:center;">
-        <i class="fa-solid fa-folder-open text-muted" style="font-size:3rem; margin-bottom:16px;"></i>
-        <p class="text-muted">Chưa có bài viết nào được xuất bản.</p>
-      </div>
+      <div class="empty-state empty-state--wide"><i class="fa-regular fa-folder-open"></i><p>Chưa có bài viết nào được xuất bản.</p></div>
       {% endfor %}
     </div>
   </div>

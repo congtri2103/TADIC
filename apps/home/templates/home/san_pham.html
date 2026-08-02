@@ -4,51 +4,48 @@
 
 {% block content %}
 
-<!-- Breadcrumb -->
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Trang chủ</a>
-      <i class="fa-solid fa-chevron-right"></i>
-      <span>Sản phẩm</span>
+      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Sản phẩm</span>
     </nav>
   </div>
 </div>
 
-<!-- Page Hero -->
-<section class="page-hero text-center">
-  <div class="container">
+<section class="page-hero">
+  <div class="page-hero__grid" aria-hidden="true"></div>
+  <div class="container page-hero__inner text-center reveal">
     <p class="eyebrow"><i class="fa-solid fa-microchip"></i> Sản phẩm AI</p>
     <h1>Hệ sinh thái Tác nhân AI cho Đường bộ</h1>
-    <p style="max-width:800px; margin:0 auto; color:rgba(255,255,255,0.8);">14 giải pháp chuyên biệt phủ khắp các mảng: Khảo sát hiện trạng, An toàn giao thông và Tự động hóa quy trình quản lý hạ tầng.</p>
+    <p>14 giải pháp chuyên biệt phủ khắp các mảng: Khảo sát hiện trạng, An toàn giao thông và Tự động hóa quy trình quản lý hạ tầng.</p>
   </div>
 </section>
 
-<!-- Filter Tabs -->
-<div class="container mt-32">
-  <div class="d-flex gap-16" style="justify-content:center; flex-wrap:wrap;">
-    <button class="btn btn--outline active" data-filter="all">Tất cả giải pháp</button>
-    <button class="btn btn--outline" data-filter="Giám sát mạng lưới đường bộ">Giám sát đường bộ</button>
-    <button class="btn btn--outline" data-filter="An toàn giao thông">An toàn giao thông</button>
-    <button class="btn btn--outline" data-filter="Tự động hóa & Số hóa">Tự động hóa</button>
+<section class="product-filter" aria-label="Lọc sản phẩm">
+  <div class="container">
+    <div class="filter-tabs" role="group" aria-label="Nhóm sản phẩm">
+      <button class="filter-tab active" type="button" data-filter="all" aria-pressed="true">Tất cả giải pháp</button>
+      <button class="filter-tab" type="button" data-filter="road_network" aria-pressed="false">Giám sát đường bộ</button>
+      <button class="filter-tab" type="button" data-filter="road_safety" aria-pressed="false">An toàn giao thông</button>
+      <button class="filter-tab" type="button" data-filter="workflow" aria-pressed="false">Tự động hóa</button>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- Danh sách Sản phẩm -->
-<section class="section" id="danh-sach">
+<section class="section section--white" id="danh-sach">
   <div class="container">
     {% regroup products by get_category_group_display as product_groups %}
     {% for group in product_groups %}
-    <div class="products-category reveal mb-32" data-category="{{ group.grouper }}">
-      <div class="section-head mb-24">
-        <h2 style="font-size:1.8rem;">
-          <i class="fa-solid {% if 'Mạng lưới' in group.grouper %}fa-map{% elif 'An toàn' in group.grouper %}fa-shield-halved{% else %}fa-arrow-right-arrow-left{% endif %} text-teal" style="margin-right:10px;"></i>
-          {{ group.grouper }}
-        </h2>
+    <section class="products-category reveal" data-category="{{ group.list.0.category_group }}">
+      <div class="category-heading">
+        <span class="category-heading__icon">
+          <i class="fa-solid {% if 'Mạng lưới' in group.grouper %}fa-map{% elif 'An toàn' in group.grouper %}fa-shield-halved{% else %}fa-arrow-right-arrow-left{% endif %}"></i>
+        </span>
+        <div><p class="eyebrow">TADIC.AI</p><h2>{{ group.grouper }}</h2></div>
       </div>
-      <div class="grid-4 reveal-group">
+      <div class="grid-4 product-grid">
         {% for product in group.list %}
-        <div class="product-card reveal">
+        <article class="product-card reveal">
           <div class="product-card__top">
             <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
             <span class="product-card__status status--{{ product.status }}">
@@ -58,25 +55,21 @@
           <span class="product-card__tag">{{ product.tag }}</span>
           <h3>{{ product.title }}</h3>
           <p>{{ product.subtitle }}</p>
-          <a href="/san-pham/{{ product.key }}/" class="link-arrow mt-16" style="margin-top:auto;">
-            Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
+          <a href="{% url 'san_pham_detail' product.key %}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
         {% endfor %}
       </div>
-    </div>
+    </section>
     {% endfor %}
+    <div class="filter-empty" hidden>Không có giải pháp phù hợp.</div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
-  <div class="container text-center reveal">
-    <h2>Bạn cần tư vấn giải pháp phù hợp?</h2>
-    <p>Đội ngũ kỹ sư TADIC sẵn sàng hỗ trợ bạn chọn đúng công cụ AI cho dự án đường bộ của bạn.</p>
-    <div class="cta-actions">
-      <a href="#" class="btn btn--white" data-contact-modal>Đặt lịch tư vấn</a>
-    </div>
+  <div class="cta-section__pattern" aria-hidden="true"></div>
+  <div class="container cta-section__inner reveal">
+    <div><h2>Bạn cần tư vấn giải pháp phù hợp?</h2><p>Đội ngũ kỹ sư TADIC sẵn sàng hỗ trợ bạn chọn đúng công cụ AI cho dự án đường bộ của bạn.</p></div>
+    <div class="cta-actions"><a href="{% url 'lien_he' %}" class="btn btn--white btn--lg" data-contact-modal>Đặt lịch tư vấn <i class="fa-solid fa-arrow-right"></i></a></div>
   </div>
 </section>
 

@@ -1,100 +1,306 @@
-document.addEventListener("DOMContentLoaded", () => { const n = document.getElementById("navbar"), t = document.getElementById("scrollProgress"), e = document.getElementById("backToTop"); function l() { const c = document.querySelectorAll("main section[id], footer[id]"), s = document.querySelectorAll(".nav-link"); let i = ""; c.forEach(o => { const h = o.getBoundingClientRect(); h.top <= 140 && h.bottom >= 140 && (i = o.getAttribute("id") || "") }), s.forEach(o => { const h = o.getAttribute("href"); (!h || h.startsWith("#")) && o.classList.toggle("active", h === `#${i}`) }) } function d() { const c = window.scrollY, s = document.documentElement.scrollHeight - window.innerHeight, i = s > 0 ? c / s * 100 : 0; t && (t.style.width = `${i}%`), n && n.classList.toggle("is-scrolled", c > 20), e && e.classList.toggle("is-visible", c > 450), l() } window.addEventListener("scroll", d, { passive: !0 }), d(); const r = document.getElementById("hamburger"), u = document.getElementById("navMenu"); r && u && (r.addEventListener("click", () => { const c = u.classList.toggle("is-open"); r.classList.toggle("is-active", c), r.setAttribute("aria-expanded", String(c)) }), document.querySelectorAll(".nav-link").forEach(c => { c.addEventListener("click", () => { u.classList.remove("is-open"), r.classList.remove("is-active"), r.setAttribute("aria-expanded", "false") }) })), document.querySelectorAll('a[href^="#"]').forEach(c => { c.addEventListener("click", function (s) { const i = this.getAttribute("href"); if (i && i.length > 1) { const o = document.querySelector(i); if (o) { s.preventDefault(); const p = o.getBoundingClientRect().top + window.pageYOffset - 76; window.scrollTo({ top: p, behavior: "smooth" }) } } }) }), e && e.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }) }) }); document.addEventListener("DOMContentLoaded", () => { const n = document.getElementById("loader"), t = document.getElementById("loaderBar"); window.addEventListener("load", () => { t && (t.style.width = "100%"), setTimeout(() => { n && n.classList.add("is-hidden"), document.body.style.overflow = "" }, 700) }); const e = document.getElementById("typedText"), l = "Triển khai Đội ngũ Tác nhân AI cho Mạng lưới Đường bộ"; function d() { if (!e) return; e.textContent = ""; let a = 0; function g() { a <= l.length && (e.textContent = l.slice(0, a), a++, setTimeout(g, 35)) } g() } setTimeout(d, 600); const r = document.querySelectorAll(".reveal"), u = new IntersectionObserver(a => { a.forEach(g => { g.isIntersecting && (g.target.classList.add("is-visible"), u.unobserve(g.target)) }) }, { threshold: .12, rootMargin: "0px 0px -40px 0px" }); r.forEach(a => u.observe(a)); const c = document.querySelectorAll(".stat-item__number"); function s(a) { const g = parseInt(a.getAttribute("data-target") || "0", 10), m = a.getAttribute("data-suffix") || "", v = 1800, w = performance.now(); function x(L) { const M = L - w, k = Math.min(M / v, 1), S = 1 - Math.pow(1 - k, 3), q = Math.floor(S * g); a.textContent = `${q}${m}`, k < 1 ? requestAnimationFrame(x) : a.textContent = `${g}${m}` } requestAnimationFrame(x) } const i = new IntersectionObserver(a => { a.forEach(g => { g.isIntersecting && (s(g.target), i.unobserve(g.target)) }) }, { threshold: .5 }); c.forEach(a => i.observe(a)); const o = document.getElementById("testimonialTrack"), h = document.getElementById("testimonialDots"), p = o ? o.children.length : 0; let b = 0, f; if (o && h && p > 0) { let a = function (m) { b = (m % p + p) % p, o.style.transform = `translateX(-${b * 100}%)`, Array.from(h.children).forEach((v, w) => { v.classList.toggle("is-active", w === b) }), g() }, g = function () { clearInterval(f), f = setInterval(() => { a(b + 1) }, 5500) }; for (let m = 0; m < p; m++) { const v = document.createElement("button"); v.setAttribute("aria-label", `Chuyển đến đánh giá ${m + 1}`), m === 0 && v.classList.add("is-active"), v.addEventListener("click", () => a(m)), h.appendChild(v) } g() } const y = document.getElementById("year"); y && (y.textContent = new Date().getFullYear().toString()) }); const B = {
-  ct01: {
-    info: '<span><i class="fa-solid fa-route"></i> Tuyến: CT01 - Km120+400</span><span><i class="fa-solid fa-gauge-high"></i> Tốc độ: 80 km/h</span>', fps: "60 FPS", quality: '<span class="text-success">Tốt (PCI: 88)</span>', boxes: `
-      <div class="bbox bbox--crack" style="top: 25%; left: 18%; width: 34%; height: 26%;">
-        <span class="bbox__label"><i class="fa-solid fa-burst"></i> Vết nứt dọc (96.4%)</span>
-      </div>
-      <div class="bbox bbox--pothole" style="top: 52%; left: 52%; width: 38%; height: 30%;">
-        <span class="bbox__label"><i class="fa-solid fa-circle-exclamation"></i> Ổ gà nhẹ (91.8%)</span>
-      </div>`, logs: ['<span class="log-time">[14:32:10]</span> <span class="log-info">SYS:</span> Quét tuyến Cao tốc Bắc - Nam CT01...', '<span class="log-time">[14:32:11]</span> <span class="log-warn">AI DETECT:</span> Phát hiện nứt dọc Km120+400 (WGS-84: 21.0285, 105.8542)']
-  }, ql1a: {
-    info: '<span><i class="fa-solid fa-route"></i> Tuyến: QL1A - Km45+200</span><span><i class="fa-solid fa-gauge-high"></i> Tốc độ: 55 km/h</span>', fps: "55 FPS", quality: '<span class="text-accent">Trung bình (PCI: 64)</span>', boxes: `
-      <div class="bbox bbox--pothole" style="top: 30%; left: 10%; width: 45%; height: 40%;">
-        <span class="bbox__label"><i class="fa-solid fa-triangle-exclamation"></i> Ổ gà đọng nước (94.2%)</span>
-      </div>
-      <div class="bbox bbox--crack" style="top: 50%; left: 58%; width: 32%; height: 24%;">
-        <span class="bbox__label"><i class="fa-solid fa-burst"></i> Nứt lưới cấp 3 (89.5%)</span>
-      </div>`, logs: ['<span class="log-time">[14:32:24]</span> <span class="log-info">SYS:</span> Quét tuyến Quốc lộ 1A Km45+200...', '<span class="log-time">[14:32:25]</span> <span class="log-warn">AI ALERT:</span> Ổ gà diện tích 0.8m² - Cần vá dặm khẩn cấp!']
-  }, dothi: {
-    info: '<span><i class="fa-solid fa-route"></i> Tuyến: Đô thị - Nguyễn Trãi</span><span><i class="fa-solid fa-gauge-high"></i> Tốc độ: 35 km/h</span>', fps: "60 FPS", quality: '<span class="text-success">Khá (PCI: 76)</span>', boxes: `
-      <div class="bbox bbox--crack" style="top: 35%; left: 25%; width: 48%; height: 35%;">
-        <span class="bbox__label"><i class="fa-solid fa-layer-group"></i> Lún rãnh vệt bánh xe (93.1%)</span>
-      </div>`, logs: ['<span class="log-time">[14:32:40]</span> <span class="log-info">SYS:</span> Giám sát tuyến đường đô thị Nguyễn Trãi...', '<span class="log-time">[14:32:41]</span> <span class="log-info">ATS CAMERA:</span> Lưu lượng 1.200 phương tiện/giờ - Đèn giao thông ổn định.']
+(() => {
+  'use strict';
+
+  document.documentElement.classList.add('js');
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const header = document.getElementById('header');
+  const nav = document.querySelector('.nav');
+  const navList = document.getElementById('navList');
+  const navToggle = document.getElementById('navToggle');
+  const dropdownParent = document.querySelector('.has-dropdown');
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const backToTop = document.getElementById('backToTop');
+  const contactModal = document.getElementById('contactModal');
+  let modalTrigger = null;
+
+  const setDropdownState = (open) => {
+    if (!dropdownParent || !dropdownToggle) return;
+    dropdownParent.classList.toggle('dropdown-open', open);
+    dropdownToggle.setAttribute('aria-expanded', String(open));
+  };
+
+  const setNavState = (open) => {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle('active', open);
+    navToggle.classList.toggle('active', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+    document.body.classList.toggle('nav-open', open);
+    if (!open) setDropdownState(false);
+  };
+
+  navToggle?.addEventListener('click', () => {
+    setNavState(!nav?.classList.contains('active'));
+  });
+
+  nav?.addEventListener('click', (event) => {
+    if (event.target === nav) setNavState(false);
+  });
+
+  navList?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 1024) setNavState(false);
+    });
+  });
+
+  dropdownToggle?.addEventListener('click', () => {
+    const open = !dropdownParent?.classList.contains('dropdown-open');
+    setDropdownState(open);
+  });
+
+  const updateScrollState = () => {
+    const scrolled = window.scrollY > 16;
+    header?.classList.toggle('is-scrolled', scrolled);
+    backToTop?.classList.toggle('visible', window.scrollY > 600);
+  };
+
+  window.addEventListener('scroll', updateScrollState, { passive: true });
+  updateScrollState();
+
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  });
+
+  const openContactModal = (trigger = null) => {
+    if (!contactModal) return;
+    modalTrigger = trigger;
+    contactModal.inert = false;
+    contactModal.classList.add('active');
+    contactModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    window.setTimeout(() => contactModal.querySelector('input:not([type="hidden"]), select, textarea')?.focus(), 80);
+  };
+
+  const closeContactModal = () => {
+    if (!contactModal) return;
+    contactModal.classList.remove('active');
+    contactModal.setAttribute('aria-hidden', 'true');
+    contactModal.inert = true;
+    document.body.classList.remove('modal-open');
+    modalTrigger?.focus?.();
+    modalTrigger = null;
+  };
+
+  window.openContactModal = openContactModal;
+  window.closeContactModal = closeContactModal;
+
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-contact-modal]');
+    if (trigger && contactModal) {
+      event.preventDefault();
+      setNavState(false);
+      openContactModal(trigger);
+      return;
+    }
+    if (event.target.closest('[data-modal-close]')) closeContactModal();
+    if (dropdownParent && !dropdownParent.contains(event.target)) setDropdownState(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' && contactModal?.classList.contains('active')) {
+      const focusable = [...contactModal.querySelectorAll('button, input, select, textarea, a[href], [tabindex]:not([tabindex="-1"])')]
+        .filter((element) => !element.disabled && element.offsetParent !== null);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement;
+
+      if (first && last && (!contactModal.contains(activeElement)
+        || (event.shiftKey && activeElement === first)
+        || (!event.shiftKey && activeElement === last))) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      }
+    }
+
+    if (event.key === 'Escape') {
+      if (contactModal?.classList.contains('active')) closeContactModal();
+      if (nav?.classList.contains('active')) setNavState(false);
+      setDropdownState(false);
+    }
+  });
+
+  const showFormMessage = (form, message, type) => {
+    const alert = form.querySelector('.form-alert');
+    if (!alert) return;
+    alert.textContent = `${type === 'success' ? '✓' : '!'} ${message}`;
+    alert.className = `form-alert alert alert--${type} is-visible`;
+    alert.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+  };
+
+  const submitContactForm = async (form) => {
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const submitButton = form.querySelector('[type="submit"]');
+    const originalButton = submitButton?.innerHTML || '';
+    const formData = new FormData(form);
+    const csrfToken = formData.get('csrfmiddlewaretoken') || '';
+    const payload = {
+      name: String(formData.get('name') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      phone: String(formData.get('phone') || '').trim(),
+      organization: String(formData.get('organization') || '').trim(),
+      product_interest: String(formData.get('product_interest') || 'all'),
+      message: String(formData.get('message') || '').trim(),
+    };
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Đang gửi...</span>';
+    }
+
+    try {
+      const response = await fetch(form.dataset.endpoint || '/contact/submit/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Có lỗi xảy ra. Vui lòng thử lại.');
+      }
+
+      showFormMessage(form, data.message || 'Cảm ơn! Chúng tôi sẽ liên hệ sớm.', 'success');
+      form.reset();
+    } catch (error) {
+      showFormMessage(form, error.message || 'Không thể kết nối. Vui lòng kiểm tra mạng.', 'error');
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButton;
+      }
+    }
+  };
+
+  document.querySelectorAll('[data-contact-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submitContactForm(form);
+    });
+  });
+
+  const revealItems = document.querySelectorAll('.reveal');
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach((item) => item.classList.add('active'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -45px' });
+    revealItems.forEach((item) => revealObserver.observe(item));
   }
-}; document.addEventListener("DOMContentLoaded", () => { const n = document.querySelectorAll(".scan-tab"), t = document.getElementById("bboxContainer"), e = document.getElementById("scanInfo"), l = document.getElementById("scanLog"), d = document.getElementById("metricFps"), r = document.getElementById("metricQuality"); n.forEach(u => { u.addEventListener("click", () => { n.forEach(i => i.classList.remove("active")), u.classList.add("active"); const c = u.getAttribute("data-route"); if (!c) return; const s = B[c]; s && (t && (t.innerHTML = s.boxes), e && (e.innerHTML = s.info), d && (d.textContent = s.fps), r && (r.innerHTML = s.quality), l && (l.innerHTML = s.logs.map(i => `<div class="scan-log__line">${i}</div>`).join(""))) }) }) }); const E = { "road-vision-ai": { title: "Đặc vụ Tình trạng Mặt đường", subtitle: "Phân tích hình ảnh & video mặt đường theo thời gian thực", icon: "fa-video", tag: "AI Vision", desc: "Sử dụng các thuật toán Thị giác máy tính (Computer Vision) kết hợp mô hình Học sâu (Deep Learning) được huấn luyện trên hơn 2 triệu hình ảnh mặt đường tại Việt Nam. Hệ thống tự động phát hiện, phân loại và đo đạc kích thước hư hỏng ngay khi xe khảo sát di chuyển.", features: ["Nhận diện 15+ loại hư hỏng: Vết nứt dọc, nứt ngang, nứt lưới, ổ gà, lún rãnh, bong tróc.", "Đo đạc chính xác diện tích (m²) và độ rộng nứt (mm) thời gian thực.", "Tích hợp GPS RTK gán tọa độ chuẩn VN-2000 cho từng điểm hư hỏng.", "Tốc độ xử lý video đến 60 FPS trên thiết bị Edge AI ngoại trường."] }, "road-bound": { title: "Đại lý Kiểm kê Ven đường", subtitle: "Nền tảng định vị & Quản lý ranh giới hành lang an toàn giao thông", icon: "fa-map-location-dot", tag: "GIS & Land", desc: "Road Bound giải quyết bài toán phức tạp về quản lý hành lang an toàn đường bộ và quỹ đất giao thông. Hệ thống tích hợp ảnh vệ tinh độ phân giải cao và mô hình 3D địa hình để số hóa toàn bộ mốc ranh giới.", features: ["Khoanh vùng tự động ranh giới giải phóng mặt bằng và hành lang an toàn.", "Tự động so sánh dữ liệu thực địa để phát hiện công trình lấn chiếm trái phép.", "Truy xuất lịch sử biến động sử dụng đất theo từng mốc thời gian.", "Xuất dữ liệu chuẩn GIS (Shapefile, GeoJSON, KML) kết nối phần mềm ngành GTVT."] }, "ats-camera": { title: "Tác nhân Phân tích Lưu lượng", subtitle: "Hệ thống camera AI giám sát giao thông thông minh 24/7", icon: "fa-camera-retro", tag: "IoT & ITS", desc: "ATS Camera System biến hệ thống camera CCTV thông thường thành các điểm cảm biến giao thông thông minh. Thuật toán AI phân tích luồng video liên tục để phục vụ công tác điều hành giao thông đô thị và đường cao tốc.", features: ["Đếm lưu lượng và phân loại 8 nhóm phương tiện (Xe máy, ô tô, xe tải, container...).", "Đo tốc độ di chuyển trung bình và nhận diện hành vi vi phạm giao thông.", "Cảnh báo tức thời sự cố tắc nghẽn, tai nạn, xe dừng đỗ trái phép.", "Vận hành ổn định trong điều kiện thời tiết xấu và ban đêm."] }, "ai-inspection": { title: "Tác nhân DMS & Báo cáo", subtitle: "Nền tảng lập báo cáo kiểm định & Quản lý bảo trì tự động", icon: "fa-clipboard-check", tag: "Automated Analytics", desc: "AI Inspection Platform là trung tâm bộ não tổng hợp dữ liệu từ Road Vision AI và cảm biến. Nền tảng tự động lập biểu đồ bản đồ nhiệt hư hỏng và tính toán chỉ số chất lượng mặt đường (Pavement Condition Index - PCI).", features: ["Tự động tính toán chỉ số PCI, IRI theo quy chuẩn ngành đường bộ Việt Nam.", "Xuất báo cáo kiểm định chất lượng mặt đường dạng PDF/Excel chuẩn ISO.", "Gợi ý phương án sửa chữa tối ưu (trám nứt, cào bóc, thảm lại) kèm dự toán kinh phí.", "Quản lý tiến độ khắc phục hư hỏng của các đơn vị nhà thầu bảo trì."] }, "vegetation-analysis": { title: "Đặc vụ Phân tích Thảm thực vật", subtitle: "Giám sát thảm thực vật ven đường bằng AI", icon: "fa-leaf", tag: "Môi trường", desc: "Giám sát thảm thực vật ven đường vì mục tiêu an toàn và tuân thủ tiêu chuẩn đường xanh (Green Highway) bằng dữ liệu camera hành trình và vệ tinh. Phát hiện sớm các nguy cơ từ thảm thực vật xâm lấn tầm nhìn, che khuất biển báo.", features: ["Phát hiện thảm thực vật xâm lấn hành lang an toàn đường bộ.", "Đánh giá mức độ che phủ và loại thực vật ven đường.", "Tích hợp dữ liệu đa thời điểm để theo dõi biến động theo mùa.", "Cảnh báo sớm các khu vực có nguy cơ cháy rừng ven đường."] }, "construction-monitoring": { title: "Đặc vụ Giám sát Thi công", subtitle: "Theo dõi tiến độ và chất lượng thi công đường bộ", icon: "fa-hard-hat", tag: "Thi công", desc: "Theo dõi tiến độ thi công đường bộ, phát hiện sai lệch so với thiết kế và đánh giá chất lượng dự án bằng AI. Sử dụng ảnh vệ tinh, drone và camera công trường để giám sát từ xa mọi giai đoạn thi công.", features: ["So sánh tiến độ thực tế với kế hoạch thi công tự động.", "Phát hiện sai lệch kết cấu so với bản vẽ thiết kế.", "Đánh giá chất lượng thi công mặt đường và lớp móng.", "Tích hợp dữ liệu từ nhiều nguồn: drone, vệ tinh, camera công trường."] }, "rapid-damage": { title: "Đặc vụ Đánh giá Hư hỏng Nhanh", subtitle: "Đánh giá thiệt hại đường bộ sau thiên tai bằng AI", icon: "fa-satellite", tag: "Thảm họa", desc: "Sử dụng ảnh vệ tinh và trí tuệ nhân tạo để đánh giá nhanh thiệt hại đường bộ sau thiên tai (bão, lũ, động đất, sạt lở). Hỗ trợ cơ quan chức năng ưu tiên nguồn lực cứu hộ và lập kế hoạch khắc phục kịp thời.", features: ["Phân tích ảnh vệ tinh trước/sau thiên tai để đánh giá mức độ hư hỏng.", "Phân loại mức độ thiệt hại: nhẹ, trung bình, nghiêm trọng.", "Ước tính chi phí khắc phục và nguồn lực cần thiết.", "Tích hợp bản đồ GIS để khoanh vùng khu vực ưu tiên xử lý."] }, "road-beauty": { title: "Đặc vụ Vệ sinh & Mỹ quan", subtitle: "Giám sát vệ sinh đô thị và mỹ quan đường phố", icon: "fa-broom", tag: "Đô thị", desc: "Giám sát vệ sinh, mỹ quan đô thị và các chỉ số chất lượng môi trường ven đường bằng AI. Phát hiện các điểm rác thải, biển báo hư hỏng, và các yếu tố ảnh hưởng đến mỹ quan đô thị.", features: ["Phát hiện điểm rác thải và đánh giá mức độ ô nhiễm ven đường.", "Kiểm tra tình trạng biển báo, cột đèn và các công trình mỹ quan.", "Đánh giá điểm số mỹ quan đường phố theo tiêu chuẩn đô thị văn minh.", "Gợi ý lịch dọn dẹp và bảo trì định kỳ dựa trên dữ liệu thực tế."] }, "road-safety-audit": { title: "Tác nhân Kiểm toán An toàn", subtitle: "Kiểm toán an toàn đường bộ tự động hóa", icon: "fa-clipboard-list", tag: "An toàn", desc: "Kiểm toán an toàn đường bộ tự động ở các giai đoạn thiết kế, thi công và vận hành — tuân thủ tiêu chuẩn IRC, AASHTO và WHO về an toàn đường bộ. Phát hiện sớm các yếu tố nguy cơ tiềm ẩn.", features: ["Kiểm toán an toàn ở giai đoạn thiết kế: phát hiện bất cập về tầm nhìn, độ dốc, khúc cua nguy hiểm.", "Kiểm toán giai đoạn vận hành: phát hiện hư hỏng công trình an toàn.", "Chấm điểm an toàn cho từng đoạn tuyến theo tiêu chuẩn quốc tế.", "Đề xuất giải pháp cải tạo điểm đen kèm dự toán chi phí."] }, anpr: { title: "Tác nhân Nhận diện Biển số", subtitle: "Nhận diện và theo dõi biển số phương tiện thời gian thực", icon: "fa-camera-cctv", tag: "ANPR", desc: "Phát hiện, đọc và theo dõi biển số phương tiện từ luồng video trực tiếp với độ chính xác cao. Hỗ trợ nhận diện biển số Việt Nam (biển trắng, biển vàng, biển xanh) và quốc tế trong mọi điều kiện ánh sáng.", features: ["Nhận diện biển số với độ chính xác >97% trong điều kiện thực tế.", "Hỗ trợ tất cả các loại biển số Việt Nam và quốc tế.", "Tra cứu thông tin phương tiện và cảnh báo xe vi phạm.", "Lưu trữ lịch sử di chuyển và xuất báo cáo thống kê."] }, "facial-recognition": { title: "Tác nhân Nhận diện Khuôn mặt", subtitle: "Giám sát và nhận diện nhân sự trong môi trường hạ tầng", icon: "fa-face-smile", tag: "Nhận diện", desc: "Nhận diện, theo dõi và giám sát sự hiện diện của nhân sự trong các khu vực thi công và môi trường hạ tầng giao thông. Tích hợp với hệ thống kiểm soát an ninh và quản lý nhân công.", features: ["Nhận diện và định danh nhân sự từ luồng video trực tiếp.", "Cảnh báo khi nhân sự không được phép vào khu vực hạn chế.", "Đếm số lượng và theo dõi thời gian làm việc của công nhân.", "Tích hợp với hệ thống chấm công và quản lý an toàn lao động."] }, "blackspot-analysis": { title: "Tác nhân Phân tích Điểm đen", subtitle: "Xác định và phân tích khu vực tiềm ẩn tai nạn giao thông", icon: "fa-location-crosshairs", tag: "Phân tích", desc: "Xác định chính xác các điểm đen tai nạn giao thông dựa trên dữ liệu lịch sử tai nạn, đặc điểm hình học đường bộ và lưu lượng giao thông. Đề xuất các giải pháp cải tạo có mục tiêu để giảm thiểu tai nạn.", features: ["Phân tích dữ liệu tai nạn giao thông đa năm.", "Xác định nguyên nhân gốc rễ của từng điểm đen.", "Đề xuất giải pháp kỹ thuật và ước tính hiệu quả giảm tai nạn.", "Theo dõi hiệu quả can thiệp sau khi cải tạo."] }, "tender-intelligence": { title: "Tác nhân Đấu thầu & Hồ sơ", subtitle: "Theo dõi và hỗ trợ chuẩn bị hồ sơ đấu thầu", icon: "fa-gavel", tag: "Đấu thầu", desc: "Theo dõi tự động các gói thầu trên toàn quốc, trích xuất thông số kỹ thuật và yêu cầu hồ sơ. Hỗ trợ tạo hồ sơ dự thầu với AI, đảm bảo tuân thủ đầy đủ yêu cầu của bên mời thầu.", features: ["Theo dõi và tổng hợp thông tin gói thầu từ nhiều nguồn.", "Trích xuất tự động yêu cầu kỹ thuật và tiêu chí đánh giá.", "Hỗ trợ soạn thảo hồ sơ dự thầu với đề xuất nội dung AI.", "Cảnh báo hạn chót nộp hồ sơ và các yêu cầu bổ sung."] }, "contract-intelligence": { title: "Tác nhân Quản lý Hợp đồng", subtitle: "Rà soát và quản lý hợp đồng xây dựng thông minh", icon: "fa-scale-balanced", tag: "Hợp đồng", desc: "Rà soát hợp đồng xây dựng bằng AI, xác định rủi ro pháp lý, điều khoản bất lợi và hỗ trợ quản lý khiếu nại. Tích hợp quy trình phê duyệt và lưu trữ hợp đồng tập trung.", features: ["Rà soát hợp đồng tự động, phát hiện điều khoản rủi ro.", "So sánh điều khoản giữa các phiên bản hợp đồng.", "Hỗ trợ quản lý khiếu nại và tranh chấp hợp đồng.", "Lưu trữ và tra cứu hợp đồng thông minh với AI Search."] } }, A = {
-  "news-1": {
-    title: "AI và Thị giác máy tính đang thay đổi ngành khảo sát đường bộ ra sao?", date: "15/06/2026", author: "Đội ngũ R&D TADIC", image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&q=80", content: `
-      <p>Trước đây, công tác khảo sát chất lượng mặt đường tại Việt Nam chủ yếu dựa vào lực lượng nhân công đi bộ dọc tuyến đường hoặc di chuyển bằng ô tô với tốc độ chậm để quan sát bằng mắt thường. Phương pháp này không chỉ tốn kém thời gian, chi phí mà còn tiềm ẩn nguy cơ mất an toàn giao thông rất lớn cho cán bộ kiểm định.</p>
-      <h3>Ứng dụng mô hình Deep Learning YOLOv8 trong phát hiện hư hỏng</h3>
-      <p>Sự ra đời của thị giác máy tính thế hệ mới kết hợp mô hình học sâu (Deep Learning) đã hoàn toàn thay đổi cục diện. Hệ thống <strong>Road Vision AI</strong> của TADIC sử dụng các camera chuẩn công nghiệp 4K gắn phía trước xe khảo sát, thu thập hàng ngàn khung hình mỗi giây khi xe di chuyển ở tốc độ thường (50 - 80 km/h).</p>
-      <div class="article-highlight">
-        "Thuật toán AI tự động phân loại vết nứt dọc, nứt ngang, nứt chân chim và ổ gà với thời gian phản hồi dưới 16ms, độ chính xác nhận diện thực tế đạt tới 96.4%."
-      </div>
-      <h3>Số hóa dữ liệu gán tọa độ VN-2000</h3>
-      <p>Tất cả hình ảnh hư hỏng sau khi được phát hiện đều gán tự động tọa độ vệ tinh GPS RTK độ chính xác milimet. Dữ liệu được đưa thẳng lên bản đồ điện tử GIS, giúp các kỹ sư giao thông dễ dàng tra cứu vị trí hư hỏng trên máy tính hoặc tablet mà không cần phải ra lại hiện trường.</p>
-    `}, "news-2": {
-    title: "Lộ trình số hóa 100% dữ liệu tài sản hạ tầng giao thông đến năm 2030", date: "28/05/2026", author: "Ban Tư vấn Chuyển đổi số TADIC", image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=900&q=80", content: `
-      <p>Quyết định của Chính phủ và Bộ GTVT về Chiến lược Chuyển đổi số ngành Giao thông vận tải đặt ra mục tiêu số hóa toàn bộ hệ thống đường bộ, cầu, hầm và tài sản hạ tầng trên toàn quốc. Việc sở hữu một Cơ sở dữ liệu số tập trung (Digital Twin) là nền tảng cốt lõi cho Đô thị thông minh.</p>
-      <h3>Xây dựng mô hình Song sinh số (Digital Twin) đường bộ</h3>
-      <p>TADIC đồng hành cùng các Sở GTVT xây dựng mô hình dữ liệu không gian 3D, tích hợp kết quả quét bề mặt từ AI với dữ liệu địa hình GIS. Mỗi cây cầu, biển báo, cọc tiêu, vạch kẻ đường đều trở thành một đối tượng dữ liệu được quản lý tuổi thọ và tình trạng kỹ thuật.</p>
-      <div class="article-highlight">
-        "Số hóa dữ liệu hạ tầng giúp cơ quan quản lý chuyển từ chiến lược 'hư đâu sửa đó' sang 'bảo trì dự báo', tiết kiệm tới 40% chi phí sửa chữa định kỳ hàng năm."
-      </div>
-      <h3>Liên thông dữ liệu từ Trung ương đến Địa phương</h3>
-      <p>Nền tảng Cloud của TADIC hỗ trợ chuẩn mở RESTful API, cho phép phân quyền truy cập minh bạch cho Cục Đường bộ, Sở GTVT và các nhà thầu quản lý bảo trì.</p>
-    `}, "news-3": {
-    title: "TADIC mở rộng triển khai hệ thống ATS Camera System tại 5 tỉnh thành", date: "10/05/2026", author: "Phòng Dự án ITS TADIC", image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=80", content: `
-      <p>Sau giai đoạn thử nghiệm thành công tại Hà Nội và TP. Hồ Chí Minh, TADIC chính thức mở rộng ký kết triển khai hệ thống <strong>ATS Camera System</strong> cho 5 tỉnh thành trọng điểm gồm Đà Nẵng, Quảng Ninh, Bình Dương, Đồng Nai và Hải Phòng.</p>
-      <h3>Cảnh báo tức thời sự cố và tắc nghẽn giao thông</h3>
-      <p>Hệ thống tích hợp AI edge-computing ngay tại camera, tự động phát hiện các tình huống giao thông nguy hiểm như: ô tô đi ngược chiều, dừng đỗ sai quy định, phương tiện gặp sự cố chết máy giữa đường hay tai nạn giao thông. Cảnh báo lập tức được truyền về Trung tâm Điều hành Giao thông (ITS) trong vòng 2 giây.</p>
-      <div class="article-highlight">
-        "Tại Quảng Ninh, hệ thống ATS Camera đã hỗ trợ giảm 35% thời gian ùn tắc tại các nút giao thông trọng điểm vào giờ cao điểm nhờ khả năng tự động điều tiết chu kỳ đèn tín hiệu."
-      </div>
-      <h3>Hỗ trợ phân luồng và quy hoạch hạ tầng</h3>
-      <p>Dữ liệu đếm lưu lượng xe theo giờ, ngày, tuần giúp các chuyên gia quy hoạch giao thông có cơ sở khoa học chính xác để đề xuất mở rộng làn đường hay điều chỉnh phân luồng giao thông hiệu quả.</p>
-    `}
-}; window.PRODUCT_DATA = E; window.NEWS_DATA = A; function C(n) { const t = document.getElementById(n); t && (t.classList.add("is-open"), t.setAttribute("aria-hidden", "false"), document.body.style.overflow = "hidden") } function T(n) { const t = document.getElementById(n); t && (t.classList.remove("is-open"), t.setAttribute("aria-hidden", "true"), document.body.style.overflow = "") } window.openProductModal = function (n) {
-  const t = E[n]; if (!t) return; const e = document.getElementById("productModalBody"); if (!e) return; e.innerHTML = `
-    <div class="product-modal__header" style="display:flex; gap:16px; align-items:center; margin-bottom:16px;">
-      <div class="product-card__icon" style="width:54px; height:54px; font-size:1.3rem;"><i class="fa-solid ${t.icon}"></i></div>
-      <div>
-        <span class="product-card__tag">${t.tag}</span>
-        <h2 style="font-size:1.4rem; margin-top:2px;">${t.title}</h2>
-        <p class="text-accent" style="font-weight:600; font-size:0.88rem;">${t.subtitle}</p>
-      </div>
-    </div>
-    <div>
-      <p style="margin-bottom:16px; color:var(--text-muted); line-height:1.6; font-size:0.95rem;">${t.desc}</p>
-      <h4 style="margin-bottom:10px; font-size:1rem;">Tính năng nổi bật:</h4>
-      <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:24px;">
-        ${t.features.map(d => `<li style="display:flex; gap:10px; font-size:0.92rem;"><i class="fa-solid fa-check text-accent" style="margin-top:4px;"></i> <span>${d}</span></li>`).join("")}
-      </ul>
-      <button class="btn btn--primary btn--full open-contact-modal-from-product">
-        <i class="fa-solid fa-paper-plane"></i> Yêu cầu Demo / Tư vấn giải pháp này
-      </button>
-    </div>
-  `, C("productModal"); const l = e.querySelector(".open-contact-modal-from-product"); l && l.addEventListener("click", () => { window.closeProductModal(), window.openContactModal() })
-}; window.closeProductModal = function () { T("productModal") }; window.openNewsModal = function (n) {
-  const t = A[n]; if (!t) return; const e = document.getElementById("newsModalBody"); if (!e) return; e.innerHTML = `
-    <div class="article-header">
-      <div class="article-meta">
-        <span><i class="fa-regular fa-calendar-days"></i> ${t.date}</span>
-        <span>•</span>
-        <span><i class="fa-solid fa-pen-nib"></i> ${t.author}</span>
-      </div>
-      <h2>${t.title}</h2>
-    </div>
-    <div class="article-img">
-      <img src="${t.image}" alt="${t.title}">
-    </div>
-    <div class="article-body">
-      ${t.content}
-    </div>
-    <div style="margin-top:30px; padding-top:20px; border-top:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-size:0.85rem; color:var(--text-muted);">TADIC Newsroom © 2026</span>
-      <button class="btn btn--primary btn--sm open-contact-modal-from-news">
-        <i class="fa-solid fa-paper-plane"></i> Liên hệ tư vấn giải pháp
-      </button>
-    </div>
-  `, C("newsModal"); const l = e.querySelector(".open-contact-modal-from-news"); l && l.addEventListener("click", () => { window.closeNewsModal(), window.openContactModal() })
-}; window.closeNewsModal = function () { T("newsModal") }; window.closeLightbox = function () { T("lightboxModal") }; window.openLightbox = function () { }; document.addEventListener("DOMContentLoaded", () => { document.getElementById("productModal"); const n = document.getElementById("productModalClose"), t = document.getElementById("productModalOverlay"); document.querySelectorAll(".open-product-modal").forEach(i => { i.addEventListener("click", o => { o.preventDefault(); const h = i.getAttribute("data-product"); h && window.openProductModal(h) }) }), n && n.addEventListener("click", window.closeProductModal), t && t.addEventListener("click", window.closeProductModal), document.getElementById("newsModal"); const e = document.getElementById("newsModalClose"), l = document.getElementById("newsModalOverlay"); document.querySelectorAll(".open-news-modal").forEach(i => { i.addEventListener("click", o => { o.preventDefault(); const h = i.getAttribute("data-news-id"); h && window.openNewsModal(h) }) }), e && e.addEventListener("click", window.closeNewsModal), l && l.addEventListener("click", window.closeNewsModal), document.getElementById("contactModal"); const d = document.getElementById("contactModalClose"), r = document.getElementById("contactModalOverlay"); document.querySelectorAll(".open-contact-modal").forEach(i => { i.addEventListener("click", o => { o.preventDefault(), window.openContactModal() }) }), d && d.addEventListener("click", window.closeContactModal), r && r.addEventListener("click", window.closeContactModal); const u = document.getElementById("lightboxModal"), c = document.getElementById("lightboxClose"), s = document.getElementById("lightboxOverlay"); document.querySelectorAll(".open-lightbox").forEach(i => { i.addEventListener("click", () => { const o = i.querySelector("img"), h = i.getAttribute("data-title"), p = i.getAttribute("data-desc"), b = document.getElementById("lightboxImg"), f = document.getElementById("lightboxTitle"), y = document.getElementById("lightboxDesc"); b && o && (b.src = o.src), f && (f.textContent = h || ""), y && (y.textContent = p || ""), u && (u.classList.add("is-open"), u.setAttribute("aria-hidden", "false"), document.body.style.overflow = "hidden") }) }), c && c.addEventListener("click", window.closeLightbox), s && s.addEventListener("click", window.closeLightbox), window.addEventListener("keydown", i => { i.key === "Escape" && (window.closeProductModal(), window.closeNewsModal(), window.closeContactModal(), window.closeLightbox()) }) }); window.openContactModal = function () { const n = document.getElementById("contactModal"); n && (n.classList.add("is-open"), n.setAttribute("aria-hidden", "false"), document.body.style.overflow = "hidden") }; window.closeContactModal = function () { const n = document.getElementById("contactModal"); n && (n.classList.remove("is-open"), n.setAttribute("aria-hidden", "true"), document.body.style.overflow = "") }; document.addEventListener("DOMContentLoaded", () => { const n = document.getElementById("contactForm"); n && n.addEventListener("submit", t => { t.preventDefault(); const e = document.getElementById("cName").value; alert(`Cảm ơn ông/bà ${e}! Yêu cầu tư vấn đã được gửi thành công. Đội ngũ kỹ sư TADIC sẽ liên hệ lại trong thời gian sớm nhất.`), n.reset(), window.closeContactModal() }) }); function I(n) { const t = document.documentElement, e = document.getElementById("themeToggle"); n === "dark" ? (t.setAttribute("data-theme", "dark"), e && (e.querySelector("i").className = "fa-solid fa-sun")) : (t.removeAttribute("data-theme"), e && (e.querySelector("i").className = "fa-solid fa-moon")) } function D() { try { return localStorage.getItem("tadic-theme") } catch { return null } } function P(n) { try { localStorage.setItem("tadic-theme", n) } catch { } } document.addEventListener("DOMContentLoaded", () => { const n = window.matchMedia("(prefers-color-scheme: dark)").matches, t = D() || (n ? "dark" : "light"); I(t); const e = document.getElementById("themeToggle"); e && e.addEventListener("click", () => { const d = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; I(d), P(d) }) });
+
+  const animateCounter = (element) => {
+    if (element.dataset.animated === 'true') return;
+    element.dataset.animated = 'true';
+    const target = Number.parseInt(element.dataset.target || '0', 10);
+    const suffix = element.dataset.suffix || '';
+
+    if (reducedMotion || !Number.isFinite(target)) {
+      element.textContent = `${target}${suffix}`;
+      return;
+    }
+
+    const duration = 1600;
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = `${Math.round(target * eased)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  };
+
+  const counters = document.querySelectorAll('[data-target]');
+  if ('IntersectionObserver' in window && !reducedMotion) {
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.45 });
+    counters.forEach((counter) => counterObserver.observe(counter));
+  } else {
+    counters.forEach(animateCounter);
+  }
+
+  const filterButtons = [...document.querySelectorAll('[data-filter]')];
+  const productCategories = [...document.querySelectorAll('.products-category[data-category]')];
+  const filterEmpty = document.querySelector('.filter-empty');
+
+  const applyProductFilter = (filter, updateUrl = false) => {
+    if (!filterButtons.length || !productCategories.length) return;
+    const available = new Set(productCategories.map((category) => category.dataset.category));
+    const activeFilter = filter === 'all' || available.has(filter) ? filter : 'all';
+    let visibleCount = 0;
+
+    productCategories.forEach((category) => {
+      const visible = activeFilter === 'all' || category.dataset.category === activeFilter;
+      category.hidden = !visible;
+      if (visible) visibleCount += 1;
+    });
+
+    filterButtons.forEach((button) => {
+      const active = button.dataset.filter === activeFilter;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+
+    if (filterEmpty) filterEmpty.hidden = visibleCount > 0;
+
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      if (activeFilter === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', activeFilter);
+      history.replaceState({}, '', `${url.pathname}${url.search}#danh-sach`);
+    }
+  };
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => applyProductFilter(button.dataset.filter || 'all', true));
+  });
+
+  if (filterButtons.length) {
+    const requestedFilter = new URLSearchParams(window.location.search).get('category') || 'all';
+    applyProductFilter(requestedFilter);
+  }
+
+  document.querySelectorAll('[data-tags]').forEach((tagList) => {
+    const tags = (tagList.dataset.tags || '').split(',').map((tag) => tag.trim()).filter(Boolean);
+    if (tags.length < 2) return;
+    const tagElements = tags.map((tag) => {
+      const element = document.createElement('span');
+      element.textContent = tag;
+      return element;
+    });
+    tagList.replaceChildren(...tagElements);
+  });
+
+  document.querySelectorAll('[data-share]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const pageUrl = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title);
+      const shareUrl = link.dataset.share === 'linkedin'
+        ? `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`
+        : `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${title}`;
+      window.open(shareUrl, 'share', 'width=720,height=560,noopener,noreferrer');
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024 && nav?.classList.contains('active')) setNavState(false);
+  });
+})();
