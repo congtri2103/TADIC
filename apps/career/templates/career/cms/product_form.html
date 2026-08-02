@@ -1,0 +1,69 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}{% if form.instance.pk %}Sửa{% else %}Thêm{% endif %} sản phẩm — TADIC CMS{% endblock %}
+{% block page_title %}{% if form.instance.pk %}Sửa sản phẩm{% else %}Thêm sản phẩm mới{% endif %}{% endblock %}
+{% block breadcrumb %}CMS / <a href="{% url 'cms-product-list' %}">Sản phẩm</a> / {% if form.instance.pk %}Sửa{% else %}Thêm{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:760px;">
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="alert alert--error"><i class="fa-solid fa-circle-xmark"></i> Vui lòng kiểm tra lại các trường bên dưới.</div>
+    {% endif %}
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Mã (key) *</label>
+        {{ form.key }}
+        {% if form.key.errors %}<div style="color:#ef4444;font-size:.78rem;margin-top:4px;">{{ form.key.errors }}</div>{% endif %}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nhóm danh mục *</label>
+        {{ form.category_group }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tên sản phẩm *</label>
+      {{ form.title }}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mô tả phụ</label>
+      {{ form.subtitle }}
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Icon (Font Awesome class)</label>
+        {{ form.icon }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tag</label>
+        {{ form.tag }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Trạng thái</label>
+        {{ form.status }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Thứ tự hiển thị</label>
+        {{ form.order }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mô tả chi tiết *</label>
+      <textarea name="description" class="form-control" rows="4" required>{% if form.instance.pk %}{{ form.instance.description }}{% endif %}</textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tính năng (mỗi dòng 1 tính năng)</label>
+      {{ form.features_raw }}
+    </div>
+    <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+      {{ form.is_active }} <label class="form-label" style="margin:0;">Hiển thị trên trang chủ</label>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+      <a href="{% url 'cms-product-list' %}" class="btn btn--outline">Hủy</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

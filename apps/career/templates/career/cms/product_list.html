@@ -1,0 +1,59 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}Sản phẩm AI — TADIC CMS{% endblock %}
+{% block page_title %}Sản phẩm AI{% endblock %}
+{% block breadcrumb %}CMS / Sản phẩm{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card__header">
+    <span class="card__title">Danh sách {{ products|length }} sản phẩm</span>
+    {% if profile.can_create %}
+    <a href="{% url 'cms-product-create' %}" class="btn btn--primary btn--sm"><i class="fa-solid fa-plus"></i> Thêm mới</a>
+    {% endif %}
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Tên sản phẩm</th><th>Nhóm</th><th>Trạng thái</th><th>Thứ tự</th><th>Hoạt động</th><th>Hành động</th></tr></thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td style="color:var(--text-muted);">{{ forloop.counter }}</td>
+          <td>
+            <div style="font-weight:600;">{{ p.title }}</div>
+            <div style="color:var(--text-muted);font-size:.78rem;">{{ p.subtitle|truncatewords:8 }}</div>
+          </td>
+          <td>
+            {% if p.category_group == 'road_network' %}<span class="badge badge--blue">Mạng lưới</span>
+            {% elif p.category_group == 'road_safety' %}<span class="badge badge--green">An toàn</span>
+            {% else %}<span class="badge badge--purple">Quy trình</span>{% endif %}
+          </td>
+          <td>
+            {% if p.status == 'live' %}<span class="badge badge--green">Live</span>
+            {% elif p.status == 'beta' %}<span class="badge badge--yellow">Beta</span>
+            {% else %}<span class="badge badge--gray">Sắp ra mắt</span>{% endif %}
+          </td>
+          <td>{{ p.order }}</td>
+          <td>
+            <a href="{% url 'cms-product-toggle' p.pk %}" class="badge {% if p.is_active %}badge--green{% else %}badge--red{% endif %}" style="cursor:pointer;text-decoration:none;">
+              {% if p.is_active %}Bật{% else %}Tắt{% endif %}
+            </a>
+          </td>
+          <td>
+            <div class="btn-group">
+              {% if profile.can_edit %}
+              <a href="{% url 'cms-product-edit' p.pk %}" class="btn btn--outline btn--sm"><i class="fa-solid fa-pen"></i></a>
+              {% endif %}
+              {% if profile.can_delete %}
+              <a href="{% url 'cms-product-delete' p.pk %}" class="btn btn--danger btn--sm" onclick="return confirm('Xóa sản phẩm này?')"><i class="fa-solid fa-trash"></i></a>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-muted);">Chưa có sản phẩm nào</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

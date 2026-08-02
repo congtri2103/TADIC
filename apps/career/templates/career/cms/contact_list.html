@@ -1,0 +1,37 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}Liên hệ — TADIC CMS{% endblock %}
+{% block page_title %}Danh sách liên hệ{% endblock %}
+{% block breadcrumb %}CMS / Liên hệ{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card__header">
+    <span class="card__title">{{ contacts|length }} liên hệ</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Họ tên</th><th>Email</th><th>Điện thoại</th><th>Cơ quan</th><th>Sản phẩm</th><th>Nội dung</th><th>Thời gian</th><th></th></tr></thead>
+      <tbody>
+        {% for c in contacts %}
+        <tr>
+          <td><strong>{{ c.name }}</strong></td>
+          <td><a href="mailto:{{ c.email }}" style="color:var(--primary);">{{ c.email }}</a></td>
+          <td>{{ c.phone }}</td>
+          <td>{{ c.organization|default:"—" }}</td>
+          <td><span class="badge badge--blue">{{ c.product_interest }}</span></td>
+          <td style="max-width:200px;"><span title="{{ c.message }}">{{ c.message|truncatewords:10|default:"—" }}</span></td>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:.78rem;">{{ c.created_at|date:"d/m/Y H:i" }}</td>
+          <td>
+            {% if profile.can_delete %}
+            <a href="{% url 'cms-contact-delete' c.pk %}" class="btn btn--danger btn--sm" onclick="return confirm('Xóa liên hệ này?')"><i class="fa-solid fa-trash"></i></a>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">Chưa có liên hệ nào</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

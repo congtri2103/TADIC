@@ -1,0 +1,40 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}Dự án — TADIC CMS{% endblock %}
+{% block page_title %}Dự án tiêu biểu{% endblock %}
+{% block breadcrumb %}CMS / Dự án{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card__header">
+    <span class="card__title">{{ projects|length }} dự án</span>
+    {% if profile.can_create %}<a href="{% url 'cms-project-create' %}" class="btn btn--primary btn--sm"><i class="fa-solid fa-plus"></i> Thêm mới</a>{% endif %}
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tên dự án</th><th>Tags</th><th>Thứ tự</th><th>Hoạt động</th><th>Hành động</th></tr></thead>
+      <tbody>
+        {% for p in projects %}
+        <tr>
+          <td><div style="font-weight:600;">{{ p.title }}</div><div style="color:var(--text-muted);font-size:.78rem;">{{ p.description|truncatewords:12 }}</div></td>
+          <td><span class="badge badge--blue">{{ p.tags }}</span></td>
+          <td>{{ p.order }}</td>
+          <td>
+            <a href="{% url 'cms-project-toggle' p.pk %}" class="badge {% if p.is_active %}badge--green{% else %}badge--gray{% endif %}" style="cursor:pointer;text-decoration:none;">
+              {% if p.is_active %}Bật{% else %}Tắt{% endif %}
+            </a>
+          </td>
+          <td>
+            <div class="btn-group">
+              {% if profile.can_edit %}<a href="{% url 'cms-project-edit' p.pk %}" class="btn btn--outline btn--sm"><i class="fa-solid fa-pen"></i></a>{% endif %}
+              {% if profile.can_delete %}<a href="{% url 'cms-project-delete' p.pk %}" class="btn btn--danger btn--sm" onclick="return confirm('Xóa dự án?')"><i class="fa-solid fa-trash"></i></a>{% endif %}
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-muted);">Chưa có dự án nào</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

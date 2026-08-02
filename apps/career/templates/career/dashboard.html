@@ -1,0 +1,77 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}Dashboard — TADIC CMS{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block breadcrumb %}Tổng quan hệ thống{% endblock %}
+
+{% block content %}
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-card__icon stat-card__icon--blue"><i class="fa-solid fa-microchip"></i></div>
+    <div>
+      <div class="stat-card__num">{{ product_count }}</div>
+      <div class="stat-card__label">Sản phẩm AI</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__icon stat-card__icon--green"><i class="fa-solid fa-newspaper"></i></div>
+    <div>
+      <div class="stat-card__num">{{ news_count }}</div>
+      <div class="stat-card__label">Tin tức</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__icon stat-card__icon--yellow"><i class="fa-solid fa-briefcase"></i></div>
+    <div>
+      <div class="stat-card__num">{{ project_count }}</div>
+      <div class="stat-card__label">Dự án</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__icon stat-card__icon--red"><i class="fa-solid fa-inbox"></i></div>
+    <div>
+      <div class="stat-card__num">{{ contact_count }}</div>
+      <div class="stat-card__label">Liên hệ mới</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <span class="card__title"><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;margin-right:6px;"></i>Liên hệ gần đây</span>
+    <a href="{% url 'cms-contact-list' %}" class="btn btn--outline btn--sm">Xem tất cả</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Họ tên</th><th>Email</th><th>Điện thoại</th><th>Thời gian</th></tr></thead>
+      <tbody>
+        {% for c in recent_contacts %}
+        <tr>
+          <td><strong>{{ c.name }}</strong></td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td style="color:var(--text-muted);font-size:.8rem;">{{ c.created_at|date:"d/m H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:20px;">Chưa có liên hệ nào</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header">
+    <span class="card__title"><i class="fa-solid fa-user" style="color:#7c3aed;margin-right:6px;"></i>Thông tin tài khoản</span>
+  </div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+    <div style="width:56px;height:56px;border-radius:50%;background:#2563eb;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.2rem;">{{ user.username|slice:":2"|upper }}</div>
+    <div>
+      <div style="font-weight:600;font-size:1rem;">{{ user.username }}</div>
+      <div style="color:var(--text-muted);font-size:.82rem;">{{ user.email|default:"—" }}</div>
+      <div style="margin-top:6px;">
+        <span class="badge role--{{ profile.role }}">{{ profile.get_role_display|default:"User" }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

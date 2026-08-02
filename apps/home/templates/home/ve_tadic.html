@@ -1,0 +1,101 @@
+{% extends 'home/base.html' %}
+{% block title %}Về TADIC — Công ty Cổ phần Xây dựng và Công nghệ TADIC{% endblock %}
+{% block meta_desc %}Tìm hiểu về TADIC — công ty tiên phong ứng dụng AI trong quản lý, khảo sát và bảo trì hạ tầng giao thông đường bộ tại Việt Nam.{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Trang chủ</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Về TADIC</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container text-center">
+    <p class="eyebrow"><i class="fa-solid fa-building"></i> Về TADIC</p>
+    <h1>Công ty Cổ phần Xây dựng và Công nghệ TADIC</h1>
+    <p style="max-width:800px; margin:0 auto; color:rgba(255,255,255,0.8);">Đơn vị tiên phong ứng dụng Trí tuệ Nhân tạo vào quản lý, giám sát và bảo trì hạ tầng giao thông đường bộ tại Việt Nam.</p>
+  </div>
+</section>
+
+<!-- Giới thiệu -->
+<section class="section">
+  <div class="container">
+    <div class="intro-grid">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow"><i class="fa-solid fa-info-circle"></i> Giới thiệu</p>
+          <h2>Chúng tôi là ai?</h2>
+        </div>
+        <div style="font-size:1.1rem; color:var(--text-main); margin-bottom:1.5rem;">
+          <p class="mb-16">TADIC (Technology for Advanced Development of Infrastructure and Connectivity) là công ty công nghệ chuyên ứng dụng Trí tuệ Nhân tạo (AI) và Thị giác máy tính (Computer Vision) để giải quyết những thách thức lớn nhất trong lĩnh vực quản lý hạ tầng giao thông đường bộ tại Việt Nam.</p>
+          <p class="mb-16">Thành lập từ năm 2019, chúng tôi xuất phát từ đội ngũ kỹ sư giao thông và chuyên gia AI giàu kinh nghiệm, với mục tiêu rõ ràng: đưa công nghệ AI vào thực tiễn quản lý đường bộ — thay thế các phương pháp khảo sát thủ công tốn kém và thiếu chính xác bằng hệ thống tự động, minh bạch và hiệu quả.</p>
+        </div>
+        
+        <div class="stats-wrap reveal" style="padding:30px; background:var(--bg-gray); color:var(--navy); justify-content:space-between; margin-top:30px;">
+          {% for stat in stats %}
+          <div class="stat-item">
+            <div class="stat-item__num" style="font-size:2.5rem; color:var(--teal);" data-target="{{ stat.target_value }}" data-suffix="{{ stat.suffix }}">0</div>
+            <div class="stat-item__label" style="font-size:0.95rem; font-weight:600;">{{ stat.label }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="mission-box reveal" style="background:#fff; border:1px solid var(--border-light); box-shadow:var(--shadow-sm);">
+          <h4 style="color:var(--teal);"><i class="fa-solid fa-bullseye"></i> Sứ mệnh</h4>
+          <p>Số hóa và tự động hóa toàn bộ chuỗi giá trị quản lý, bảo trì hạ tầng giao thông — giúp Việt Nam có hệ thống đường bộ an toàn, bền vững và hiệu quả hơn bằng sức mạnh của AI.</p>
+        </div>
+        <div class="mission-box reveal" style="background:#fff; border:1px solid var(--border-light); box-shadow:var(--shadow-sm);">
+          <h4 style="color:var(--teal);"><i class="fa-solid fa-eye"></i> Tầm nhìn 2030</h4>
+          <p>Trở thành nền tảng AI quản lý hạ tầng giao thông hàng đầu Đông Nam Á, được tin dùng bởi các cơ quan quản lý đường bộ trên toàn khu vực.</p>
+        </div>
+        <div class="mission-box reveal" style="background:#fff; border:1px solid var(--border-light); box-shadow:var(--shadow-sm);">
+          <h4 style="color:var(--teal);"><i class="fa-solid fa-certificate"></i> Chứng nhận</h4>
+          <p>Tuân thủ QCVN, TCVN và các tiêu chuẩn quốc tế IRC, AASHTO, WHO. Hệ thống đạt tiêu chuẩn bảo mật dữ liệu theo quy định pháp luật Việt Nam.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quy trình công nghệ -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head reveal text-center" style="margin: 0 auto 50px auto;">
+      <p class="eyebrow"><i class="fa-solid fa-diagram-project"></i> Quy trình</p>
+      <h2>Quy trình công nghệ TADIC</h2>
+      <p class="section-head__desc">Từ thu thập dữ liệu thực địa đến báo cáo quản lý — quy trình 4 bước khép kín, tự động hóa hoàn toàn.</p>
+    </div>
+    
+    <div class="grid-4">
+      {% for step in process_steps %}
+      <div class="value-card reveal text-center" style="padding:30px 20px;">
+        <div class="process-step__num" style="font-size:2.5rem; margin-bottom:15px; color:var(--teal);">{{ step.number }}</div>
+        <h3 style="font-size:1.2rem; min-height:50px;">{{ step.title }}</h3>
+        <p style="font-size:0.95rem; color:var(--text-muted);">{{ step.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container text-center reveal">
+    <h2>Bạn cần tư vấn lộ trình chuyển đổi số?</h2>
+    <p>Chuyên gia của TADIC sẵn sàng đồng hành cùng tổ chức của bạn.</p>
+    <div class="cta-actions">
+      <a href="/lien-he/" class="btn btn--white">Liên hệ ngay</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

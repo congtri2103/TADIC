@@ -1,0 +1,42 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}{% if form.instance.pk %}Sửa{% else %}Thêm{% endif %} bài viết — TADIC CMS{% endblock %}
+{% block page_title %}{% if form.instance.pk %}Sửa bài viết{% else %}Thêm bài viết mới{% endif %}{% endblock %}
+{% block breadcrumb %}CMS / <a href="{% url 'cms-news-list' %}">Tin tức</a> / {% if form.instance.pk %}Sửa{% else %}Thêm{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:760px;">
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Slug (URL) *</label>{{ form.slug }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ngày đăng *</label>{{ form.date }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tiêu đề *</label>{{ form.title }}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tác giả *</label>{{ form.author }}
+    </div>
+    <div class="form-group">
+      <label class="form-label">URL ảnh đại diện</label>{{ form.image_url }}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tóm tắt</label>{{ form.summary }}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nội dung bài viết (HTML)</label>{{ form.content }}
+    </div>
+    <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+      {{ form.is_published }} <label class="form-label" style="margin:0;">Công bố ngay</label>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+      <a href="{% url 'cms-news-list' %}" class="btn btn--outline">Hủy</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

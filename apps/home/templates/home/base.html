@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Công ty Cổ phần Xây dựng và Công nghệ TADIC{% endblock %}</title>
+  <meta name="description" content="{% block meta_desc %}TADIC tiên phong ứng dụng công nghệ AI và số hóa trong quản lý, bảo trì và phát triển hạ tầng giao thông đường bộ tại Việt Nam.{% endblock %}">
+  
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="/" class="header__logo">
+        <i class="fa-solid fa-road"></i> TADIC.AI
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav">
+        <ul class="nav__list" id="navList">
+          <li><a href="/" class="nav__link {% if request.path == '/' %}active{% endif %}">Trang chủ</a></li>
+          <li><a href="/ve-tadic/" class="nav__link {% if request.path == '/ve-tadic/' %}active{% endif %}">Về TADIC</a></li>
+          <li class="has-dropdown">
+            <a href="/san-pham/" class="nav__link {% if '/san-pham/' in request.path %}active{% endif %}">Sản phẩm <i class="fa-solid fa-chevron-down" style="font-size:0.8em;"></i></a>
+            <div class="dropdown">
+              <a href="/san-pham/">Tất cả sản phẩm</a>
+              <a href="/san-pham/?category=road-vision-ai">Giám sát mạng lưới đường bộ</a>
+              <a href="/san-pham/?category=ats-camera">Hệ thống an toàn giao thông</a>
+              <a href="/san-pham/?category=ai-inspection">Tự động hóa & Số hóa</a>
+            </div>
+          </li>
+          <li><a href="/du-an/" class="nav__link {% if '/du-an/' in request.path %}active{% endif %}">Dự án</a></li>
+          <li><a href="/tin-tuc/" class="nav__link {% if '/tin-tuc/' in request.path %}active{% endif %}">Tin tức</a></li>
+          <li>
+            <a href="#" class="btn btn--primary" data-contact-modal style="margin-left:15px; color:#fff !important;">
+              Đặt lịch Demo
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="min-height: 80vh;">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer__logo">
+            <i class="fa-solid fa-road"></i> TADIC
+          </div>
+          <p style="margin-bottom:20px;">Tiên phong ứng dụng Trí tuệ Nhân tạo (AI) nâng tầm hạ tầng giao thông Việt Nam.</p>
+          <div class="d-flex gap-16">
+            <a href="#" style="color:#a5a5a5; font-size:1.5rem;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" style="color:#a5a5a5; font-size:1.5rem;"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" style="color:#a5a5a5; font-size:1.5rem;"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Về chúng tôi</h4>
+          <ul class="footer-links">
+            <li><a href="/ve-tadic/">Câu chuyện TADIC</a></li>
+            <li><a href="/ve-tadic/">Tầm nhìn & Sứ mệnh</a></li>
+            <li><a href="/du-an/">Dự án tiêu biểu</a></li>
+            <li><a href="/tin-tuc/">Tin tức & Công nghệ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Giải pháp</h4>
+          <ul class="footer-links">
+            <li><a href="/san-pham/">Giám sát đường bộ AI</a></li>
+            <li><a href="/san-pham/">An toàn giao thông</a></li>
+            <li><a href="/san-pham/">Số hóa hạ tầng GIS</a></li>
+            <li><a href="/san-pham/">Bảo trì dự báo</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Liên hệ</h4>
+          <ul class="footer-links">
+            <li><i class="fa-solid fa-location-dot" style="color:var(--teal); width:20px;"></i> Tầng 12, Tòa nhà Innovation, 123 Đường Láng, Đống Đa, Hà Nội</li>
+            <li><i class="fa-solid fa-phone" style="color:var(--teal); width:20px;"></i> (024) 3812 3456</li>
+            <li><i class="fa-solid fa-envelope" style="color:var(--teal); width:20px;"></i> contact@tadic.vn</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Công ty Cổ phần Xây dựng và Công nghệ TADIC. Tất cả các quyền được bảo hộ.</p>
+        <p style="margin-top:10px;"><a href="/career/login/">Đăng nhập nội bộ (Nhân sự)</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div class="modal" id="contactModal">
+    <div class="modal__content">
+      <button class="modal__close" id="closeContactModal"><i class="fa-solid fa-xmark"></i></button>
+      <h3 style="color:var(--navy);margin-bottom:10px;">Yêu cầu tư vấn / Demo</h3>
+      <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:24px;">Để lại thông tin, chuyên gia TADIC sẽ liên hệ tư vấn giải pháp phù hợp nhất cho dự án của bạn.</p>
+      
+      <form id="contactForm" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="form-label">Họ và tên *</label>
+          <input type="text" class="form-control" name="name" required placeholder="Nguyễn Văn A">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Điện thoại *</label>
+          <input type="tel" class="form-control" name="phone" required placeholder="0901 234 567">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cơ quan / Đơn vị</label>
+          <input type="text" class="form-control" name="organization" placeholder="Sở GTVT / Ban QLDA...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lĩnh vực quan tâm</label>
+          <select class="form-control" name="product_interest">
+            <option value="all">-- Chọn lĩnh vực --</option>
+            <option value="road-vision">Giám sát hạ tầng AI</option>
+            <option value="ats">An toàn giao thông</option>
+            <option value="gis">Số hóa bản đồ GIS</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%;">
+          Gửi yêu cầu <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

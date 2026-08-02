@@ -1,0 +1,96 @@
+{% extends 'home/base.html' %}
+{% block title %}{{ article.title }} — Tin tức TADIC.AI{% endblock %}
+{% block meta_desc %}{{ article.summary|truncatewords:20 }}{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Trang chủ</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <a href="/tin-tuc/">Tin tức</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Chi tiết bài viết</span>
+    </nav>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="display:flex; justify-content:center;">
+    <article style="max-width:800px; width:100%;">
+      <h1 style="font-size:2.5rem; color:var(--navy); margin-bottom:20px;">{{ article.title }}</h1>
+      <div style="display:flex; gap:20px; font-size:0.95rem; color:var(--text-muted); margin-bottom:30px; border-bottom:1px solid var(--border-light); padding-bottom:20px;">
+        <span title="Ngày đăng"><i class="fa-regular fa-calendar text-teal"></i> {{ article.date|date:"d/m/Y H:i" }}</span>
+        <span title="Tác giả"><i class="fa-regular fa-user text-teal"></i> <strong>{{ article.author }}</strong></span>
+      </div>
+      
+      <div style="margin-bottom:30px; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
+        <img src="{{ article.image_url }}" alt="{{ article.title }}" style="width:100%;">
+      </div>
+
+      <div class="article-content" style="font-size:1.1rem; line-height:1.8; color:var(--text-main);">
+        <p style="font-weight:600; color:var(--navy); margin-bottom:24px; font-size:1.2rem;">{{ article.summary }}</p>
+        
+        {{ article.content|safe|linebreaks }}
+        
+      </div>
+
+      <div class="d-flex gap-16 mt-32" style="border-top:1px solid var(--border-light); padding-top:24px;">
+        <span class="text-muted" style="font-weight:600;">Chia sẻ bài viết:</span>
+        <a href="#" class="text-teal"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        <a href="#" class="text-teal"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% if related %}
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head text-center mx-auto">
+      <h2>Tin tức liên quan</h2>
+    </div>
+    <div class="grid-3">
+      {% for rel in related %}
+      <div class="news-card">
+        <div class="news-card__img">
+          <img src="{{ rel.image_url }}" alt="{{ rel.title }}" loading="lazy">
+        </div>
+        <div class="news-card__body">
+          <div class="news-card__meta">
+            <span><i class="fa-regular fa-calendar text-teal"></i> {{ rel.date|date:"d/m/Y" }}</span>
+          </div>
+          <h3><a href="/tin-tuc/{{ rel.slug }}/">{{ rel.title }}</a></h3>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<style>
+/* Style riêng cho nội dung bài viết do dùng |safe */
+.article-content h3 {
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin: 30px 0 15px;
+}
+.article-content p {
+  margin-bottom: 20px;
+}
+.article-content .article-highlight {
+  padding: 20px 30px;
+  background: rgba(13, 179, 158, 0.1);
+  border-left: 4px solid var(--teal);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--navy);
+  margin: 30px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+</style>
+
+{% endblock %}

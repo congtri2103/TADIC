@@ -1,0 +1,68 @@
+{% extends 'home/base.html' %}
+{% block title %}Dự án tiêu biểu — TADIC.AI{% endblock %}
+{% block meta_desc %}Tổng hợp các dự án triển khai hệ thống quản lý hạ tầng giao thông thông minh bằng AI của TADIC trên toàn quốc.{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Trang chủ</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Dự án</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero text-center">
+  <div class="container">
+    <p class="eyebrow"><i class="fa-solid fa-briefcase"></i> Case Studies</p>
+    <h1>Dự án tiêu biểu</h1>
+    <p style="max-width:800px; margin:0 auto; color:rgba(255,255,255,0.8);">Khám phá cách giải pháp AI của TADIC đang giúp tối ưu hóa công tác quản lý và bảo trì đường bộ trên khắp cả nước.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div style="display:flex; flex-direction:column; gap:40px;">
+      {% for project in projects %}
+      <div class="project-card reveal" id="project-{{ project.pk }}" style="flex-direction:row; min-height:400px; box-shadow:var(--shadow-md);">
+        <div class="project-card__img" style="width:50%; height:auto;">
+          <img src="{{ project.image_url }}" alt="{{ project.title }}" loading="lazy" style="height:100%;">
+        </div>
+        <div class="project-card__body" style="width:50%; padding:50px; justify-content:center;">
+          <div style="margin-bottom:20px;">
+            {% for tag in project.tags.split %}
+            <span class="product-card__tag" style="background:#fff; border:1px solid var(--border-light); margin-right:8px;">{{ tag|cut:"," }}</span>
+            {% endfor %}
+          </div>
+          <h3 style="font-size:2rem; margin-bottom:20px; color:var(--navy);">{{ project.title }}</h3>
+          <p style="font-size:1.1rem; color:var(--text-main); margin-bottom:30px; line-height:1.8;">{{ project.description }}</p>
+          <div>
+            <a href="#" class="btn btn--primary" data-contact-modal>Tư vấn giải pháp tương tự</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center text-muted" style="padding:60px 0;">Đang cập nhật danh sách dự án tiêu biểu...</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container text-center reveal">
+    <h2>Dự án tiếp theo có thể là của bạn?</h2>
+    <p>Hãy để chuyên gia của TADIC tư vấn lộ trình số hóa hạ tầng giao thông tối ưu nhất.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn--white" data-contact-modal>
+        Yêu cầu báo giá / Đề cương
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
