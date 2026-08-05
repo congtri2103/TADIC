@@ -8,7 +8,7 @@
   <title>{% block title %}Công ty Cổ phần Xây dựng và Công nghệ TADIC{% endblock %}</title>
   <meta name="description" content="{% block meta_desc %}TADIC tiên phong ứng dụng công nghệ AI và số hóa trong quản lý, bảo trì và phát triển hạ tầng giao thông đường bộ tại Việt Nam.{% endblock %}">
 
-  <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}?v=2">
+  <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -32,9 +32,8 @@
 
     <div class="header__main">
       <div class="container header__inner">
-        <a href="{% url 'home' %}" class="header__logo" aria-label="TADIC.AI - Trang chủ">
-          <span class="header__logo-mark" aria-hidden="true"><i class="fa-solid fa-road"></i></span>
-          <span>TADIC<span>.AI</span></span>
+        <a href="{% url 'home' %}" class="header__logo" aria-label="Tadic - Trang chủ">
+          <img class="header__logo-image" src="{% static 'images/tadic-logo.png' %}" alt="Tadic">
         </a>
 
         <button class="nav-toggle" id="navToggle" type="button" aria-label="Mở menu" aria-controls="navList" aria-expanded="false">
@@ -55,7 +54,7 @@
               <div class="dropdown">
                 <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-layer-group"></i> Tất cả giải pháp</a>
                 <a href="{% url 'san_pham_detail' 'road-vision-ai' %}"><i class="fa-solid fa-road"></i> AI.RAMS — Bảo trì đường bộ</a>
-                <a href="{% url 'san_pham_detail' 'ats-camera' %}"><i class="fa-solid fa-video"></i> AI.NETRAM — Giám sát video</a>
+                <a href="{% url 'san_pham_detail' 'ats-camera' %}"><i class="fa-solid fa-video"></i> AI.NETRAM — Phân tích giao thông</a>
                 <a href="{% url 'san_pham_detail' 'construction-monitoring' %}"><i class="fa-solid fa-helmet-safety"></i> AI.Construction</a>
                 <a href="{% url 'san_pham_detail' 'ai-inspection' %}"><i class="fa-solid fa-folder-tree"></i> AI.DMS — Quản lý hồ sơ</a>
                 <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-mobile-screen-button"></i> Ứng dụng GIS di động</a>
@@ -95,9 +94,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col--brand">
-          <a href="{% url 'home' %}" class="footer__logo">
-            <span class="footer__logo-mark"><i class="fa-solid fa-road"></i></span>
-            TADIC<span>.AI</span>
+          <a href="{% url 'home' %}" class="footer__logo" aria-label="Tadic - Trang chủ">
+            <img class="footer__logo-image" src="{% static 'images/tadic-logo.png' %}" alt="Tadic">
           </a>
           <p>Tiên phong ứng dụng Trí tuệ Nhân tạo (AI) nâng tầm hạ tầng giao thông Việt Nam.</p>
           <div class="footer__social">
@@ -154,7 +152,7 @@
       <div class="modal__heading">
         <span class="modal__icon"><i class="fa-regular fa-paper-plane"></i></span>
         <div>
-          <p class="eyebrow">TADIC.AI</p>
+          <p class="eyebrow">TADIC</p>
           <h3 id="contactModalTitle">Liên hệ tư vấn</h3>
         </div>
       </div>

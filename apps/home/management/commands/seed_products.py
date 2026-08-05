@@ -5,19 +5,19 @@ PRODUCTS = [
     # ── Road Network Monitoring ──
     {
         "key": "road-vision-ai",
-        "title": "Tác nhân Đánh giá Tình trạng Mặt đường",
-        "subtitle": "Phân tích hình ảnh & video mặt đường theo thời gian thực",
+        "title": "AI.RAMS",
+        "subtitle": "Nền tảng quản lý tài sản đường bộ tích hợp AI, GIS và dữ liệu khảo sát",
         "icon": "fa-road-circle-exclamation",
-        "tag": "Giám sát đường bộ",
+        "tag": "Quản lý tài sản đường bộ",
         "category_group": "road_network",
         "status": "live",
         "order": 1,
-        "description": "Đánh giá tình trạng mặt đường tự động theo tiêu chuẩn IRC, MoRTH, ASTM, AASHTO, PAS và quy trình nội bộ. Phát hiện, phân loại 15+ loại khuyết tật mặt đường với độ chính xác >96%.",
+        "description": "AI.RAMS hợp nhất mạng lưới GIS, dữ liệu khảo sát, hiện trạng mặt đường và thông tin tài sản trên một nền tảng quản lý tập trung. Hệ thống hỗ trợ chuyển dữ liệu hiện trường thành bản đồ, chỉ số kỹ thuật, báo cáo và danh sách công việc ưu tiên, giúp cơ quan quản lý theo dõi toàn bộ vòng đời tài sản đường bộ từ số hóa đến bảo trì.",
         "features": [
-            "Nhận diện 15+ loại hư hỏng: Vết nứt dọc, nứt ngang, nứt lưới, ổ gà, lún rãnh, bong tróc.",
-            "Đo đạc chính xác diện tích (m²) và độ rộng nứt (mm) thời gian thực.",
-            "Tích hợp GPS RTK gán tọa độ chuẩn VN-2000 cho từng điểm hư hỏng.",
-            "Tốc độ xử lý video đến 60 FPS trên thiết bị Edge AI ngoại trường."
+            "Số hóa và đồng bộ mạng lưới từ KML, Shapefile, GeoJSON hoặc hệ thống GIS hiện có.",
+            "Tiếp nhận dữ liệu từ camera hành trình, thiết bị khảo sát, drone, ứng dụng di động và cơ sở dữ liệu cũ.",
+            "Tổng hợp đánh giá hiện trạng, chỉ số PCI/IRI/RQI và hồ sơ hình ảnh theo từng đoạn tuyến.",
+            "Ưu tiên nhu cầu bảo trì, theo dõi lệnh công việc và xuất dữ liệu qua bản đồ, báo cáo hoặc API."
         ],
     },
     {
@@ -108,19 +108,19 @@ PRODUCTS = [
     # ── Road Safety ──
     {
         "key": "ats-camera",
-        "title": "Tác nhân Phân tích Lưu lượng",
-        "subtitle": "Hệ thống camera AI giám sát giao thông thông minh 24/7",
+        "title": "AI.NETRAM",
+        "subtitle": "Phân tích lưu lượng và vận hành giao thông từ camera CCTV/IP",
         "icon": "fa-car-burst",
-        "tag": "An toàn giao thông",
+        "tag": "Phân tích giao thông",
         "category_group": "road_safety",
         "status": "live",
         "order": 7,
-        "description": "Tự động đếm phương tiện, phân loại giao thông và phân tích ùn tắc cho quy hoạch và tối ưu hóa. Biến camera CCTV thông thường thành cảm biến giao thông thông minh.",
+        "description": "AI.NETRAM chuyển luồng video từ camera CCTV/IP thành dữ liệu giao thông có cấu trúc phục vụ quản lý và quy hoạch. Nền tảng tự động nhận diện phương tiện, theo dõi chuyển động theo làn, phân tích lưu lượng và trực quan hóa các điểm ùn tắc mà không làm thay đổi hệ thống camera hiện có.",
         "features": [
-            "Đếm lưu lượng và phân loại 8 nhóm phương tiện (Xe máy, ô tô, xe tải, container...).",
-            "Đo tốc độ di chuyển trung bình và nhận diện hành vi vi phạm giao thông.",
-            "Cảnh báo tức thời sự cố tắc nghẽn, tai nạn, xe dừng đỗ trái phép.",
-            "Vận hành ổn định trong điều kiện thời tiết xấu và ban đêm."
+            "Đếm và phân loại xe máy, ô tô con, xe buýt, xe tải và các nhóm phương tiện theo làn.",
+            "Phân tích lưu lượng theo làn, chuyển hướng tại nút giao và cơ cấu phương tiện theo thời gian.",
+            "Xác định giờ cao điểm, hàng chờ, nút thắt và thể hiện mức độ ùn tắc trên dashboard hoặc bản đồ nhiệt.",
+            "Xuất báo cáo, CSV, lớp dữ liệu GIS hoặc API để tích hợp với hệ thống điều hành và công cụ quy hoạch."
         ],
     },
     {
@@ -247,7 +247,7 @@ PRODUCTS = [
 
 
 class Command(BaseCommand):
-    help = "Seed the database with 14 AI agent products"
+    help = "Seed the database with TADIC AI products and specialist agents"
 
     def handle(self, *args, **options):
         created = 0

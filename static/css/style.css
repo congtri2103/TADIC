@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TADIC.AI — Corporate GIS / AI design system
+   TADIC — Corporate GIS / AI design system
    ========================================================================== */
 
 :root {
@@ -177,37 +177,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .header__logo, .footer__logo {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  color: var(--navy);
-  font-family: var(--font-heading);
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -.045em;
 }
-.header__logo > span:last-child span, .footer__logo > span { color: var(--accent); }
-.header__logo-mark, .footer__logo-mark {
-  display: inline-grid;
-  width: 40px;
-  height: 40px;
-  place-items: center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary), var(--navy-3));
-  color: var(--white);
-  font-size: 1rem;
-  box-shadow: 0 9px 20px rgba(var(--primary-rgb), .22);
-}
-.header__logo-mark::after, .footer__logo-mark::after {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 10px;
-  height: 10px;
-  border: 2px solid var(--white);
-  border-radius: 50%;
-  background: var(--accent);
-  content: '';
-}
-.header__logo-mark, .footer__logo-mark { position: relative; }
+.header__logo-image { display: block; width: 148px; height: auto; }
 .nav__list { display: flex; align-items: center; gap: clamp(18px, 2vw, 31px); }
 .nav__link {
   position: relative;
@@ -625,8 +596,8 @@ textarea.form-control { resize: vertical; }
 .footer { position: relative; padding: 75px 0 0; background: #07172c; color: rgba(255,255,255,.62); }
 .footer__accent { position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--primary) 0 52%, var(--white) 52% 57%, var(--accent) 57% 100%); }
 .footer-grid { display: grid; grid-template-columns: 1.65fr .8fr .9fr 1.3fr; gap: 48px; padding-bottom: 55px; }
-.footer__logo { margin-bottom: 20px; color: var(--white); }
-.footer__logo-mark { width: 38px; height: 38px; }
+.footer__logo { width: fit-content; margin-bottom: 20px; padding: 5px 10px; border-radius: 12px; background: var(--white); }
+.footer__logo-image { display: block; width: 148px; height: auto; }
 .footer-col--brand > p { max-width: 330px; font-size: .9rem; line-height: 1.7; }
 .footer__social { display: flex; gap: 8px; margin-top: 22px; }
 .footer__social a { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(255,255,255,.12); border-radius: 10px; color: rgba(255,255,255,.7); transition: color var(--transition), border-color var(--transition), background var(--transition); }
@@ -762,8 +733,7 @@ html.js .reveal.active { opacity: 1; transform: translateY(0); }
 @media (max-width: 560px) {
   .container { width: min(100% - 24px, var(--container)); }
   .section { padding: 68px 0; }
-  .header__logo { font-size: 1.28rem; }
-  .header__logo-mark { width: 36px; height: 36px; }
+  .header__logo-image { width: 132px; }
   .nav__list { width: 100%; }
   .hero { padding-top: 58px; padding-bottom: 72px; }
   .hero__content h1 { font-size: clamp(2.45rem, 13.5vw, 3.5rem); }
