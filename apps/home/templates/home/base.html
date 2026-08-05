@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1f3a">
+  <meta name="theme-color" content="#071f3d">
   <title>{% block title %}Công ty Cổ phần Xây dựng và Công nghệ TADIC{% endblock %}</title>
   <meta name="description" content="{% block meta_desc %}TADIC tiên phong ứng dụng công nghệ AI và số hóa trong quản lý, bảo trì và phát triển hạ tầng giao thông đường bộ tại Việt Nam.{% endblock %}">
 
@@ -44,25 +44,41 @@
         <nav class="nav" aria-label="Điều hướng chính">
           <ul class="nav__list" id="navList">
             <li><a href="{% url 'home' %}" class="nav__link {% if request.path == '/' %}active{% endif %}">Trang chủ</a></li>
-            <li><a href="{% url 've_tadic' %}" class="nav__link {% if request.path == '/ve-tadic/' %}active{% endif %}">Về TADIC</a></li>
+            <li><a href="{% url 've_tadic' %}" class="nav__link {% if request.path == '/ve-tadic/' %}active{% endif %}">Về chúng tôi</a></li>
             <li class="has-dropdown">
               <div class="nav__item-wrap">
-                <a href="{% url 'san_pham_list' %}" class="nav__link {% if '/san-pham/' in request.path %}active{% endif %}">Sản phẩm</a>
-                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục sản phẩm" aria-expanded="false">
+                <a href="{% url 'home' %}#giai-phap" class="nav__link">Giải pháp</a>
+                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục giải pháp" aria-expanded="false">
                   <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
               </div>
               <div class="dropdown">
-                <a href="{% url 'san_pham_list' %}"><i class="fa-solid fa-layer-group"></i> Tất cả sản phẩm</a>
-                <a href="{% url 'san_pham_list' %}?category=road_network#danh-sach"><i class="fa-solid fa-map"></i> Giám sát mạng lưới đường bộ</a>
-                <a href="{% url 'san_pham_list' %}?category=road_safety#danh-sach"><i class="fa-solid fa-shield-halved"></i> Hệ thống an toàn giao thông</a>
-                <a href="{% url 'san_pham_list' %}?category=workflow#danh-sach"><i class="fa-solid fa-arrow-right-arrow-left"></i> Tự động hóa &amp; Số hóa</a>
+                <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-layer-group"></i> Tất cả giải pháp</a>
+                <a href="{% url 'san_pham_detail' 'road-vision-ai' %}"><i class="fa-solid fa-road"></i> AI.RAMS — Bảo trì đường bộ</a>
+                <a href="{% url 'san_pham_detail' 'ats-camera' %}"><i class="fa-solid fa-video"></i> AI.NETRAM — Giám sát video</a>
+                <a href="{% url 'san_pham_detail' 'construction-monitoring' %}"><i class="fa-solid fa-helmet-safety"></i> AI.Construction</a>
+                <a href="{% url 'san_pham_detail' 'ai-inspection' %}"><i class="fa-solid fa-folder-tree"></i> AI.DMS — Quản lý hồ sơ</a>
+                <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-mobile-screen-button"></i> Ứng dụng GIS di động</a>
+              </div>
+            </li>
+            <li class="has-dropdown">
+              <div class="nav__item-wrap">
+                <a href="{% url 'tac_nhan_ai' %}" class="nav__link {% if request.path == '/tac-nhan-ai/' or '/san-pham/' in request.path %}active{% endif %}">Tác nhân AI</a>
+                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục tác nhân AI" aria-expanded="false">
+                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="dropdown">
+                <a href="{% url 'tac_nhan_ai' %}"><i class="fa-solid fa-robot"></i> Tất cả tác nhân AI</a>
+                <a href="{% url 'tac_nhan_ai' %}?category=road_network#danh-sach"><i class="fa-solid fa-road"></i> Giám sát mạng lưới đường bộ</a>
+                <a href="{% url 'tac_nhan_ai' %}?category=road_safety#danh-sach"><i class="fa-solid fa-shield-halved"></i> An toàn giao thông</a>
+                <a href="{% url 'tac_nhan_ai' %}?category=workflow#danh-sach"><i class="fa-solid fa-gears"></i> Tự động hóa quy trình</a>
               </div>
             </li>
             <li><a href="{% url 'du_an' %}" class="nav__link {% if '/du-an/' in request.path %}active{% endif %}">Dự án</a></li>
             <li><a href="{% url 'tin_tuc_list' %}" class="nav__link {% if '/tin-tuc/' in request.path %}active{% endif %}">Tin tức</a></li>
             <li class="nav__cta-item">
-              <a href="{% url 'lien_he' %}" class="btn btn--primary btn--sm" data-contact-modal>Đặt lịch Demo <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="{% url 'lien_he' %}" class="btn btn--primary btn--sm" data-contact-modal>Liên hệ <i class="fa-solid fa-arrow-right"></i></a>
             </li>
           </ul>
         </nav>
@@ -104,17 +120,18 @@
         <div class="footer-col">
           <h4>Giải pháp</h4>
           <ul class="footer-links">
-            <li><a href="{% url 'san_pham_list' %}">Giám sát đường bộ AI</a></li>
-            <li><a href="{% url 'san_pham_list' %}">An toàn giao thông</a></li>
-            <li><a href="{% url 'san_pham_list' %}">Số hóa hạ tầng GIS</a></li>
-            <li><a href="{% url 'san_pham_list' %}">Bảo trì dự báo</a></li>
+            <li><a href="{% url 'san_pham_detail' 'road-vision-ai' %}">AI.RAMS</a></li>
+            <li><a href="{% url 'san_pham_detail' 'ats-camera' %}">AI.NETRAM</a></li>
+            <li><a href="{% url 'san_pham_detail' 'construction-monitoring' %}">AI.Construction</a></li>
+            <li><a href="{% url 'san_pham_detail' 'ai-inspection' %}">AI.DMS</a></li>
+            <li><a href="{% url 'home' %}#giai-phap">Ứng dụng GIS di động</a></li>
           </ul>
         </div>
 
         <div class="footer-col footer-col--contact">
           <h4>Liên hệ</h4>
           <ul class="footer-contact">
-            <li><i class="fa-solid fa-location-dot"></i><span>Tầng 12, Tòa nhà Innovation, 123 Đường Láng, Đống Đa, Hà Nội</span></li>
+            <li><i class="fa-solid fa-location-dot"></i><span>Tầng 4, Tòa nhà LND Galaxy, Số 3 đường Galaxy 6, Phường Hà Đông, TP. Hà Nội</span></li>
             <li><i class="fa-solid fa-phone"></i><a href="tel:+842438123456">(024) 3812 3456</a></li>
             <li><i class="fa-solid fa-envelope"></i><a href="mailto:contact@tadic.vn">contact@tadic.vn</a></li>
           </ul>
@@ -138,7 +155,7 @@
         <span class="modal__icon"><i class="fa-regular fa-paper-plane"></i></span>
         <div>
           <p class="eyebrow">TADIC.AI</p>
-          <h3 id="contactModalTitle">Yêu cầu tư vấn / Demo</h3>
+          <h3 id="contactModalTitle">Liên hệ tư vấn</h3>
         </div>
       </div>
       <p class="modal__intro">Để lại thông tin, chuyên gia TADIC sẽ liên hệ tư vấn giải pháp phù hợp nhất cho dự án của bạn.</p>
@@ -168,9 +185,11 @@
           <label class="form-label" for="modalProduct">Lĩnh vực quan tâm</label>
           <select class="form-control" id="modalProduct" name="product_interest">
             <option value="all">-- Chọn lĩnh vực --</option>
-            <option value="road-vision">Giám sát hạ tầng AI</option>
-            <option value="ats">An toàn giao thông</option>
-            <option value="gis">Số hóa bản đồ GIS</option>
+            <option value="road-vision-ai">AI.RAMS — Đánh giá hư hỏng và quản lý bảo trì đường bộ AI</option>
+            <option value="ats-camera">AI.NETRAM — Hệ thống giám sát video AI</option>
+            <option value="construction-monitoring">AI.Construction — Hệ thống giám sát công trình xây dựng AI</option>
+            <option value="ai-inspection">AI.DMS — Số hóa và quản lý hồ sơ tích hợp AI</option>
+            <option value="mobile-gis">Ứng dụng GIS di động</option>
           </select>
         </div>
         <div class="form-group">

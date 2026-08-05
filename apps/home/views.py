@@ -85,7 +85,7 @@ COMPANY_INFO = {
     'name':    'Công ty Cổ phần Xây dựng và Công nghệ TADIC',
     'short':   'TADIC',
     'founded': '2019',
-    'address': 'Tầng 12, Tòa nhà Innovation, 123 Đường Láng, Q. Đống Đa, Hà Nội',
+    'address': 'Tầng 4, Tòa nhà LND Galaxy, Số 3 đường Galaxy 6, Phường Hà Đông, TP. Hà Nội',
     'phone':   '(024) 3812 3456',
     'email':   'contact@tadic.vn',
     'website': 'www.tadic.vn',
@@ -133,7 +133,7 @@ def san_pham_list(request):
     ctx = _base_ctx()
     ctx.update({
         'products':      Product.objects.filter(is_active=True),
-        'page_title':    'Sản phẩm AI',
+        'page_title':    'Tác nhân AI',
         'page_desc':     '14 tác nhân AI chuyên biệt cho hạ tầng giao thông đường bộ.',
     })
     return render(request, 'home/san_pham.html', ctx)

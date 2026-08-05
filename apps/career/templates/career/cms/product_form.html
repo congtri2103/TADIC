@@ -1,7 +1,7 @@
 {% extends 'career/cms_base.html' %}
-{% block title %}{% if form.instance.pk %}Sửa{% else %}Thêm{% endif %} sản phẩm — TADIC CMS{% endblock %}
-{% block page_title %}{% if form.instance.pk %}Sửa sản phẩm{% else %}Thêm sản phẩm mới{% endif %}{% endblock %}
-{% block breadcrumb %}CMS / <a href="{% url 'cms-product-list' %}">Sản phẩm</a> / {% if form.instance.pk %}Sửa{% else %}Thêm{% endif %}{% endblock %}
+{% block title %}{% if form.instance.pk %}Sửa{% else %}Thêm{% endif %} tác nhân — TADIC CMS{% endblock %}
+{% block page_title %}{% if form.instance.pk %}Sửa tác nhân{% else %}Thêm tác nhân mới{% endif %}{% endblock %}
+{% block breadcrumb %}CMS / <a href="{% url 'cms-product-list' %}">Tác nhân AI</a> / {% if form.instance.pk %}Sửa{% else %}Thêm{% endif %}{% endblock %}
 
 {% block content %}
 <div class="card" style="max-width:760px;">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Tên sản phẩm *</label>
+      <label class="form-label">Tên tác nhân *</label>
       {{ form.title }}
     </div>
     <div class="form-group">

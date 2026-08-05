@@ -84,13 +84,13 @@ def product_create(request):
                 obj.is_active = False
             obj.save()
             form.save_m2m()
-            messages.success(request, 'Đã thêm sản phẩm thành công.')
+            messages.success(request, 'Đã thêm tác nhân thành công.')
             return redirect('cms-product-list')
     else:
         form = ProductForm()
     return render(request, 'career/cms/product_form.html', {
         'form': form,
-        'title': 'Thêm sản phẩm',
+        'title': 'Thêm tác nhân',
         'profile': _get_profile(request.user),
     })
 
@@ -101,19 +101,19 @@ def product_edit(request, pk):
     product = get_object_or_404(Product, pk=pk)
     profile = _get_profile(request.user)
     if profile.is_author() and not profile.is_editor() and product.created_by != request.user:
-        messages.error(request, 'Bạn chỉ có thể sửa sản phẩm do mình tạo.')
+        messages.error(request, 'Bạn chỉ có thể sửa tác nhân do mình tạo.')
         return redirect('cms-product-list')
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Đã cập nhật sản phẩm.')
+            messages.success(request, 'Đã cập nhật tác nhân.')
             return redirect('cms-product-list')
     else:
         form = ProductForm(instance=product)
     return render(request, 'career/cms/product_form.html', {
         'form': form,
-        'title': 'Sửa sản phẩm',
+        'title': 'Sửa tác nhân',
         'profile': profile,
     })
 
@@ -122,7 +122,7 @@ def product_edit(request, pk):
 @role_required('admin')
 def product_delete(request, pk):
     get_object_or_404(Product, pk=pk).delete()
-    messages.success(request, 'Đã xóa sản phẩm.')
+    messages.success(request, 'Đã xóa tác nhân.')
     return redirect('cms-product-list')
 
 
@@ -133,7 +133,7 @@ def product_toggle_active(request, pk):
     product.is_active = not product.is_active
     product.save()
     status = 'kích hoạt' if product.is_active else 'ẩn'
-    messages.success(request, f'Đã {status} sản phẩm "{product.title}".')
+    messages.success(request, f'Đã {status} tác nhân "{product.title}".')
     return redirect('cms-product-list')
 
 

@@ -1,19 +1,19 @@
 {% extends 'career/cms_base.html' %}
-{% block title %}Sản phẩm AI — TADIC CMS{% endblock %}
-{% block page_title %}Sản phẩm AI{% endblock %}
-{% block breadcrumb %}CMS / Sản phẩm{% endblock %}
+{% block title %}Tác nhân AI — TADIC CMS{% endblock %}
+{% block page_title %}Tác nhân AI{% endblock %}
+{% block breadcrumb %}CMS / Tác nhân AI{% endblock %}
 
 {% block content %}
 <div class="card">
   <div class="card__header">
-    <span class="card__title">Danh sách {{ products|length }} sản phẩm</span>
+    <span class="card__title">Danh sách {{ products|length }} tác nhân</span>
     {% if profile.can_create %}
     <a href="{% url 'cms-product-create' %}" class="btn btn--primary btn--sm"><i class="fa-solid fa-plus"></i> Thêm mới</a>
     {% endif %}
   </div>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>#</th><th>Tên sản phẩm</th><th>Nhóm</th><th>Trạng thái</th><th>Thứ tự</th><th>Hoạt động</th><th>Hành động</th></tr></thead>
+      <thead><tr><th>#</th><th>Tên tác nhân</th><th>Nhóm</th><th>Trạng thái</th><th>Thứ tự</th><th>Hoạt động</th><th>Hành động</th></tr></thead>
       <tbody>
         {% for p in products %}
         <tr>
@@ -44,13 +44,13 @@
               <a href="{% url 'cms-product-edit' p.pk %}" class="btn btn--outline btn--sm"><i class="fa-solid fa-pen"></i></a>
               {% endif %}
               {% if profile.can_delete %}
-              <a href="{% url 'cms-product-delete' p.pk %}" class="btn btn--danger btn--sm" onclick="return confirm('Xóa sản phẩm này?')"><i class="fa-solid fa-trash"></i></a>
+              <a href="{% url 'cms-product-delete' p.pk %}" class="btn btn--danger btn--sm" onclick="return confirm('Xóa tác nhân này?')"><i class="fa-solid fa-trash"></i></a>
               {% endif %}
             </div>
           </td>
         </tr>
         {% empty %}
-        <tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-muted);">Chưa có sản phẩm nào</td></tr>
+        <tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-muted);">Chưa có tác nhân nào</td></tr>
         {% endfor %}
       </tbody>
     </table>
