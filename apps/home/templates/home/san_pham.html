@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %}
-{% block title %}Hệ sinh thái Tác nhân AI — TADIC.AI{% endblock %}
-{% block meta_desc %}Khám phá 14 tác nhân AI chuyên biệt của TADIC cho giám sát đường bộ, an toàn giao thông và tự động hóa quy trình quản lý hạ tầng.{% endblock %}
+{% block title %}Hệ sinh thái Sản phẩm & Tác nhân AI — TADIC{% endblock %}
+{% block meta_desc %}Khám phá AI.RAMS, AI.NETRAM và các tác nhân AI chuyên biệt của TADIC cho giám sát đường bộ, an toàn giao thông và tự động hóa quy trình quản lý hạ tầng.{% endblock %}
 
 {% block content %}
 
@@ -16,8 +16,8 @@
   <div class="page-hero__grid" aria-hidden="true"></div>
   <div class="container page-hero__inner text-center reveal">
     <p class="eyebrow"><i class="fa-solid fa-robot"></i> Tác nhân chuyên biệt</p>
-    <h1>Hệ sinh thái Tác nhân AI cho hạ tầng đường bộ</h1>
-    <p>14 tác nhân chuyên môn hỗ trợ phân tích dữ liệu đường bộ, an toàn giao thông và tự động hóa quy trình trong suốt vòng đời dự án.</p>
+    <h1>Hệ sinh thái Sản phẩm & Tác nhân AI cho hạ tầng đường bộ</h1>
+    <p>AI.RAMS, AI.NETRAM và các tác nhân chuyên môn hỗ trợ phân tích dữ liệu đường bộ, an toàn giao thông và tự động hóa quy trình trong suốt vòng đời dự án.</p>
   </div>
 </section>
 
@@ -85,7 +85,7 @@
         <span class="category-heading__icon">
           <i class="fa-solid {% if 'Mạng lưới' in group.grouper %}fa-map{% elif 'An toàn' in group.grouper %}fa-shield-halved{% else %}fa-arrow-right-arrow-left{% endif %}"></i>
         </span>
-        <div><p class="eyebrow">TADIC.AI</p><h2>{{ group.grouper }}</h2></div>
+        <div><p class="eyebrow">TADIC</p><h2>{{ group.grouper }}</h2></div>
       </div>
       <div class="grid-4 product-grid">
         {% for product in group.list %}

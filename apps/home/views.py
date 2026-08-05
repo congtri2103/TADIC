@@ -129,12 +129,12 @@ def ve_tadic(request):
 
 
 def san_pham_list(request):
-    """Danh sách 14 tác nhân AI."""
+    """Danh sách sản phẩm và tác nhân AI."""
     ctx = _base_ctx()
     ctx.update({
         'products':      Product.objects.filter(is_active=True),
         'page_title':    'Tác nhân AI',
-        'page_desc':     '14 tác nhân AI chuyên biệt cho hạ tầng giao thông đường bộ.',
+        'page_desc':     'Hệ sinh thái sản phẩm và tác nhân AI cho quản lý hạ tầng giao thông đường bộ.',
     })
     return render(request, 'home/san_pham.html', ctx)
 
@@ -161,7 +161,7 @@ def du_an_list(request):
     ctx.update({
         'projects':    Project.objects.filter(is_active=True),
         'page_title':  'Dự án tiêu biểu',
-        'page_desc':   'Các công trình TADIC.AI đã triển khai thành công trên toàn quốc.',
+        'page_desc':   'Các công trình TADIC đã triển khai thành công trên toàn quốc.',
     })
     return render(request, 'home/du_an.html', ctx)
 

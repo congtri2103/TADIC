@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TADIC">
-  <defs>
-    <linearGradient id="tadic-blue" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1258a4"/>
-      <stop offset="1" stop-color="#0a3b72"/>
-    </linearGradient>
-  </defs>
-  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#tadic-blue)"/>
-  <path d="M21 51 28.5 13h7L43 51" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M32 16v7m0 7v7m0 7v6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="51" cy="13" r="7.5" fill="#d6202f" stroke="#fff" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tadic">
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#fff" stroke="#1258a4" stroke-width="3"/>
+  <path d="M11 14h34v9H33v28H23V23H11z" fill="#1258a4"/>
+  <circle cx="50" cy="14" r="7" fill="#d6202f"/>
 </svg>

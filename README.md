@@ -1,4 +1,4 @@
-# TADIC.AI — Nền tảng Quản lý & Bảo trì Hạ tầng Giao thông bằng AI
+# TADIC — Nền tảng Quản lý & Bảo trì Hạ tầng Giao thông bằng AI
 
 <div align="center">
 
@@ -32,7 +32,7 @@
 
 ## 🚀 Giới thiệu
 
-**TADIC.AI** là website giới thiệu sản phẩm và cổng thông tin của Công ty Cổ phần Xây dựng và Công nghệ TADIC — đơn vị tiên phong ứng dụng Trí tuệ nhân tạo (AI) vào quản lý, khảo sát và bảo trì hạ tầng giao thông đường bộ tại Việt Nam.
+**TADIC** là website giới thiệu sản phẩm và cổng thông tin của Công ty Cổ phần Xây dựng và Công nghệ TADIC — đơn vị tiên phong ứng dụng Trí tuệ nhân tạo (AI) vào quản lý, khảo sát và bảo trì hạ tầng giao thông đường bộ tại Việt Nam.
 
 Hệ thống bao gồm:
 - **Trang web công khai** — Giới thiệu 14 tác nhân AI, dự án tiêu biểu, tin tức và form liên hệ
