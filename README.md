@@ -450,24 +450,7 @@ certbot --nginx -d tadic.vn -d www.tadic.vn
 
 ---
 
-## 🔑 Accounts mặc định
 
-> ⚠️ **Thay đổi mật khẩu trước khi deploy production!**
-
-| Username | Mật khẩu | Role | Quyền |
-|---|---|---|---|
-| `admin` | `admin2026@tadic` | root | Superuser + Django Admin |
-| `root_user` | `root123` | root | Toàn quyền |
-| `editor_user` | `edit123` | editor | CRUD + publish |
-| `author_user` | `auth123` | author | Tạo/sửa nội dung |
-| `viewer_user` | `view123` | viewer | Xem dashboard |
-
-### Đổi mật khẩu:
-```bash
-python manage.py changepassword admin
-```
-
----
 
 ## 📊 Dữ liệu sau khi seed
 

@@ -8,16 +8,21 @@
   const nav = document.querySelector('.nav');
   const navList = document.getElementById('navList');
   const navToggle = document.getElementById('navToggle');
-  const dropdownParent = document.querySelector('.has-dropdown');
-  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdownParents = [...document.querySelectorAll('.has-dropdown')];
   const backToTop = document.getElementById('backToTop');
   const contactModal = document.getElementById('contactModal');
   let modalTrigger = null;
 
-  const setDropdownState = (open) => {
-    if (!dropdownParent || !dropdownToggle) return;
-    dropdownParent.classList.toggle('dropdown-open', open);
-    dropdownToggle.setAttribute('aria-expanded', String(open));
+  const setDropdownState = (parent, open) => {
+    if (!parent) return;
+    parent.classList.toggle('dropdown-open', open);
+    parent.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', String(open));
+  };
+
+  const closeDropdowns = (except = null) => {
+    dropdownParents.forEach((parent) => {
+      if (parent !== except) setDropdownState(parent, false);
+    });
   };
 
   const setNavState = (open) => {
@@ -27,7 +32,7 @@
     navToggle.setAttribute('aria-expanded', String(open));
     navToggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
     document.body.classList.toggle('nav-open', open);
-    if (!open) setDropdownState(false);
+    if (!open) closeDropdowns();
   };
 
   navToggle?.addEventListener('click', () => {
@@ -44,9 +49,12 @@
     });
   });
 
-  dropdownToggle?.addEventListener('click', () => {
-    const open = !dropdownParent?.classList.contains('dropdown-open');
-    setDropdownState(open);
+  dropdownParents.forEach((parent) => {
+    parent.querySelector('.dropdown-toggle')?.addEventListener('click', () => {
+      const open = !parent.classList.contains('dropdown-open');
+      closeDropdowns(parent);
+      setDropdownState(parent, open);
+    });
   });
 
   const updateScrollState = () => {
@@ -94,7 +102,7 @@
       return;
     }
     if (event.target.closest('[data-modal-close]')) closeContactModal();
-    if (dropdownParent && !dropdownParent.contains(event.target)) setDropdownState(false);
+    if (!event.target.closest('.has-dropdown')) closeDropdowns();
   });
 
   document.addEventListener('keydown', (event) => {
@@ -116,7 +124,7 @@
     if (event.key === 'Escape') {
       if (contactModal?.classList.contains('active')) closeContactModal();
       if (nav?.classList.contains('active')) setNavState(false);
-      setDropdownState(false);
+      closeDropdowns();
     }
   });
 

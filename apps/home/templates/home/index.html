@@ -12,7 +12,7 @@
       <h1>Nền tảng AI đột phá cho Quản lý Hạ tầng Giao thông</h1>
       <p>Số hóa tài sản đường bộ, tự động hóa quy trình kiểm định, và thiết lập mô hình bảo trì dự báo với độ chính xác đạt &gt;96%.</p>
       <div class="hero__actions">
-        <a href="{% url 'san_pham_list' %}" class="btn btn--primary btn--lg">Khám phá Giải pháp <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#giai-phap" class="btn btn--primary btn--lg">Khám phá Giải pháp <i class="fa-solid fa-arrow-right"></i></a>
         <a href="{% url 'lien_he' %}" class="btn btn--ghost btn--lg" data-contact-modal><i class="fa-regular fa-circle-play"></i> Yêu cầu Demo</a>
       </div>
     </div>
@@ -115,8 +115,8 @@
   </div>
 </section>
 
-<!-- Sản phẩm AI -->
-<section class="section section--white">
+<!-- Giải pháp AI -->
+<section class="section section--white" id="giai-phap">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-layer-group"></i> Hệ sinh thái TADIC.AI</p>
@@ -127,7 +127,7 @@
       <article class="product-card reveal">
         <div class="product-card__top">
           <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
-          <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Live{% elif product.status == 'beta' %}Beta{% else %}Mới{% endif %}</span>
+          <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Đang hoạt động{% elif product.status == 'beta' %}Thử nghiệm{% else %}Sắp ra mắt{% endif %}</span>
         </div>
         <span class="product-card__tag">{{ product.tag }}</span>
         <h3>{{ product.title }}</h3>
@@ -139,7 +139,7 @@
       {% endfor %}
     </div>
     <div class="section-actions reveal">
-      <a href="{% url 'san_pham_list' %}" class="btn btn--outline">Xem toàn bộ 14 Giải pháp AI <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="{% url 'tac_nhan_ai' %}" class="btn btn--outline">Xem toàn bộ 14 Tác nhân AI <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>

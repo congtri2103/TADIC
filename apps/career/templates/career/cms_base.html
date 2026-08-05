@@ -1,19 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}?v=2">
   <title>{% block title %}CMS - TADIC{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
-      --primary: #0db39e;
-      --primary-dark: #0a8e7e;
-      --sidebar-bg: #142355;
-      --sidebar-text: #a5a5a5;
-      --sidebar-active: #0db39e;
+      --primary: #1258a4;
+      --primary-dark: #0a3b72;
+      --accent: #d6202f;
+      --sidebar-bg: #071f3d;
+      --sidebar-text: #b8c7d9;
+      --sidebar-active: #d6202f;
       --content-bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #1e293b;
@@ -39,7 +42,7 @@
     }
     .sidebar__logo-icon { color: var(--primary); font-size: 1.4rem; }
     .sidebar__logo-text { color: #fff; font-weight: 700; font-size: 1.1rem; }
-    .sidebar__logo-text span { color: var(--primary); }
+    .sidebar__logo-text span { color: var(--accent); }
     .sidebar__profile {
       padding: 16px; border-bottom: 1px solid rgba(255,255,255,.08);
       display: flex; align-items: center; gap: 10px;
@@ -59,7 +62,7 @@
       transition: all .15s; border-left: 3px solid transparent;
     }
     .sidebar__link:hover { color: #fff; background: rgba(255,255,255,.05); }
-    .sidebar__link.active { color: #fff; background: rgba(37,99,235,.15); border-left-color: var(--primary); }
+    .sidebar__link.active { color: #fff; background: rgba(18,88,164,.25); border-left-color: var(--sidebar-active); }
     .sidebar__link i { width: 16px; text-align: center; }
     .sidebar__footer { padding: 16px; border-top: 1px solid rgba(255,255,255,.08); }
     .sidebar__footer a {
@@ -131,7 +134,7 @@
     .form-group { margin-bottom: 16px; }
     .form-label { display: block; font-size: .82rem; font-weight: 500; color: var(--text); margin-bottom: 5px; }
     .form-control { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: .87rem; font-family: inherit; color: var(--text); background: #fff; transition: border .15s; }
-    .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+    .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(18,88,164,.12); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-actions { display: flex; gap: 10px; margin-top: 20px; }
 
@@ -181,7 +184,7 @@
     </a>
     <div class="sidebar__group">Nội dung</div>
     <a href="{% url 'cms-product-list' %}" class="sidebar__link {% if 'product' in request.resolver_match.url_name %}active{% endif %}">
-      <i class="fa-solid fa-microchip"></i> Sản phẩm AI
+      <i class="fa-solid fa-microchip"></i> Tác nhân AI
     </a>
     <a href="{% url 'cms-news-list' %}" class="sidebar__link {% if 'news' in request.resolver_match.url_name %}active{% endif %}">
       <i class="fa-solid fa-newspaper"></i> Tin tức

@@ -1,0 +1,34 @@
+[Unit]
+Description=TADIC Django application
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=tadic
+Group=www-data
+WorkingDirectory=/var/www/tadic
+EnvironmentFile=/var/www/tadic/.env
+Environment=PYTHONUNBUFFERED=1
+
+RuntimeDirectory=tadic
+RuntimeDirectoryMode=0750
+UMask=0007
+
+ExecStart=/var/www/tadic/.venv/bin/gunicorn \
+    --workers 3 \
+    --timeout 60 \
+    --access-logfile - \
+    --error-logfile - \
+    --bind unix:/run/tadic/gunicorn.sock \
+    config.wsgi:application
+
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

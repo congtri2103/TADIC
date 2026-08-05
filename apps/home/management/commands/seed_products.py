@@ -5,7 +5,7 @@ PRODUCTS = [
     # ── Road Network Monitoring ──
     {
         "key": "road-vision-ai",
-        "title": "Đặc vụ Tình trạng Mặt đường",
+        "title": "Tác nhân Đánh giá Tình trạng Mặt đường",
         "subtitle": "Phân tích hình ảnh & video mặt đường theo thời gian thực",
         "icon": "fa-road-circle-exclamation",
         "tag": "Giám sát đường bộ",
@@ -22,7 +22,7 @@ PRODUCTS = [
     },
     {
         "key": "road-bound",
-        "title": "Đại lý Kiểm kê Ven đường",
+        "title": "Tác nhân Kiểm kê Tài sản Ven đường",
         "subtitle": "Nền tảng định vị & Quản lý ranh giới hành lang an toàn giao thông",
         "icon": "fa-signs-post",
         "tag": "Kiểm kê tài sản",
@@ -39,7 +39,7 @@ PRODUCTS = [
     },
     {
         "key": "vegetation-analysis",
-        "title": "Đặc vụ Phân tích Thảm thực vật",
+        "title": "Tác nhân Phân tích Thảm thực vật",
         "subtitle": "Giám sát thảm thực vật ven đường bằng AI",
         "icon": "fa-leaf",
         "tag": "Giám sát đường bộ",
@@ -56,7 +56,7 @@ PRODUCTS = [
     },
     {
         "key": "construction-monitoring",
-        "title": "Đặc vụ Giám sát Thi công",
+        "title": "Tác nhân Giám sát Thi công",
         "subtitle": "Theo dõi tiến độ và chất lượng thi công đường bộ",
         "icon": "fa-hard-hat",
         "tag": "Giám sát đường bộ",
@@ -73,7 +73,7 @@ PRODUCTS = [
     },
     {
         "key": "rapid-damage",
-        "title": "Đặc vụ Đánh giá Hư hỏng Nhanh",
+        "title": "Tác nhân Đánh giá Hư hỏng Nhanh",
         "subtitle": "Đánh giá thiệt hại đường bộ sau thiên tai bằng AI",
         "icon": "fa-satellite",
         "tag": "Giám sát đường bộ",
@@ -90,7 +90,7 @@ PRODUCTS = [
     },
     {
         "key": "road-beauty",
-        "title": "Đặc vụ Vệ sinh & Mỹ quan",
+        "title": "Tác nhân Vệ sinh & Mỹ quan Đường bộ",
         "subtitle": "Giám sát vệ sinh đô thị và mỹ quan đường phố",
         "icon": "fa-broom",
         "tag": "Giám sát đường bộ",

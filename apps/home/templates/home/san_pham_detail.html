@@ -8,7 +8,7 @@
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
-      <a href="{% url 'san_pham_list' %}">Sản phẩm</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="{% url 'tac_nhan_ai' %}">Tác nhân AI</a><i class="fa-solid fa-chevron-right"></i>
       <span>{{ product.title }}</span>
     </nav>
   </div>
@@ -80,8 +80,8 @@
 <section class="section section--soft">
   <div class="container">
     <div class="section-layout section-layout--align-end">
-      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC.AI</p><h2>Các giải pháp AI cùng nhóm</h2></div>
-      <a href="{% url 'san_pham_list' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC.AI</p><h2>Các tác nhân AI cùng nhóm</h2></div>
+      <a href="{% url 'tac_nhan_ai' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="grid-3">
       {% for rel in related %}

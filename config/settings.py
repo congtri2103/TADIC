@@ -6,11 +6,16 @@ import dj_database_url
 
 load_dotenv()
 
+def env_bool(name, default=False):
+    return os.getenv(name, str(default)).strip().lower() in {
+        '1', 'true', 'yes', 'on'
+    }
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / 'apps'))
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-dev-key-change-in-production')
-DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = env_bool('DJANGO_DEBUG', True)
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 if DEBUG:
     ALLOWED_HOSTS += ['.ngrok-free.dev', '.ngrok.io']
@@ -29,6 +34,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,6 +60,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 _db_url = os.getenv('DATABASE_URL', '')
@@ -68,7 +76,19 @@ else:
     }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 12},
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 LANGUAGE_CODE = 'vi'
@@ -79,6 +99,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -110,11 +139,20 @@ else:
 
 # ── Production Security ────────────────────────────────────────────────────────
 if not DEBUG:
-    SECURE_SSL_REDIRECT           = True
-    SESSION_COOKIE_SECURE         = True
-    CSRF_COOKIE_SECURE            = True
-    SECURE_HSTS_SECONDS           = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD           = True
-    X_FRAME_OPTIONS               = 'DENY'
-    SECURE_CONTENT_TYPE_NOSNIFF   = True
+    SECURE_SSL_REDIRECT = env_bool('DJANGO_SECURE_SSL_REDIRECT', True)
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+    SECURE_HSTS_SECONDS = int(
+        os.getenv('DJANGO_SECURE_HSTS_SECONDS', '0')
+    )
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool(
+        'DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', False
+    )
+    SECURE_HSTS_PRELOAD = env_bool(
+        'DJANGO_SECURE_HSTS_PRELOAD', False
+    )
+
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_CONTENT_TYPE_NOSNIFF = True
