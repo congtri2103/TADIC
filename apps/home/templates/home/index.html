@@ -115,29 +115,81 @@
   </div>
 </section>
 
+<!-- Video / Demo trực quan -->
+<section class="section section--white video-section">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow"><i class="fa-solid fa-circle-play"></i> Xem thực tế</p>
+      <h2>TADIC AI vận hành trên hiện trường</h2>
+      <p class="section-head__desc">Từ camera hành trình đến bản đồ hư hỏng GIS — xem cách các tác nhân AI TADIC xử lý dữ liệu đường bộ theo thời gian thực.</p>
+    </div>
+
+    <button type="button" class="video-showcase__player reveal" data-contact-modal aria-label="Yêu cầu xem video demo TADIC AI">
+      <span class="video-showcase__play"><i class="fa-solid fa-play"></i></span>
+      <span class="video-showcase__badge"><i class="fa-solid fa-video"></i> Demo trực tiếp</span>
+      <span class="video-showcase__caption">Nhấn để yêu cầu xem demo cùng chuyên gia TADIC</span>
+    </button>
+
+    <div class="grid-3 video-grid reveal-group">
+      <button type="button" class="video-card reveal" data-contact-modal>
+        <span class="video-card__play"><i class="fa-solid fa-play"></i></span>
+        <span class="video-card__icon"><i class="fa-solid fa-car-burst"></i></span>
+        <h3>AI.NETRAM — Camera giám sát giao thông</h3>
+        <p>Nhận diện và phân tích lưu lượng phương tiện theo thời gian thực từ camera CCTV/IP hiện có, không cần thay đổi hạ tầng.</p>
+      </button>
+      <button type="button" class="video-card reveal" data-contact-modal>
+        <span class="video-card__play"><i class="fa-solid fa-play"></i></span>
+        <span class="video-card__icon"><i class="fa-solid fa-road-circle-exclamation"></i></span>
+        <h3>AI.RAMS — Phát hiện hư hỏng mặt đường</h3>
+        <p>Tự động khoanh vùng ổ gà, nứt vỡ mặt đường và tính toán chỉ số PCI/IRI từ video khảo sát hành trình.</p>
+      </button>
+      <button type="button" class="video-card reveal" data-contact-modal>
+        <span class="video-card__play"><i class="fa-solid fa-play"></i></span>
+        <span class="video-card__icon"><i class="fa-solid fa-diagram-project"></i></span>
+        <h3>Quy trình vận hành hệ thống TADIC</h3>
+        <p>Mô phỏng luồng dữ liệu từ hiện trường đến dashboard quản lý, cảnh báo ưu tiên và báo cáo tự động.</p>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- Giải pháp AI -->
 <section class="section section--white" id="giai-phap">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-layer-group"></i> Hệ sinh thái TADIC</p>
-      <h2>Khám phá Sản phẩm & Tác nhân AI chuyên dụng</h2>
+      <h2>14 Tác nhân AI chuyên dụng cho toàn vòng đời hạ tầng</h2>
+      <p class="section-head__desc">Mỗi tác nhân đảm nhiệm một nghiệp vụ chuyên biệt, được nhóm theo 3 trụ cột: giám sát mạng lưới, an toàn giao thông và tự động hóa quy trình.</p>
     </div>
-    <div class="grid-4 product-grid reveal-group">
-      {% for product in products %}
-      <article class="product-card reveal">
-        <div class="product-card__top">
-          <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
-          <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Đang hoạt động{% elif product.status == 'beta' %}Thử nghiệm{% else %}Sắp ra mắt{% endif %}</span>
-        </div>
-        <span class="product-card__tag">{{ product.tag }}</span>
-        <h3>{{ product.title }}</h3>
-        <p>{{ product.subtitle }}</p>
-        <a href="{% url 'san_pham_detail' product.key %}" class="link-arrow">
-          Chi tiết <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </article>
-      {% endfor %}
+
+    {% regroup products by get_category_group_display as home_product_groups %}
+    {% for group in home_product_groups %}
+    <div class="products-category products-category--home reveal">
+      <div class="category-heading category-heading--sm">
+        <span class="category-heading__icon">
+          <i class="fa-solid {% if 'Mạng lưới' in group.grouper %}fa-road{% elif 'An toàn' in group.grouper %}fa-shield-halved{% else %}fa-gears{% endif %}"></i>
+        </span>
+        <div><p class="eyebrow">0{{ forloop.counter }} &middot; {{ group.list|length }} tác nhân</p><h3>{{ group.grouper }}</h3></div>
+      </div>
+      <div class="grid-4 product-grid reveal-group">
+        {% for product in group.list %}
+        <article class="product-card reveal">
+          <div class="product-card__top">
+            <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
+            <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Đang hoạt động{% elif product.status == 'beta' %}Thử nghiệm{% else %}Sắp ra mắt{% endif %}</span>
+          </div>
+          <span class="product-card__tag">{{ product.tag }}</span>
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.subtitle }}</p>
+          <a href="{% url 'san_pham_detail' product.key %}" class="link-arrow">
+            Chi tiết <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+
     <div class="section-actions reveal">
       <a href="{% url 'tac_nhan_ai' %}" class="btn btn--outline">Xem toàn bộ Sản phẩm & Tác nhân AI <i class="fa-solid fa-arrow-right"></i></a>
     </div>

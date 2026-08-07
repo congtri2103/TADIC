@@ -60,18 +60,33 @@
                 <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-mobile-screen-button"></i> Ứng dụng GIS di động</a>
               </div>
             </li>
-            <li class="has-dropdown">
+            <li class="has-dropdown has-dropdown--mega">
               <div class="nav__item-wrap">
                 <a href="{% url 'tac_nhan_ai' %}" class="nav__link {% if request.path == '/tac-nhan-ai/' or '/san-pham/' in request.path %}active{% endif %}">Tác nhân AI</a>
                 <button class="dropdown-toggle" type="button" aria-label="Mở danh mục tác nhân AI" aria-expanded="false">
                   <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
               </div>
-              <div class="dropdown">
-                <a href="{% url 'tac_nhan_ai' %}"><i class="fa-solid fa-robot"></i> Tất cả tác nhân AI</a>
-                <a href="{% url 'tac_nhan_ai' %}?category=road_network#danh-sach"><i class="fa-solid fa-road"></i> Giám sát mạng lưới đường bộ</a>
-                <a href="{% url 'tac_nhan_ai' %}?category=road_safety#danh-sach"><i class="fa-solid fa-shield-halved"></i> An toàn giao thông</a>
-                <a href="{% url 'tac_nhan_ai' %}?category=workflow#danh-sach"><i class="fa-solid fa-gears"></i> Tự động hóa quy trình</a>
+              <div class="dropdown dropdown--mega">
+                <div class="mega-grid">
+                  {% regroup nav_products by category_group as nav_groups %}
+                  {% for group in nav_groups %}
+                  <div class="mega-col">
+                    <p class="mega-col__head">
+                      <i class="fa-solid {% if group.grouper == 'road_network' %}fa-road{% elif group.grouper == 'road_safety' %}fa-shield-halved{% else %}fa-gears{% endif %}"></i>
+                      {% if group.grouper == 'road_network' %}Giám sát Mạng lưới Đường bộ{% elif group.grouper == 'road_safety' %}An toàn Giao thông{% else %}Tự động hóa Quy trình{% endif %}
+                    </p>
+                    <ul class="mega-col__list">
+                      {% for p in group.list %}
+                      <li><a href="{% url 'san_pham_detail' p.key %}">{{ p.title }}<span>{{ p.subtitle|truncatechars:46 }}</span></a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="mega-dropdown__footer">
+                  <a href="{% url 'tac_nhan_ai' %}" class="btn btn--outline btn--sm">Xem toàn bộ 14 tác nhân AI <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
               </div>
             </li>
             <li><a href="{% url 'du_an' %}" class="nav__link {% if '/du-an/' in request.path %}active{% endif %}">Dự án</a></li>
@@ -95,7 +110,7 @@
       <div class="footer-grid">
         <div class="footer-col footer-col--brand">
           <a href="{% url 'home' %}" class="footer__logo" aria-label="Tadic - Trang chủ">
-            <img class="footer__logo-image" src="{% static 'images/tadic-logo.png' %}" alt="Tadic">
+            <img class="footer__logo-image" src="{% static 'images/tadic-logo-white.png' %}" alt="Tadic">
           </a>
           <p>Tiên phong ứng dụng Trí tuệ Nhân tạo (AI) nâng tầm hạ tầng giao thông Việt Nam.</p>
           <div class="footer__social">

@@ -99,6 +99,7 @@ def _base_ctx():
         'process_steps': PROCESS_STEPS,
         'why_us':        WHY_US,
         'company':       COMPANY_INFO,
+        'nav_products':  Product.objects.filter(is_active=True),
     }
 
 
