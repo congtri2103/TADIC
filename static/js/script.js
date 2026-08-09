@@ -94,6 +94,25 @@
   window.closeContactModal = closeContactModal;
 
   document.addEventListener('click', (event) => {
+    const videoTrigger = event.target.closest('.video-embed');
+    if (videoTrigger) {
+      event.preventDefault();
+      if (videoTrigger.dataset.loaded === 'true') return;
+
+      const youtubeId = videoTrigger.dataset.youtubeId;
+      if (!youtubeId) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.className = 'video-embed__frame';
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?autoplay=1&rel=0&hl=vi`;
+      iframe.title = videoTrigger.dataset.youtubeTitle || 'Video demo TADIC';
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      videoTrigger.dataset.loaded = 'true';
+      videoTrigger.replaceWith(iframe);
+      return;
+    }
+
     const trigger = event.target.closest('[data-contact-modal]');
     if (trigger && contactModal) {
       event.preventDefault();

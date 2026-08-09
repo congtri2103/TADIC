@@ -81,6 +81,35 @@ WHY_US = [
     },
 ]
 
+PRODUCT_VIDEOS = {
+    'road-vision-ai': [
+        {
+            'youtube_id': 'lgg1mVu-1ro',
+            'title': 'AI khoanh vùng hư hỏng mặt đường — Camera hành trình phía trước',
+            'description': 'Camera trước ghi nhận mặt đường ở tốc độ khảo sát thực tế; mô hình AI khoanh vùng và phân loại hư hỏng trực tiếp trên từng khung hình.',
+            'duration': '',
+        },
+        {
+            'youtube_id': 'ZmpErCdjScI',
+            'title': 'Quét hiện trạng lề trái tuyến — Camera LHS',
+            'description': 'Góc quay hông trái cùng đoạn tuyến, phục vụ đánh giá hiện trạng lề đường, rãnh thoát nước và hệ thống an toàn giao thông.',
+            'duration': '',
+        },
+        {
+            'youtube_id': 'Zw1mRAXp_7w',
+            'title': 'Quét hiện trạng lề phải tuyến — Camera RHS',
+            'description': 'Góc quay hông phải đồng bộ cùng thời điểm với camera trái, cho phép dựng lại hiện trạng đầy đủ hai bên tuyến trong một lượt khảo sát.',
+            'duration': '',
+        },
+        {
+            'youtube_id': 'KTRidDrgLRc',
+            'title': 'Phân tích liên tục theo hành trình — Đoạn tuyến kế tiếp',
+            'description': 'Đoạn khảo sát tiếp theo cho thấy hệ thống nhận diện liên tục, không gián đoạn khi xe di chuyển giữa các phân đoạn tuyến.',
+            'duration': '',
+        },
+    ],
+}
+
 COMPANY_INFO = {
     'name':    'Công ty Cổ phần Xây dựng và Công nghệ TADIC',
     'short':   'TADIC',
@@ -150,6 +179,7 @@ def san_pham_detail(request, key):
     ctx.update({
         'product':    product,
         'related':    related,
+        'videos':     PRODUCT_VIDEOS.get(key, []),
         'page_title': product.title,
         'page_desc':  product.subtitle,
     })

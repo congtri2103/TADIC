@@ -58,6 +58,32 @@
         </ul>
       </section>
       {% endif %}
+
+      {% if videos %}
+      <section class="detail-block reveal">
+        <div class="detail-block__heading"><span>03</span><h2>Video demo thực tế</h2></div>
+        <div class="detail-video-grid">
+          {% for v in videos %}
+          <article class="video-card detail-video-card reveal">
+            <button type="button" class="video-embed"
+                    data-youtube-id="{{ v.youtube_id }}"
+                    data-youtube-title="{{ v.title }}"
+                    aria-label="Phát video: {{ v.title }}">
+              <img class="video-embed__poster"
+                   src="https://i.ytimg.com/vi/{{ v.youtube_id }}/hqdefault.jpg"
+                   alt="" loading="lazy" width="480" height="360">
+              <span class="video-embed__play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              {% if v.duration %}<span class="video-embed__duration">{{ v.duration }}</span>{% endif %}
+            </button>
+            <div class="detail-video-card__body">
+              <h3>{{ v.title }}</h3>
+              <p>{{ v.description }}</p>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
     </div>
 
     <aside class="detail-sidebar reveal">
