@@ -8,11 +8,20 @@
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
-      <a href="{% url 'tac_nhan_ai' %}">Tác nhân AI</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="{% url 'san_pham_list' %}">Sản phẩm</a><i class="fa-solid fa-chevron-right"></i>
       <span>{{ product.title }}</span>
     </nav>
   </div>
 </div>
+
+{% if is_vroad_product %}
+<div class="product-solution-banner">
+  <div class="container product-solution-banner__inner">
+    <span><i class="fa-solid fa-road"></i> Sản phẩm thuộc giải pháp VRoad.AI</span>
+    <a href="{% url 'giai_phap_vroad' %}">Khám phá giải pháp <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</div>
+{% endif %}
 
 <section class="product-detail-hero">
   <div class="product-detail-hero__grid" aria-hidden="true"></div>

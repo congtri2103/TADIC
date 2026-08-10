@@ -110,6 +110,158 @@ PRODUCT_VIDEOS = {
     ],
 }
 
+VROAD_SOLUTION = {
+    'key': 'vroad-ai',
+    'name': 'VRoad.AI',
+    'tagline': 'Better roads, better future.',
+    'summary': 'Nền tảng phần mềm tổng thể quản lý hạ tầng đường bộ, kết nối dữ liệu khảo sát, AI và GIS để biến hiện trạng tuyến đường thành thông tin có thể hành động.',
+    'product_keys': [
+        'road-vision-ai',
+        'road-bound',
+        'vegetation-analysis',
+        'construction-monitoring',
+        'rapid-damage',
+        'road-beauty',
+    ],
+    'modules': [
+        {
+            'icon': 'fa-chart-pie',
+            'name': 'Bảng điều khiển',
+            'description': 'Tổng hợp trạng thái tuyến, tài sản, lỗi và chỉ số khảo sát trên một màn hình.',
+        },
+        {
+            'icon': 'fa-boxes-stacked',
+            'name': 'Thư viện tài sản',
+            'description': 'Tra cứu, phân loại và định vị tài sản dọc tuyến theo dữ liệu khảo sát.',
+        },
+        {
+            'icon': 'fa-triangle-exclamation',
+            'name': 'Thư viện lỗi',
+            'description': 'Theo dõi mã lỗi, lý trình, mức độ và trạng thái xử lý hiện trường.',
+        },
+        {
+            'icon': 'fa-road-circle-exclamation',
+            'name': 'Độ gồ ghề mặt đường',
+            'description': 'Trực quan chỉ số IRI trên bản đồ và biểu đồ phân bố theo tuyến.',
+        },
+        {
+            'icon': 'fa-route',
+            'name': 'Sổ tuyến đường',
+            'description': 'Quản lý hồ sơ tuyến, đoạn tuyến và các thông tin liên quan.',
+        },
+        {
+            'icon': 'fa-cloud-arrow-up',
+            'name': 'Tải lên khảo sát',
+            'description': 'Tiếp nhận video và dữ liệu khảo sát để xử lý theo từng dự án.',
+        },
+        {
+            'icon': 'fa-photo-film',
+            'name': 'Thư viện video',
+            'description': 'Tổ chức các phiên video khảo sát theo tuyến và mã phiên.',
+        },
+        {
+            'icon': 'fa-folder-tree',
+            'name': 'Dự án',
+            'description': 'Quản lý dự án, tuyến và tiến độ khảo sát tập trung.',
+        },
+        {
+            'icon': 'fa-sliders',
+            'name': 'Cấu hình hệ thống',
+            'description': 'Thiết lập các tham số vận hành và cấu hình nền tảng.',
+        },
+    ],
+}
+
+VROAD_PROBLEM_SOLUTION = {
+    'problem': {
+        'eyebrow': 'Bài toán',
+        'title': 'Hiện trạng đường bộ cần được nhìn thấy đầy đủ hơn',
+        'description': 'Dữ liệu tài sản, hư hỏng và chất lượng tuyến thường nằm rời rạc trong nhiều hồ sơ, khó cập nhật liên tục và khó chuyển thành quyết định ưu tiên.',
+        'points': [
+            'Khảo sát thủ công mất nhiều thời gian và phụ thuộc vào kinh nghiệm.',
+            'Dữ liệu hiện trường thiếu liên kết giữa bản đồ, hình ảnh và lý trình.',
+            'Đơn vị quản lý khó theo dõi đồng thời tài sản, lỗi và chất lượng mặt đường.',
+        ],
+    },
+    'solution': {
+        'eyebrow': 'Lời giải',
+        'title': 'Một nền tảng thống nhất cho toàn bộ vòng đời tuyến đường',
+        'description': 'VRoad.AI kết nối dữ liệu khảo sát với AI và GIS, giúp đội ngũ quản lý chuyển từ quan sát rời rạc sang một bức tranh hiện trạng có thể truy vấn, phân tích và hành động.',
+        'points': [
+            'Chuẩn hóa dữ liệu theo dự án, tuyến, lý trình và loại tài sản.',
+            'Trực quan hóa kết quả AI trên bản đồ, dashboard và thư viện dữ liệu.',
+            'Hỗ trợ lập kế hoạch bảo trì dựa trên bằng chứng từ hiện trường.',
+        ],
+    },
+}
+
+VROAD_SAMPLE_STATS = [
+    {'value': '5,20 km', 'label': 'chiều dài khảo sát'},
+    {'value': '432', 'label': 'tài sản'},
+    {'value': '314', 'label': 'lỗi'},
+    {'value': '4,16 m/km', 'label': 'IRI trung bình'},
+    {'value': '8,99 m/km', 'label': 'đoạn xấu nhất'},
+    {'value': '70,6', 'label': 'PCI (Satisfactory)'},
+    {'value': '87,5', 'label': 'PCI (Good)'},
+]
+
+VROAD_SAMPLE_NOTE = 'Số liệu từ dự án khảo sát mẫu: Đường Hồ Chí Minh, khảo sát 21/07/2026.'
+
+VROAD_STANDARDS = [
+    {
+        'icon': 'fa-road',
+        'title': 'PCI theo ASTM D6433',
+        'description': 'Đánh giá tình trạng mặt đường theo phương pháp PCI được sử dụng trong kiểm định.',
+    },
+    {
+        'icon': 'fa-scale-balanced',
+        'title': 'TCVN 14182:2024',
+        'description': 'Tham chiếu tiêu chuẩn Việt Nam trong quản lý và khai thác đường bộ.',
+    },
+    {
+        'icon': 'fa-chart-line',
+        'title': 'IRI theo dải HDM-4',
+        'description': 'Theo dõi độ gồ ghề mặt đường bằng chỉ số IRI theo dải HDM-4.',
+    },
+]
+
+VROAD_DAMAGE_TYPES = [
+    'Nứt da cá sấu (nứt mỏi)',
+    'Vá mặt đường',
+    'Ổ gà',
+    'Vạch kẻ đường bị phai',
+    'Biển báo tầm nhìn kém',
+    'Hư hỏng biển báo / kết cấu biển báo',
+    'Hư hỏng gạch lát vỉa hè',
+    'Hư hỏng gờ giảm tốc',
+    'Thiếu tấm đậy cống',
+]
+
+VROAD_ASSET_GROUPS = [
+    'Biển báo chỉ dẫn',
+    'Hệ thống giao thông thông minh (ITS)',
+    'Chiếu sáng đường bộ',
+    'Mặt đường',
+    'Tài sản hạ tầng khác (OIA)',
+]
+
+VROAD_UI_IMAGES = [
+    {'path': 'images/vroad/dashboard-tai-san.webp', 'title': 'Bảng điều khiển tài sản', 'alt': 'Bảng điều khiển VRoad.AI với dữ liệu tuyến, tài sản và lỗi', 'width': 1323, 'height': 640},
+    {'path': 'images/vroad/chi-tiet-hu-hong.webp', 'title': 'Chi tiết hư hỏng', 'alt': 'So sánh khung hình gốc và khung hình đã được AI phân tích', 'width': 952, 'height': 555},
+    {'path': 'images/vroad/thu-vien-loi.webp', 'title': 'Thư viện lỗi', 'alt': 'Bản đồ và danh sách lỗi có mã lỗi, lý trình', 'width': 1344, 'height': 647},
+    {'path': 'images/vroad/thu-vien-tai-san.webp', 'title': 'Thư viện tài sản', 'alt': 'Bản đồ và danh sách tài sản có mã tài sản', 'width': 1358, 'height': 655},
+    {'path': 'images/vroad/dashboard-hu-hong.webp', 'title': 'Dashboard hư hỏng', 'alt': 'Dashboard phân tích hư hỏng theo mức độ', 'width': 1304, 'height': 616},
+    {'path': 'images/vroad/iri-01.webp', 'title': 'Phân tích IRI', 'alt': 'Bản đồ và biểu đồ phân tích độ gồ ghề IRI', 'width': 1347, 'height': 654},
+    {'path': 'images/vroad/iri-02.webp', 'title': 'Màn hình IRI bổ sung', 'alt': 'Màn hình bổ sung của phân hệ phân tích IRI', 'width': 1327, 'height': 642},
+    {'path': 'images/vroad/iri-03.webp', 'title': 'Biểu đồ IRI', 'alt': 'Biểu đồ và dữ liệu phân bố IRI theo tuyến', 'width': 1335, 'height': 647},
+    {'path': 'images/vroad/thu-vien-video.webp', 'title': 'Thư viện video', 'alt': 'Lưới các phiên video khảo sát trong VRoad.AI', 'width': 1323, 'height': 645},
+    {'path': 'images/vroad/hang-doi-video.webp', 'title': 'Hàng đợi video', 'alt': 'Hàng đợi xử lý video khảo sát', 'width': 1312, 'height': 657},
+    {'path': 'images/vroad/tao-du-an.webp', 'title': 'Tạo dự án', 'alt': 'Biểu mẫu tạo dự án khảo sát', 'width': 1347, 'height': 674},
+    {'path': 'images/vroad/tao-tuyen-01.webp', 'title': 'Tạo tuyến', 'alt': 'Biểu mẫu tạo tuyến có bản đồ', 'width': 1204, 'height': 586},
+    {'path': 'images/vroad/tao-tuyen-02.webp', 'title': 'Thông tin tuyến', 'alt': 'Màn hình thông tin tuyến và bản đồ', 'width': 1353, 'height': 635},
+    {'path': 'images/vroad/cau-hinh-he-thong.webp', 'title': 'Cấu hình hệ thống', 'alt': 'Màn hình cấu hình hệ thống VRoad.AI', 'width': 1302, 'height': 656},
+]
+
 COMPANY_INFO = {
     'name':    'Công ty Cổ phần Xây dựng và Công nghệ TADIC',
     'short':   'TADIC',
@@ -128,6 +280,9 @@ def _base_ctx():
         'process_steps': PROCESS_STEPS,
         'why_us':        WHY_US,
         'company':       COMPANY_INFO,
+        'solution':      VROAD_SOLUTION,
+        'sample_stats':  VROAD_SAMPLE_STATS,
+        'sample_note':   VROAD_SAMPLE_NOTE,
         'nav_products':  Product.objects.filter(is_active=True),
     }
 
@@ -169,6 +324,36 @@ def san_pham_list(request):
     return render(request, 'home/san_pham.html', ctx)
 
 
+def giai_phap_vroad(request):
+    """Trang giới thiệu giải pháp nền tảng VRoad.AI."""
+    products_by_key = {
+        product.key: product
+        for product in Product.objects.filter(
+            is_active=True,
+            key__in=VROAD_SOLUTION['product_keys'],
+        )
+    }
+    solution_products = [
+        products_by_key[key]
+        for key in VROAD_SOLUTION['product_keys']
+        if key in products_by_key
+    ]
+    ctx = _base_ctx()
+    ctx.update({
+        'page_title': VROAD_SOLUTION['name'],
+        'page_desc': VROAD_SOLUTION['summary'],
+        'solution_products': solution_products,
+        'problem_solution': VROAD_PROBLEM_SOLUTION,
+        'sample_stats': VROAD_SAMPLE_STATS,
+        'sample_note': VROAD_SAMPLE_NOTE,
+        'standards': VROAD_STANDARDS,
+        'damage_types': VROAD_DAMAGE_TYPES,
+        'asset_groups': VROAD_ASSET_GROUPS,
+        'ui_images': VROAD_UI_IMAGES,
+    })
+    return render(request, 'home/giai_phap_vroad.html', ctx)
+
+
 def san_pham_detail(request, key):
     """Chi tiết sản phẩm."""
     product  = get_object_or_404(Product, key=key, is_active=True)
@@ -180,6 +365,7 @@ def san_pham_detail(request, key):
         'product':    product,
         'related':    related,
         'videos':     PRODUCT_VIDEOS.get(key, []),
+        'is_vroad_product': key in VROAD_SOLUTION['product_keys'],
         'page_title': product.title,
         'page_desc':  product.subtitle,
     })

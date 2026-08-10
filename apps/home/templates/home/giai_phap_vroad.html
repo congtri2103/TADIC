@@ -1,0 +1,218 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}VRoad.AI — Better roads, better future. | TADIC{% endblock %}
+{% block meta_desc %}{{ solution.summary }}{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
+      <span>Giải pháp VRoad.AI</span>
+    </nav>
+  </div>
+</div>
+
+<!-- 01. Hero giải pháp -->
+<section class="solution-hero">
+  <div class="solution-hero__grid" aria-hidden="true"></div>
+  <div class="container solution-hero__inner">
+    <div class="solution-hero__content reveal">
+      <p class="eyebrow eyebrow--light"><span></span> Giải pháp nền tảng</p>
+      <p class="solution-wordmark">VRoad<span>.AI</span></p>
+      <p class="solution-tagline">{{ solution.tagline }}</p>
+      <h1>Quản lý hạ tầng đường bộ bằng dữ liệu có thể hành động</h1>
+      <p class="solution-hero__summary">{{ solution.summary }}</p>
+      <div class="solution-hero__actions">
+        <a href="{% url 'lien_he' %}" class="btn btn--primary btn--lg" data-contact-modal>Yêu cầu demo <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#san-pham-vroad" class="btn btn--ghost btn--lg">Xem sản phẩm <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+    </div>
+    <figure class="solution-hero__visual solution-ui-frame reveal">
+      <img src="{% static 'images/vroad/dashboard-tai-san.webp' %}"
+           alt="Bảng điều khiển VRoad.AI với dữ liệu tuyến, tài sản và lỗi"
+           width="1323" height="640" fetchpriority="high" decoding="async">
+      <figcaption>{{ sample_note }}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 02. Bài toán và lời giải -->
+<section class="section section--white solution-problem-section">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow"><i class="fa-solid fa-arrows-to-circle"></i> Từ hiện trạng đến hành động</p>
+      <h2>Bài toán quản lý hạ tầng và lời giải thống nhất</h2>
+      <p class="section-head__desc">VRoad.AI kết nối dữ liệu khảo sát, AI và GIS trong cùng một nền tảng để đội ngũ quản lý nhìn thấy đúng hiện trạng và ra quyết định đúng thời điểm.</p>
+    </div>
+    <div class="solution-split">
+      <article class="solution-panel solution-panel--problem reveal">
+        <div class="solution-panel__head"><span class="solution-panel__number">01</span><p class="eyebrow">{{ problem_solution.problem.eyebrow }}</p></div>
+        <h3>{{ problem_solution.problem.title }}</h3>
+        <p>{{ problem_solution.problem.description }}</p>
+        <ul class="solution-check-list">
+          {% for point in problem_solution.problem.points %}<li><i class="fa-solid fa-minus"></i><span>{{ point }}</span></li>{% endfor %}
+        </ul>
+      </article>
+      <article class="solution-panel solution-panel--answer reveal">
+        <div class="solution-panel__head"><span class="solution-panel__number">02</span><p class="eyebrow">{{ problem_solution.solution.eyebrow }}</p></div>
+        <h3>{{ problem_solution.solution.title }}</h3>
+        <p>{{ problem_solution.solution.description }}</p>
+        <ul class="solution-check-list">
+          {% for point in problem_solution.solution.points %}<li><i class="fa-solid fa-check"></i><span>{{ point }}</span></li>{% endfor %}
+        </ul>
+      </article>
+    </div>
+    <figure class="solution-feature-image solution-ui-frame reveal">
+      <img src="{% static 'images/vroad/chi-tiet-hu-hong.webp' %}"
+           alt="So sánh khung hình gốc và khung hình đã được AI phân tích"
+           width="952" height="555" loading="lazy" decoding="async">
+      <figcaption>Hình ảnh hiện trường được đối chiếu cùng kết quả phân tích AI.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 03. Quy trình -->
+<section class="section section--soft solution-process-section">
+  <div class="container">
+    <div class="section-layout">
+      <div class="section-head reveal">
+        <p class="eyebrow"><i class="fa-solid fa-diagram-project"></i> Quy trình nền tảng</p>
+        <h2>Từ dữ liệu thực địa đến quyết định bảo trì</h2>
+        <p class="section-head__desc">Bốn bước liên tục giúp dữ liệu khảo sát trở thành thông tin rõ ràng, có thể kiểm chứng và dễ phối hợp.</p>
+      </div>
+      <div class="section-side-note reveal" aria-hidden="true"><i class="fa-solid fa-route"></i></div>
+    </div>
+    <div class="process-steps solution-process-steps">
+      {% for step in process_steps %}
+      <article class="process-step solution-process-step reveal">
+        <div class="process-step__rail"><span>{{ step.number }}</span></div>
+        <div class="process-step__content">
+          <div class="process-step__icon"><i class="fa-solid {{ step.icon }}"></i></div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 04. Phân hệ nền tảng -->
+<section class="section section--white solution-modules-section" id="phan-he">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow"><i class="fa-solid fa-cubes"></i> Nền tảng VRoad.AI</p>
+      <h2>9 phân hệ kết nối trong một không gian quản lý</h2>
+      <p class="section-head__desc">Từ dự án và tuyến đường đến video, tài sản, lỗi và chỉ số mặt đường — mỗi phân hệ đảm nhiệm một mắt xích rõ ràng trong quy trình.</p>
+    </div>
+    <div class="solution-module-grid reveal-group">
+      {% for module in solution.modules %}
+      <article class="solution-module-card reveal">
+        <span class="solution-module-card__icon"><i class="fa-solid {{ module.icon }}"></i></span>
+        <h3>{{ module.name }}</h3>
+        <p>{{ module.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="solution-gallery-head reveal">
+      <div><p class="eyebrow"><i class="fa-solid fa-images"></i> Giao diện thật</p><h3>Các màn hình trong nền tảng</h3></div>
+      <p>Ảnh chụp từ các phân hệ quản lý, phân tích và cấu hình của VRoad.AI. {{ sample_note }}</p>
+    </div>
+    <div class="solution-gallery-grid reveal-group">
+      {% for image in ui_images %}
+      <figure class="solution-ui-card reveal">
+        <img src="{% static image.path %}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async">
+        <figcaption>{{ image.title }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 05. Sáu sản phẩm trong giải pháp -->
+<section class="section section--soft solution-products-section" id="san-pham-vroad">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow"><i class="fa-solid fa-layer-group"></i> Hệ sản phẩm</p>
+      <h2>6 sản phẩm trong giải pháp VRoad.AI</h2>
+      <p class="section-head__desc">Các sản phẩm chuyên biệt cùng phục vụ mục tiêu quản lý, giám sát và nâng cao chất lượng mạng lưới đường bộ.</p>
+    </div>
+    <div class="solution-product-grid reveal-group">
+      {% for product in solution_products %}
+      <article class="solution-product-card reveal">
+        <a href="{% url 'san_pham_detail' product.key %}">
+          <div class="solution-product-card__top">
+            <span class="solution-product-card__icon"><i class="fa-solid {{ product.icon }}"></i></span>
+            <span class="product-card__status status--{{ product.status }}">{% if product.status == 'live' %}Đang hoạt động{% elif product.status == 'beta' %}Thử nghiệm{% else %}Sắp ra mắt{% endif %}</span>
+          </div>
+          <span class="product-card__tag">{{ product.tag }}</span>
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.subtitle }}</p>
+          <span class="link-arrow">Tìm hiểu thêm <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 06. Chuẩn và dữ liệu -->
+<section class="section section--white solution-compliance-section">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Chuẩn &amp; tuân thủ</p>
+      <h2>Đo lường theo chuẩn, báo cáo có căn cứ</h2>
+      <p class="section-head__desc">VRoad.AI hỗ trợ tổ chức dữ liệu và chỉ số theo các chuẩn tham chiếu trong kiểm định, quản lý và khai thác đường bộ.</p>
+    </div>
+    <div class="solution-standard-grid reveal-group">
+      {% for standard in standards %}
+      <article class="solution-standard-card reveal">
+        <span class="solution-standard-card__icon"><i class="fa-solid {{ standard.icon }}"></i></span>
+        <h3>{{ standard.title }}</h3>
+        <p>{{ standard.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="solution-data-grid">
+      <article class="solution-data-card reveal">
+        <p class="eyebrow">Nhận diện hiện trạng</p>
+        <h3>Loại hư hỏng hệ thống nhận diện</h3>
+        <ul class="solution-chip-list">{% for item in damage_types %}<li>{{ item }}</li>{% endfor %}</ul>
+      </article>
+      <article class="solution-data-card reveal">
+        <p class="eyebrow">Quản lý tài sản</p>
+        <h3>Nhóm tài sản quản lý</h3>
+        <ul class="solution-chip-list">{% for item in asset_groups %}<li>{{ item }}</li>{% endfor %}</ul>
+      </article>
+    </div>
+    <div class="solution-sample-data reveal">
+      <div class="solution-sample-data__head"><p class="eyebrow"><i class="fa-solid fa-chart-simple"></i> Dữ liệu minh họa</p><span>{{ sample_note }}</span></div>
+      <div class="solution-sample-data__grid">
+        {% for stat in sample_stats %}<div class="solution-sample-stat"><strong>{{ stat.value }}</strong><span>{{ stat.label }}</span></div>{% endfor %}
+      </div>
+      <p class="solution-sample-data__note">Các số liệu trên chỉ mô tả dự án khảo sát mẫu, không phải số liệu tổng năng lực của công ty.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07. CTA -->
+<section class="cta-section solution-final-cta">
+  <div class="cta-section__pattern" aria-hidden="true"></div>
+  <div class="container cta-section__inner reveal">
+    <div>
+      <p class="eyebrow"><i class="fa-solid fa-road"></i> VRoad.AI</p>
+      <h2>Cùng xây dựng những tuyến đường tốt hơn</h2>
+      <p>Đội ngũ TADIC sẵn sàng trao đổi về dữ liệu, tuyến đường và mục tiêu quản lý của đơn vị bạn.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="{% url 'lien_he' %}" class="btn btn--white btn--lg" data-contact-modal>Yêu cầu demo <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="{% url 'san_pham_list' %}" class="btn btn--white-outline btn--lg">Xem toàn bộ sản phẩm</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

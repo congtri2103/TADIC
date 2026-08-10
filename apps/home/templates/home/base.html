@@ -46,24 +46,23 @@
             <li><a href="{% url 've_tadic' %}" class="nav__link {% if request.path == '/ve-tadic/' %}active{% endif %}">Về chúng tôi</a></li>
             <li class="has-dropdown">
               <div class="nav__item-wrap">
-                <a href="{% url 'home' %}#giai-phap" class="nav__link">Giải pháp</a>
+                <a href="{% url 'giai_phap_vroad' %}" class="nav__link {% if '/giai-phap/vroad-ai/' in request.path %}active{% endif %}">Giải pháp</a>
                 <button class="dropdown-toggle" type="button" aria-label="Mở danh mục giải pháp" aria-expanded="false">
                   <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
               </div>
               <div class="dropdown">
-                <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-layer-group"></i> Tất cả giải pháp</a>
-                <a href="{% url 'san_pham_detail' 'road-vision-ai' %}"><i class="fa-solid fa-road"></i> AI.RAMS — Bảo trì đường bộ</a>
-                <a href="{% url 'san_pham_detail' 'ats-camera' %}"><i class="fa-solid fa-video"></i> AI.NETRAM — Phân tích giao thông</a>
-                <a href="{% url 'san_pham_detail' 'construction-monitoring' %}"><i class="fa-solid fa-helmet-safety"></i> AI.Construction</a>
-                <a href="{% url 'san_pham_detail' 'ai-inspection' %}"><i class="fa-solid fa-folder-tree"></i> AI.DMS — Quản lý hồ sơ</a>
-                <a href="{% url 'home' %}#giai-phap"><i class="fa-solid fa-mobile-screen-button"></i> Ứng dụng GIS di động</a>
+                <a href="{% url 'giai_phap_vroad' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-road"></i></span>
+                  <span class="dropdown__solution-copy"><strong>VRoad.AI</strong><small>Better roads, better future.</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
               </div>
             </li>
             <li class="has-dropdown has-dropdown--mega">
               <div class="nav__item-wrap">
-                <a href="{% url 'tac_nhan_ai' %}" class="nav__link {% if request.path == '/tac-nhan-ai/' or '/san-pham/' in request.path %}active{% endif %}">Tác nhân AI</a>
-                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục tác nhân AI" aria-expanded="false">
+                <a href="{% url 'san_pham_list' %}" class="nav__link {% if request.path == '/tac-nhan-ai/' or '/san-pham/' in request.path %}active{% endif %}">Sản phẩm</a>
+                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục sản phẩm" aria-expanded="false">
                   <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
               </div>
@@ -76,6 +75,7 @@
                       <i class="fa-solid {% if group.grouper == 'road_network' %}fa-road{% elif group.grouper == 'road_safety' %}fa-shield-halved{% else %}fa-gears{% endif %}"></i>
                       {% if group.grouper == 'road_network' %}Giám sát Mạng lưới Đường bộ{% elif group.grouper == 'road_safety' %}An toàn Giao thông{% else %}Tự động hóa Quy trình{% endif %}
                     </p>
+                    {% if group.grouper == 'road_network' %}<span class="mega-col__badge">Thuộc giải pháp VRoad.AI</span>{% endif %}
                     <ul class="mega-col__list">
                       {% for p in group.list %}
                       <li><a href="{% url 'san_pham_detail' p.key %}">{{ p.title }}<span>{{ p.subtitle|truncatechars:46 }}</span></a></li>
@@ -85,7 +85,7 @@
                   {% endfor %}
                 </div>
                 <div class="mega-dropdown__footer">
-                  <a href="{% url 'tac_nhan_ai' %}" class="btn btn--outline btn--sm">Xem toàn bộ 14 tác nhân AI <i class="fa-solid fa-arrow-right"></i></a>
+                  <a href="{% url 'san_pham_list' %}" class="btn btn--outline btn--sm">Xem toàn bộ 14 sản phẩm <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
               </div>
             </li>
@@ -132,6 +132,10 @@
 
         <div class="footer-col">
           <h4>Giải pháp</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'giai_phap_vroad' %}">VRoad.AI</a></li>
+          </ul>
+          <h4 class="footer-col__subhead">Sản phẩm</h4>
           <ul class="footer-links">
             <li><a href="{% url 'san_pham_detail' 'road-vision-ai' %}">AI.RAMS</a></li>
             <li><a href="{% url 'san_pham_detail' 'ats-camera' %}">AI.NETRAM</a></li>

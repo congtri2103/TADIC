@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('ve-tadic/', views.ve_tadic, name='ve_tadic'),
+    path('giai-phap/vroad-ai/', views.giai_phap_vroad, name='giai_phap_vroad'),
     path('tac-nhan-ai/', views.san_pham_list, name='tac_nhan_ai'),
     path('san-pham/', views.san_pham_list, name='san_pham_list'),
     path('san-pham/<slug:key>/', views.san_pham_detail, name='san_pham_detail'),
