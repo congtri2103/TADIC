@@ -7,12 +7,25 @@
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
-      <a href="{% url 'tac_nhan_ai' %}">Tác nhân AI</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="{% url 'home' %}"><i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
+      {% if product.kind == 'product' %}
+      <a href="{% url 'san_pham_list' %}">Sản phẩm</a><i class="fa-solid fa-chevron-right"></i>
+      {% else %}
+      <a href="{% url 'giai_phap_list' %}">Giải pháp</a><i class="fa-solid fa-chevron-right"></i>
+      {% endif %}
       <span>{{ product.title }}</span>
     </nav>
   </div>
 </div>
+
+{% if is_vroad_product %}
+<div class="product-solution-banner">
+  <div class="container product-solution-banner__inner">
+    <span><i class="fa-solid fa-road"></i> {% if product.kind == 'product' %}Sản phẩm{% else %}Giải pháp{% endif %} tích hợp với VRoad.AI</span>
+    <a href="{% url 'san_pham_vroad' %}">Khám phá VRoad.AI <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</div>
+{% endif %}
 
 <section class="product-detail-hero">
   <div class="product-detail-hero__grid" aria-hidden="true"></div>
@@ -41,21 +54,50 @@
   <div class="container detail-layout">
     <div class="detail-content">
       <section class="detail-block reveal">
-        <div class="detail-block__heading"><span>01</span><h2>Mô tả giải pháp</h2></div>
+        <div class="detail-block__heading"><span class="detail-block__icon" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span><h2>Mô tả {% if product.kind == 'product' %}sản phẩm{% else %}giải pháp{% endif %}</h2></div>
         <div class="rich-copy">{{ product.description|linebreaks }}</div>
       </section>
 
       {% if product.features %}
       <section class="detail-block reveal">
-        <div class="detail-block__heading"><span>02</span><h2>Tính năng nổi bật</h2></div>
+        <div class="detail-block__heading"><span class="detail-block__icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span><h2>Tính năng nổi bật</h2></div>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i><span>Phân tích tự động dữ liệu bằng Trí tuệ Nhân tạo (Deep Learning) thay vì đo đạc thủ công.</span></li>
-          <li><i class="fa-solid fa-check"></i><span>Xuất báo cáo trực quan dưới dạng bản đồ GIS và file PDF/Excel tiêu chuẩn.</span></li>
-          <li><i class="fa-solid fa-check"></i><span>Tích hợp dễ dàng vào các hệ thống quản lý giao thông thông minh (ITS) sẵn có.</span></li>
+          <li><i class="fa-solid fa-brain" aria-hidden="true"></i><span>Phân tích tự động dữ liệu bằng Trí tuệ Nhân tạo (Deep Learning) thay vì đo đạc thủ công.</span></li>
+          <li><i class="fa-solid fa-file-export" aria-hidden="true"></i><span>Xuất báo cáo trực quan dưới dạng bản đồ GIS và file PDF/Excel tiêu chuẩn.</span></li>
+          <li><i class="fa-solid fa-plug" aria-hidden="true"></i><span>Tích hợp dễ dàng vào các hệ thống quản lý giao thông thông minh (ITS) sẵn có.</span></li>
           {% for feature in product.features %}
-          <li><i class="fa-solid fa-check"></i><span>{{ feature }}</span></li>
+          <li>
+            <i class="fa-solid {% if product.key == 'road-vision-ai' %}{% if forloop.counter == 1 %}fa-map-location-dot{% elif forloop.counter == 2 %}fa-camera{% elif forloop.counter == 3 %}fa-chart-line{% else %}fa-screwdriver-wrench{% endif %}{% else %}{% cycle 'fa-wand-magic-sparkles' 'fa-chart-column' 'fa-link' 'fa-gears' %}{% endif %}" aria-hidden="true"></i>
+            <span>{{ feature }}</span>
+          </li>
           {% endfor %}
         </ul>
+      </section>
+      {% endif %}
+
+      {% if videos %}
+      <section class="detail-block reveal">
+        <div class="detail-block__heading"><span class="detail-block__icon" aria-hidden="true"><i class="fa-solid fa-circle-play"></i></span><h2>Video demo thực tế</h2></div>
+        <div class="detail-video-grid">
+          {% for v in videos %}
+          <article class="video-card detail-video-card reveal">
+            <button type="button" class="video-embed"
+                    data-youtube-id="{{ v.youtube_id }}"
+                    data-youtube-title="{{ v.title }}"
+                    aria-label="Phát video: {{ v.title }}">
+              <img class="video-embed__poster"
+                   src="https://i.ytimg.com/vi/{{ v.youtube_id }}/hqdefault.jpg"
+                   alt="" loading="lazy" width="480" height="360">
+              <span class="video-embed__play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              {% if v.duration %}<span class="video-embed__duration">{{ v.duration }}</span>{% endif %}
+            </button>
+            <div class="detail-video-card__body">
+              <h3>{{ v.title }}</h3>
+              <p>{{ v.description }}</p>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
       </section>
       {% endif %}
     </div>
@@ -64,9 +106,9 @@
       <div class="consult-card">
         <span class="consult-card__icon"><i class="fa-regular fa-comments"></i></span>
         <h3>Bạn muốn ứng dụng {{ product.title }}?</h3>
-        <p>Đội ngũ kỹ sư TADIC sẵn sàng demo thực tế giải pháp này trên chính dữ liệu tuyến đường của bạn.</p>
+        <p>Đội ngũ kỹ sư TADIC sẵn sàng demo thực tế {% if product.kind == 'product' %}sản phẩm{% else %}giải pháp{% endif %} này trên chính dữ liệu tuyến đường của bạn.</p>
         <a href="{% url 'lien_he' %}" class="btn btn--primary btn--full" data-contact-modal>Đăng ký Demo ngay <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="{% url 'lien_he' %}" class="btn btn--outline btn--full">Liên hệ phòng kinh doanh</a>
+        <a href="{% url 'lien_he' %}" class="btn btn--outline btn--full"><i class="fa-solid fa-headset" aria-hidden="true"></i> Liên hệ phòng kinh doanh</a>
         <div class="consult-card__fit">
           <strong>PHÙ HỢP CHO:</strong>
           <div class="tag-list"><span>Sở GTVT</span><span>Ban Quản lý Dự án</span><span>Nhà thầu bảo trì BOT</span></div>
@@ -80,8 +122,12 @@
 <section class="section section--soft">
   <div class="container">
     <div class="section-layout section-layout--align-end">
-      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC</p><h2>Các tác nhân AI cùng nhóm</h2></div>
-      <a href="{% url 'tac_nhan_ai' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC</p><h2>Các {% if product.kind == 'product' %}sản phẩm{% else %}giải pháp AI{% endif %} cùng nhóm</h2></div>
+      {% if product.kind == 'product' %}
+      <a href="{% url 'san_pham_list' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      {% else %}
+      <a href="{% url 'giai_phap_list' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      {% endif %}
     </div>
     <div class="grid-3">
       {% for rel in related %}
@@ -89,7 +135,7 @@
         <div class="product-card__top"><div class="product-card__icon"><i class="fa-solid {{ rel.icon }}"></i></div></div>
         <h3>{{ rel.title }}</h3>
         <p>{{ rel.subtitle }}</p>
-        <a href="{% url 'san_pham_detail' rel.key %}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="{{ rel.get_absolute_url }}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
       </article>
       {% endfor %}
     </div>

@@ -1,8 +1,13 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
 
 class Product(models.Model):
+    KIND_CHOICES = [
+        ('solution', 'Giải pháp AI'),
+        ('product', 'Sản phẩm'),
+    ]
     CATEGORY_CHOICES = [
         ('road_network', 'Giám sát Mạng lưới Đường bộ'),
         ('road_safety',  'An toàn Giao thông'),
@@ -15,6 +20,7 @@ class Product(models.Model):
     ]
 
     key            = models.SlugField(unique=True)
+    kind           = models.CharField(max_length=20, choices=KIND_CHOICES, default='solution')
     title          = models.CharField(max_length=200)
     subtitle       = models.CharField(max_length=200)
     icon           = models.CharField(max_length=50)
@@ -37,6 +43,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        name = 'san_pham_detail' if self.kind == 'product' else 'giai_phap_detail'
+        return reverse(name, args=[self.key])
 
 
 class NewsArticle(models.Model):

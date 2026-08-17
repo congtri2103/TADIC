@@ -135,7 +135,7 @@ PARTNERS = [
 # ─── Stats ────────────────────────────────────────────────────────────────────
 STATS = [
     {"label": "km đường đã khảo sát",           "target_value": 1800, "suffix": "+",  "icon": "fa-road",             "order": 1},
-    {"label": "Tác nhân AI trong hệ sinh thái",  "target_value": 14,   "suffix": "",   "icon": "fa-robot",            "order": 2},
+    {"label": "Sản phẩm & tác nhân AI trong hệ sinh thái", "target_value": 14, "suffix": "", "icon": "fa-robot", "order": 2},
     {"label": "Độ chính xác nhận diện",          "target_value": 96,   "suffix": "%",  "icon": "fa-bullseye",         "order": 3},
     {"label": "Tỉnh thành đang triển khai",      "target_value": 5,    "suffix": "+",  "icon": "fa-map-location-dot", "order": 4},
 ]

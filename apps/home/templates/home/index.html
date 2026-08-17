@@ -153,23 +153,48 @@
   </div>
 </section>
 
-<!-- Giải pháp AI -->
+<!-- Sản phẩm nền tảng VRoad.AI -->
+<section class="section section--white solution-home-section">
+  <div class="container solution-home-grid">
+    <figure class="solution-home-visual solution-ui-frame reveal">
+      <img src="{% static 'images/vroad/dashboard-tai-san.webp' %}"
+           alt="Bảng điều khiển VRoad.AI với dữ liệu tuyến, tài sản và lỗi"
+           width="1323" height="640" loading="lazy" decoding="async">
+      <figcaption>{{ sample_note }}</figcaption>
+    </figure>
+    <div class="solution-home-content reveal">
+      <p class="eyebrow"><i class="fa-solid fa-road"></i> Sản phẩm nền tảng</p>
+      <h2>{{ solution.name }}</h2>
+      <p class="solution-home-tagline">{{ solution.tagline }}</p>
+      <p class="solution-home-summary">{{ solution.summary }}</p>
+      <div class="solution-home-stats">
+        {% for stat in sample_stats|slice:":4" %}
+        <div class="solution-home-stat"><strong>{{ stat.value }}</strong><span>{{ stat.label }}</span></div>
+        {% endfor %}
+      </div>
+      <p class="solution-sample-note">{{ sample_note }}</p>
+      <a href="{% url 'san_pham_vroad' %}" class="btn btn--primary btn--lg">Khám phá sản phẩm VRoad.AI <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Danh sách giải pháp AI -->
 <section class="section section--white" id="giai-phap">
   <div class="container">
     <div class="section-head section-head--center reveal">
-      <p class="eyebrow"><i class="fa-solid fa-layer-group"></i> Hệ sinh thái TADIC</p>
-      <h2>14 Tác nhân AI chuyên dụng cho toàn vòng đời hạ tầng</h2>
-      <p class="section-head__desc">Mỗi tác nhân đảm nhiệm một nghiệp vụ chuyên biệt, được nhóm theo 3 trụ cột: giám sát mạng lưới, an toàn giao thông và tự động hóa quy trình.</p>
+      <p class="eyebrow"><i class="fa-solid fa-layer-group"></i> Giải pháp AI</p>
+      <h2>11 giải pháp AI chuyên dụng cho toàn vòng đời hạ tầng</h2>
+      <p class="section-head__desc">Mỗi giải pháp đảm nhiệm một nghiệp vụ chuyên biệt, được nhóm theo 3 trụ cột: giám sát mạng lưới, an toàn giao thông và tự động hóa quy trình.</p>
     </div>
 
-    {% regroup products by get_category_group_display as home_product_groups %}
+    {% regroup solutions by get_category_group_display as home_product_groups %}
     {% for group in home_product_groups %}
     <div class="products-category products-category--home reveal">
       <div class="category-heading category-heading--sm">
         <span class="category-heading__icon">
           <i class="fa-solid {% if 'Mạng lưới' in group.grouper %}fa-road{% elif 'An toàn' in group.grouper %}fa-shield-halved{% else %}fa-gears{% endif %}"></i>
         </span>
-        <div><p class="eyebrow">0{{ forloop.counter }} &middot; {{ group.list|length }} tác nhân</p><h3>{{ group.grouper }}</h3></div>
+        <div><p class="eyebrow">0{{ forloop.counter }} &middot; {{ group.list|length }} giải pháp</p><h3>{{ group.grouper }}</h3></div>
       </div>
       <div class="grid-4 product-grid reveal-group">
         {% for product in group.list %}
@@ -181,7 +206,7 @@
           <span class="product-card__tag">{{ product.tag }}</span>
           <h3>{{ product.title }}</h3>
           <p>{{ product.subtitle }}</p>
-          <a href="{% url 'san_pham_detail' product.key %}" class="link-arrow">
+          <a href="{{ product.get_absolute_url }}" class="link-arrow">
             Chi tiết <i class="fa-solid fa-arrow-right"></i>
           </a>
         </article>
@@ -191,7 +216,7 @@
     {% endfor %}
 
     <div class="section-actions reveal">
-      <a href="{% url 'tac_nhan_ai' %}" class="btn btn--outline">Xem toàn bộ Sản phẩm & Tác nhân AI <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="{% url 'giai_phap_list' %}" class="btn btn--outline">Xem toàn bộ Giải pháp <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -254,7 +279,7 @@
 </section>
 
 <!-- Đánh giá khách hàng -->
-<section class="section section--soft">
+<section class="section section--navy testimonials-home">
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow"><i class="fa-solid fa-comments"></i> Phản hồi</p>
@@ -313,7 +338,7 @@
     </div>
     <div class="cta-actions">
       <a href="{% url 'lien_he' %}" class="btn btn--white btn--lg" data-contact-modal>Đăng ký Demo Miễn phí <i class="fa-solid fa-arrow-right"></i></a>
-      <a href="{% url 'lien_he' %}" class="btn btn--white-outline btn--lg">Xem thông tin Liên hệ</a>
+      <a href="{% url 'lien_he' %}" class="btn btn--white-outline btn--lg">Xem thông tin Liên hệ <i class="fa-solid fa-address-card" aria-hidden="true"></i></a>
     </div>
   </div>
 </section>

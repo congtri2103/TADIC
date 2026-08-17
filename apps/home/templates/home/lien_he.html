@@ -7,7 +7,7 @@
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Liên hệ</span>
+      <a href="{% url 'home' %}"><i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Liên hệ</span>
     </nav>
   </div>
 </div>
@@ -73,11 +73,15 @@
           <label class="form-label" for="pProduct">Lĩnh vực quan tâm</label>
           <select class="form-control" id="pProduct" name="product_interest">
             <option value="all">-- Chọn lĩnh vực --</option>
-            <option value="road-vision-ai">AI.RAMS — Đánh giá hư hỏng và quản lý bảo trì đường bộ AI</option>
-            <option value="ats-camera">AI.NETRAM — Hệ thống giám sát video AI</option>
-            <option value="construction-monitoring">AI.Construction — Hệ thống giám sát công trình xây dựng AI</option>
-            <option value="ai-inspection">AI.DMS — Số hóa và quản lý hồ sơ tích hợp AI</option>
-            <option value="mobile-gis">Ứng dụng GIS di động</option>
+            <optgroup label="Sản phẩm">
+              <option value="road-vision-ai">AI.RAMS — Đánh giá hư hỏng và quản lý bảo trì đường bộ AI</option>
+              <option value="ai-inspection">Số hóa tài liệu — AI.DMS</option>
+              <option value="ats-camera">AI.NETRAM — Hệ thống giám sát video AI</option>
+              <option value="vroad-ai">Phần mềm quản lý tài sản — VRoad.AI</option>
+            </optgroup>
+            <optgroup label="Giải pháp AI">
+              {% for p in nav_solutions %}<option value="{{ p.key }}">{{ p.title }}</option>{% endfor %}
+            </optgroup>
             <option value="other">Yêu cầu khác / Hợp tác</option>
           </select>
         </div>

@@ -1,13 +1,13 @@
 {% extends 'home/base.html' %}
-{% block title %}Hệ sinh thái Sản phẩm & Tác nhân AI — TADIC{% endblock %}
-{% block meta_desc %}Khám phá AI.RAMS, AI.NETRAM và các tác nhân AI chuyên biệt của TADIC cho giám sát đường bộ, an toàn giao thông và tự động hóa quy trình quản lý hạ tầng.{% endblock %}
+{% block title %}Sản phẩm — TADIC{% endblock %}
+{% block meta_desc %}Khám phá 4 sản phẩm thương mại ứng dụng AI và số hóa của TADIC: AI.RAMS, Số hóa tài liệu, AI.NETRAM và VRoad.AI.{% endblock %}
 
 {% block content %}
 
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Tác nhân AI</span>
+      <a href="{% url 'home' %}"><i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Sản phẩm</span>
     </nav>
   </div>
 </div>
@@ -15,104 +15,47 @@
 <section class="page-hero">
   <div class="page-hero__grid" aria-hidden="true"></div>
   <div class="container page-hero__inner text-center reveal">
-    <p class="eyebrow"><i class="fa-solid fa-robot"></i> Tác nhân chuyên biệt</p>
-    <h1>Hệ sinh thái Sản phẩm & Tác nhân AI cho hạ tầng đường bộ</h1>
-    <p>AI.RAMS, AI.NETRAM và các tác nhân chuyên môn hỗ trợ phân tích dữ liệu đường bộ, an toàn giao thông và tự động hóa quy trình trong suốt vòng đời dự án.</p>
-  </div>
-</section>
-
-<section class="section section--soft">
-  <div class="container">
-    <div class="section-head section-head--center reveal">
-      <p class="eyebrow"><i class="fa-solid fa-diagram-project"></i> Cách thức hoạt động</p>
-      <h2>Từ dữ liệu thô đến thông tin có thể hành động</h2>
-      <p class="section-head__desc">Mỗi tác nhân đảm nhiệm một nghiệp vụ riêng nhưng cùng vận hành trên quy trình thống nhất, giúp dữ liệu hiện trường trở thành kết quả trực quan và dễ khai thác.</p>
-    </div>
-    <div class="process-steps">
-      <article class="process-step reveal">
-        <div class="process-step__rail"><span>01</span></div>
-        <div class="process-step__content">
-          <div class="process-step__icon"><i class="fa-solid fa-camera"></i></div>
-          <h3>Tiếp nhận dữ liệu</h3>
-          <p>Thu thập video camera hành trình, camera cố định, ảnh drone hoặc vệ tinh, dữ liệu GIS và tài liệu kỹ thuật.</p>
-        </div>
-      </article>
-      <article class="process-step reveal">
-        <div class="process-step__rail"><span>02</span></div>
-        <div class="process-step__content">
-          <div class="process-step__icon"><i class="fa-solid fa-microchip"></i></div>
-          <h3>Chuẩn hóa &amp; phân tích</h3>
-          <p>Dữ liệu được chuẩn hóa, gắn vị trí và thời gian trước khi AI nhận diện đối tượng, hiện trạng hoặc rủi ro liên quan.</p>
-        </div>
-      </article>
-      <article class="process-step reveal">
-        <div class="process-step__rail"><span>03</span></div>
-        <div class="process-step__content">
-          <div class="process-step__icon"><i class="fa-solid fa-robot"></i></div>
-          <h3>Tác nhân chuyên môn</h3>
-          <p>Từng tác nhân xử lý một nhiệm vụ cụ thể như mặt đường, tài sản, thi công, giao thông, an toàn hoặc hồ sơ.</p>
-        </div>
-      </article>
-      <article class="process-step reveal">
-        <div class="process-step__rail"><span>04</span></div>
-        <div class="process-step__content">
-          <div class="process-step__icon"><i class="fa-solid fa-chart-line"></i></div>
-          <h3>Bàn giao kết quả</h3>
-          <p>Kết quả được tổng hợp thành bản đồ, dashboard, cảnh báo ưu tiên, báo cáo hoặc dữ liệu tích hợp qua API.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="product-filter" aria-label="Lọc tác nhân AI">
-  <div class="container">
-    <div class="filter-tabs" role="group" aria-label="Nhóm tác nhân AI">
-      <button class="filter-tab active" type="button" data-filter="all" aria-pressed="true">Tất cả tác nhân</button>
-      <button class="filter-tab" type="button" data-filter="road_network" aria-pressed="false">Giám sát đường bộ</button>
-      <button class="filter-tab" type="button" data-filter="road_safety" aria-pressed="false">An toàn giao thông</button>
-      <button class="filter-tab" type="button" data-filter="workflow" aria-pressed="false">Tự động hóa</button>
-    </div>
+    <p class="eyebrow"><i class="fa-solid fa-box-open"></i> Sản phẩm TADIC</p>
+    <h1>Hệ sinh thái Sản phẩm cho hạ tầng đường bộ</h1>
+    <p>4 sản phẩm thương mại kết nối AI, dữ liệu và nền tảng quản lý để hỗ trợ số hóa toàn diện nghiệp vụ hạ tầng giao thông.</p>
   </div>
 </section>
 
 <section class="section section--white" id="danh-sach">
   <div class="container">
-    {% regroup products by get_category_group_display as product_groups %}
-    {% for group in product_groups %}
-    <section class="products-category reveal" data-category="{{ group.list.0.category_group }}">
-      <div class="category-heading">
-        <span class="category-heading__icon">
-          <i class="fa-solid {% if 'Mạng lưới' in group.grouper %}fa-map{% elif 'An toàn' in group.grouper %}fa-shield-halved{% else %}fa-arrow-right-arrow-left{% endif %}"></i>
-        </span>
-        <div><p class="eyebrow">TADIC</p><h2>{{ group.grouper }}</h2></div>
-      </div>
-      <div class="grid-4 product-grid">
-        {% for product in group.list %}
-        <article class="product-card reveal">
-          <div class="product-card__top">
-            <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
-            <span class="product-card__status status--{{ product.status }}">
-              {% if product.status == 'live' %}Đang hoạt động{% elif product.status == 'beta' %}Thử nghiệm{% else %}Sắp ra mắt{% endif %}
-            </span>
-          </div>
-          <span class="product-card__tag">{{ product.tag }}</span>
-          <h3>{{ product.title }}</h3>
-          <p>{{ product.subtitle }}</p>
-          <a href="{% url 'san_pham_detail' product.key %}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
-        </article>
-        {% endfor %}
-      </div>
-    </section>
-    {% endfor %}
-    <div class="filter-empty" hidden>Không có tác nhân phù hợp.</div>
+    <div class="grid-4 product-grid">
+      {% for product in products %}
+      <article class="product-card reveal">
+        <div class="product-card__top">
+          <div class="product-card__icon"><i class="fa-solid {{ product.icon }}"></i></div>
+          <span class="product-card__status status--{{ product.status }}">
+            {% if product.status == 'live' %}Đang hoạt động{% elif product.status == 'beta' %}Thử nghiệm{% else %}Sắp ra mắt{% endif %}
+          </span>
+        </div>
+        <span class="product-card__tag">{{ product.tag }}</span>
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.subtitle }}</p>
+        <a href="{{ product.get_absolute_url }}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+      {% endfor %}
+      <article class="product-card reveal">
+        <div class="product-card__top">
+          <div class="product-card__icon"><i class="fa-solid fa-road"></i></div>
+          <span class="product-card__status status--live">Đang hoạt động</span>
+        </div>
+        <span class="product-card__tag">Nền tảng quản lý tài sản</span>
+        <h3>Phần mềm quản lý tài sản</h3>
+        <p>VRoad.AI — Better roads, better future.</p>
+        <a href="{% url 'san_pham_vroad' %}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+    </div>
   </div>
 </section>
 
 <section class="cta-section">
   <div class="cta-section__pattern" aria-hidden="true"></div>
   <div class="container cta-section__inner reveal">
-    <div><h2>Bạn cần lựa chọn tác nhân phù hợp?</h2><p>Đội ngũ kỹ sư TADIC sẵn sàng hỗ trợ xác định nhóm tác nhân phù hợp với dữ liệu và nghiệp vụ của dự án.</p></div>
+    <div><h2><i class="fa-solid fa-box-open cta-heading__icon" aria-hidden="true"></i>Bạn cần lựa chọn sản phẩm phù hợp?</h2><p>Đội ngũ kỹ sư TADIC sẵn sàng tư vấn sản phẩm phù hợp với dữ liệu và nghiệp vụ của dự án.</p></div>
     <div class="cta-actions"><a href="{% url 'lien_he' %}" class="btn btn--white btn--lg" data-contact-modal>Liên hệ tư vấn <i class="fa-solid fa-arrow-right"></i></a></div>
   </div>
 </section>
