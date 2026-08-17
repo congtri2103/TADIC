@@ -44,49 +44,55 @@
           <ul class="nav__list" id="navList">
             <li><a href="{% url 'home' %}" class="nav__link {% if request.path == '/' %}active{% endif %}">Trang chủ</a></li>
             <li><a href="{% url 've_tadic' %}" class="nav__link {% if request.path == '/ve-tadic/' %}active{% endif %}">Về chúng tôi</a></li>
-            <li class="has-dropdown">
-              <div class="nav__item-wrap">
-                <a href="{% url 'giai_phap_vroad' %}" class="nav__link {% if '/giai-phap/vroad-ai/' in request.path %}active{% endif %}">Giải pháp</a>
-                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục giải pháp" aria-expanded="false">
-                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-                </button>
-              </div>
-              <div class="dropdown">
-                <a href="{% url 'giai_phap_vroad' %}" class="dropdown__solution">
-                  <span class="dropdown__solution-icon"><i class="fa-solid fa-road"></i></span>
-                  <span class="dropdown__solution-copy"><strong>VRoad.AI</strong><small>Better roads, better future.</small></span>
-                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
-                </a>
-              </div>
-            </li>
             <li class="has-dropdown has-dropdown--mega">
               <div class="nav__item-wrap">
-                <a href="{% url 'san_pham_list' %}" class="nav__link {% if request.path == '/tac-nhan-ai/' or '/san-pham/' in request.path %}active{% endif %}">Sản phẩm</a>
-                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục sản phẩm" aria-expanded="false">
+                <a href="{% url 'giai_phap_list' %}" class="nav__link {% if '/giai-phap/' in request.path %}active{% endif %}">Giải pháp</a>
+                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục giải pháp" aria-expanded="false">
                   <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
               </div>
               <div class="dropdown dropdown--mega">
                 <div class="mega-grid">
-                  {% regroup nav_products by category_group as nav_groups %}
+                  {% regroup nav_solutions by category_group as nav_groups %}
                   {% for group in nav_groups %}
                   <div class="mega-col">
                     <p class="mega-col__head">
                       <i class="fa-solid {% if group.grouper == 'road_network' %}fa-road{% elif group.grouper == 'road_safety' %}fa-shield-halved{% else %}fa-gears{% endif %}"></i>
                       {% if group.grouper == 'road_network' %}Giám sát Mạng lưới Đường bộ{% elif group.grouper == 'road_safety' %}An toàn Giao thông{% else %}Tự động hóa Quy trình{% endif %}
                     </p>
-                    {% if group.grouper == 'road_network' %}<span class="mega-col__badge">Thuộc giải pháp VRoad.AI</span>{% endif %}
                     <ul class="mega-col__list">
                       {% for p in group.list %}
-                      <li><a href="{% url 'san_pham_detail' p.key %}">{{ p.title }}<span>{{ p.subtitle|truncatechars:46 }}</span></a></li>
+                      <li><a href="{{ p.get_absolute_url }}">{{ p.title }}<span>{{ p.subtitle|truncatechars:46 }}</span></a></li>
                       {% endfor %}
                     </ul>
                   </div>
                   {% endfor %}
                 </div>
                 <div class="mega-dropdown__footer">
-                  <a href="{% url 'san_pham_list' %}" class="btn btn--outline btn--sm">Xem toàn bộ 14 sản phẩm <i class="fa-solid fa-arrow-right"></i></a>
+                  <a href="{% url 'giai_phap_list' %}" class="btn btn--outline btn--sm">Xem toàn bộ 11 giải pháp <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+              </div>
+            </li>
+            <li class="has-dropdown">
+              <div class="nav__item-wrap">
+                <a href="{% url 'san_pham_list' %}" class="nav__link {% if '/san-pham/' in request.path %}active{% endif %}">Sản phẩm</a>
+                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục sản phẩm" aria-expanded="false">
+                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="dropdown">
+                {% for p in nav_products %}
+                <a href="{{ p.get_absolute_url }}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid {{ p.icon }}"></i></span>
+                  <span class="dropdown__solution-copy"><strong>{{ p.title }}</strong><small>{{ p.subtitle|truncatechars:55 }}</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
+                {% endfor %}
+                <a href="{% url 'san_pham_vroad' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-road"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Phần mềm quản lý tài sản</strong><small>VRoad.AI — Better roads, better future.</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
               </div>
             </li>
             <li><a href="{% url 'du_an' %}" class="nav__link {% if '/du-an/' in request.path %}active{% endif %}">Dự án</a></li>
@@ -133,15 +139,13 @@
         <div class="footer-col">
           <h4>Giải pháp</h4>
           <ul class="footer-links">
-            <li><a href="{% url 'giai_phap_vroad' %}">VRoad.AI</a></li>
+            {% for p in nav_solutions|slice:":5" %}<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>{% endfor %}
+            <li><a href="{% url 'giai_phap_list' %}">Xem tất cả</a></li>
           </ul>
           <h4 class="footer-col__subhead">Sản phẩm</h4>
           <ul class="footer-links">
-            <li><a href="{% url 'san_pham_detail' 'road-vision-ai' %}">AI.RAMS</a></li>
-            <li><a href="{% url 'san_pham_detail' 'ats-camera' %}">AI.NETRAM</a></li>
-            <li><a href="{% url 'san_pham_detail' 'construction-monitoring' %}">AI.Construction</a></li>
-            <li><a href="{% url 'san_pham_detail' 'ai-inspection' %}">AI.DMS</a></li>
-            <li><a href="{% url 'home' %}#giai-phap">Ứng dụng GIS di động</a></li>
+            {% for p in nav_products %}<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>{% endfor %}
+            <li><a href="{% url 'san_pham_vroad' %}">Phần mềm quản lý tài sản</a></li>
           </ul>
         </div>
 
@@ -202,11 +206,15 @@
           <label class="form-label" for="modalProduct">Lĩnh vực quan tâm</label>
           <select class="form-control" id="modalProduct" name="product_interest">
             <option value="all">-- Chọn lĩnh vực --</option>
-            <option value="road-vision-ai">AI.RAMS — Đánh giá hư hỏng và quản lý bảo trì đường bộ AI</option>
-            <option value="ats-camera">AI.NETRAM — Hệ thống giám sát video AI</option>
-            <option value="construction-monitoring">AI.Construction — Hệ thống giám sát công trình xây dựng AI</option>
-            <option value="ai-inspection">AI.DMS — Số hóa và quản lý hồ sơ tích hợp AI</option>
-            <option value="mobile-gis">Ứng dụng GIS di động</option>
+            <optgroup label="Sản phẩm">
+              <option value="road-vision-ai">AI.RAMS — Đánh giá hư hỏng và quản lý bảo trì đường bộ AI</option>
+              <option value="ai-inspection">Số hóa tài liệu — AI.DMS</option>
+              <option value="ats-camera">AI.NETRAM — Hệ thống giám sát video AI</option>
+              <option value="vroad-ai">Phần mềm quản lý tài sản — VRoad.AI</option>
+            </optgroup>
+            <optgroup label="Giải pháp AI">
+              {% for p in nav_solutions %}<option value="{{ p.key }}">{{ p.title }}</option>{% endfor %}
+            </optgroup>
           </select>
         </div>
         <div class="form-group">

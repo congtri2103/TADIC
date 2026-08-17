@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Product, NewsArticle, Project, Testimonial, Partner, Stat
 
 # ── Static context data ────────────────────────────────────────────────────────
@@ -283,7 +283,8 @@ def _base_ctx():
         'solution':      VROAD_SOLUTION,
         'sample_stats':  VROAD_SAMPLE_STATS,
         'sample_note':   VROAD_SAMPLE_NOTE,
-        'nav_products':  Product.objects.filter(is_active=True),
+        'nav_solutions': Product.objects.filter(is_active=True, kind='solution'),
+        'nav_products':  Product.objects.filter(is_active=True, kind='product'),
     }
 
 
@@ -293,7 +294,7 @@ def home(request):
     """Trang chủ — Corporate overview."""
     ctx = _base_ctx()
     ctx.update({
-        'products':      Product.objects.filter(is_active=True),
+        'solutions':     Product.objects.filter(is_active=True, kind='solution'),
         'stats':         Stat.objects.all(),
         'news_articles': NewsArticle.objects.filter(is_published=True)[:3],
         'projects':      Project.objects.filter(is_active=True)[:4],
@@ -313,19 +314,30 @@ def ve_tadic(request):
     return render(request, 'home/ve_tadic.html', ctx)
 
 
-def san_pham_list(request):
-    """Danh sách sản phẩm và tác nhân AI."""
+def giai_phap_list(request):
+    """Danh sách các giải pháp AI chuyên biệt."""
     ctx = _base_ctx()
     ctx.update({
-        'products':      Product.objects.filter(is_active=True),
-        'page_title':    'Tác nhân AI',
-        'page_desc':     'Hệ sinh thái sản phẩm và tác nhân AI cho quản lý hạ tầng giao thông đường bộ.',
+        'products':   Product.objects.filter(is_active=True, kind='solution'),
+        'page_title': 'Giải pháp AI',
+        'page_desc':  'Hệ sinh thái giải pháp AI cho quản lý hạ tầng giao thông đường bộ.',
+    })
+    return render(request, 'home/giai_phap_list.html', ctx)
+
+
+def san_pham_list(request):
+    """Danh sách các sản phẩm thương mại của TADIC."""
+    ctx = _base_ctx()
+    ctx.update({
+        'products':   Product.objects.filter(is_active=True, kind='product'),
+        'page_title': 'Sản phẩm',
+        'page_desc':  'Các sản phẩm thương mại ứng dụng AI và số hóa của TADIC.',
     })
     return render(request, 'home/san_pham.html', ctx)
 
 
-def giai_phap_vroad(request):
-    """Trang giới thiệu giải pháp nền tảng VRoad.AI."""
+def san_pham_vroad(request):
+    """Trang giới thiệu sản phẩm nền tảng VRoad.AI."""
     products_by_key = {
         product.key: product
         for product in Product.objects.filter(
@@ -351,25 +363,39 @@ def giai_phap_vroad(request):
         'asset_groups': VROAD_ASSET_GROUPS,
         'ui_images': VROAD_UI_IMAGES,
     })
-    return render(request, 'home/giai_phap_vroad.html', ctx)
+    return render(request, 'home/san_pham_vroad.html', ctx)
 
 
-def san_pham_detail(request, key):
-    """Chi tiết sản phẩm."""
-    product  = get_object_or_404(Product, key=key, is_active=True)
-    related  = Product.objects.filter(
-        is_active=True, category_group=product.category_group
+def _product_detail(request, key, expected_kind):
+    product = get_object_or_404(Product, key=key, is_active=True)
+    if product.kind != expected_kind:
+        return redirect(product.get_absolute_url(), permanent=True)
+
+    related = Product.objects.filter(
+        is_active=True,
+        kind=product.kind,
+        category_group=product.category_group,
     ).exclude(pk=product.pk)[:3]
     ctx = _base_ctx()
     ctx.update({
-        'product':    product,
-        'related':    related,
-        'videos':     PRODUCT_VIDEOS.get(key, []),
+        'product': product,
+        'related': related,
+        'videos': PRODUCT_VIDEOS.get(key, []),
         'is_vroad_product': key in VROAD_SOLUTION['product_keys'],
         'page_title': product.title,
-        'page_desc':  product.subtitle,
+        'page_desc': product.subtitle,
     })
     return render(request, 'home/san_pham_detail.html', ctx)
+
+
+def giai_phap_detail(request, key):
+    """Chi tiết giải pháp AI; chuyển hướng nếu key thuộc danh mục sản phẩm."""
+    return _product_detail(request, key, 'solution')
+
+
+def san_pham_detail(request, key):
+    """Chi tiết sản phẩm; chuyển hướng nếu key thuộc danh mục giải pháp."""
+    return _product_detail(request, key, 'product')
 
 
 def du_an_list(request):

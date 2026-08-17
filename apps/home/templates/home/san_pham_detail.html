@@ -8,7 +8,11 @@
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
+      {% if product.kind == 'product' %}
       <a href="{% url 'san_pham_list' %}">Sản phẩm</a><i class="fa-solid fa-chevron-right"></i>
+      {% else %}
+      <a href="{% url 'giai_phap_list' %}">Giải pháp</a><i class="fa-solid fa-chevron-right"></i>
+      {% endif %}
       <span>{{ product.title }}</span>
     </nav>
   </div>
@@ -17,8 +21,8 @@
 {% if is_vroad_product %}
 <div class="product-solution-banner">
   <div class="container product-solution-banner__inner">
-    <span><i class="fa-solid fa-road"></i> Sản phẩm thuộc giải pháp VRoad.AI</span>
-    <a href="{% url 'giai_phap_vroad' %}">Khám phá giải pháp <i class="fa-solid fa-arrow-right"></i></a>
+    <span><i class="fa-solid fa-road"></i> {% if product.kind == 'product' %}Sản phẩm{% else %}Giải pháp{% endif %} tích hợp với VRoad.AI</span>
+    <a href="{% url 'san_pham_vroad' %}">Khám phá VRoad.AI <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 </div>
 {% endif %}
@@ -50,7 +54,7 @@
   <div class="container detail-layout">
     <div class="detail-content">
       <section class="detail-block reveal">
-        <div class="detail-block__heading"><span>01</span><h2>Mô tả giải pháp</h2></div>
+        <div class="detail-block__heading"><span>01</span><h2>Mô tả {% if product.kind == 'product' %}sản phẩm{% else %}giải pháp{% endif %}</h2></div>
         <div class="rich-copy">{{ product.description|linebreaks }}</div>
       </section>
 
@@ -99,7 +103,7 @@
       <div class="consult-card">
         <span class="consult-card__icon"><i class="fa-regular fa-comments"></i></span>
         <h3>Bạn muốn ứng dụng {{ product.title }}?</h3>
-        <p>Đội ngũ kỹ sư TADIC sẵn sàng demo thực tế giải pháp này trên chính dữ liệu tuyến đường của bạn.</p>
+        <p>Đội ngũ kỹ sư TADIC sẵn sàng demo thực tế {% if product.kind == 'product' %}sản phẩm{% else %}giải pháp{% endif %} này trên chính dữ liệu tuyến đường của bạn.</p>
         <a href="{% url 'lien_he' %}" class="btn btn--primary btn--full" data-contact-modal>Đăng ký Demo ngay <i class="fa-solid fa-arrow-right"></i></a>
         <a href="{% url 'lien_he' %}" class="btn btn--outline btn--full">Liên hệ phòng kinh doanh</a>
         <div class="consult-card__fit">
@@ -115,8 +119,12 @@
 <section class="section section--soft">
   <div class="container">
     <div class="section-layout section-layout--align-end">
-      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC</p><h2>Các tác nhân AI cùng nhóm</h2></div>
-      <a href="{% url 'tac_nhan_ai' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="section-head reveal"><p class="eyebrow"><i class="fa-solid fa-layer-group"></i> TADIC</p><h2>Các {% if product.kind == 'product' %}sản phẩm{% else %}giải pháp AI{% endif %} cùng nhóm</h2></div>
+      {% if product.kind == 'product' %}
+      <a href="{% url 'san_pham_list' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      {% else %}
+      <a href="{% url 'giai_phap_list' %}" class="link-arrow">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+      {% endif %}
     </div>
     <div class="grid-3">
       {% for rel in related %}
@@ -124,7 +132,7 @@
         <div class="product-card__top"><div class="product-card__icon"><i class="fa-solid {{ rel.icon }}"></i></div></div>
         <h3>{{ rel.title }}</h3>
         <p>{{ rel.subtitle }}</p>
-        <a href="{% url 'san_pham_detail' rel.key %}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="{{ rel.get_absolute_url }}" class="link-arrow">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
       </article>
       {% endfor %}
     </div>
