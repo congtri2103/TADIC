@@ -7,7 +7,7 @@
 <div class="breadcrumb-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="{% url 'home' %}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="{% url 'home' %}"><i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a><i class="fa-solid fa-chevron-right"></i>
       <a href="{% url 'tin_tuc_list' %}">Tin tức</a><i class="fa-solid fa-chevron-right"></i>
       <span>Chi tiết bài viết</span>
     </nav>
@@ -32,7 +32,7 @@
       <figure class="article-cover"><img src="{{ article.image_url }}" alt="{{ article.title }}"></figure>
       <div class="article-content">{{ article.content|safe }}</div>
       <div class="article-share">
-        <span>Chia sẻ bài viết:</span>
+        <span><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Chia sẻ bài viết:</span>
         <a href="#" data-share="facebook"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
         <a href="#" data-share="linkedin"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
       </div>
@@ -43,7 +43,7 @@
 {% if related %}
 <section class="section section--soft">
   <div class="container">
-    <div class="section-head section-head--center reveal"><h2>Tin tức liên quan</h2></div>
+    <div class="section-head section-head--center reveal"><h2><i class="fa-regular fa-newspaper heading-inline__icon" aria-hidden="true"></i>Tin tức liên quan</h2></div>
     <div class="grid-3">
       {% for rel in related %}
       <article class="news-card reveal">

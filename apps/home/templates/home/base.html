@@ -4,16 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#071f3d">
+  <meta name="theme-color" content="#000e1e">
   <title>{% block title %}Công ty Cổ phần Xây dựng và Công nghệ TADIC{% endblock %}</title>
   <meta name="description" content="{% block meta_desc %}TADIC tiên phong ứng dụng công nghệ AI và số hóa trong quản lý, bảo trì và phát triển hạ tầng giao thông đường bộ tại Việt Nam.{% endblock %}">
 
   <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base-crm-theme.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -127,7 +128,7 @@
         </div>
 
         <div class="footer-col">
-          <h4>Về chúng tôi</h4>
+          <h4><i class="fa-solid fa-building" aria-hidden="true"></i> Về chúng tôi</h4>
           <ul class="footer-links">
             <li><a href="{% url 've_tadic' %}">Câu chuyện TADIC</a></li>
             <li><a href="{% url 've_tadic' %}">Tầm nhìn &amp; Sứ mệnh</a></li>
@@ -137,12 +138,12 @@
         </div>
 
         <div class="footer-col">
-          <h4>Giải pháp</h4>
+          <h4><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Giải pháp</h4>
           <ul class="footer-links">
             {% for p in nav_solutions|slice:":5" %}<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>{% endfor %}
             <li><a href="{% url 'giai_phap_list' %}">Xem tất cả</a></li>
           </ul>
-          <h4 class="footer-col__subhead">Sản phẩm</h4>
+          <h4 class="footer-col__subhead"><i class="fa-solid fa-box-open" aria-hidden="true"></i> Sản phẩm</h4>
           <ul class="footer-links">
             {% for p in nav_products %}<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>{% endfor %}
             <li><a href="{% url 'san_pham_vroad' %}">Phần mềm quản lý tài sản</a></li>
@@ -150,7 +151,7 @@
         </div>
 
         <div class="footer-col footer-col--contact">
-          <h4>Liên hệ</h4>
+          <h4><i class="fa-solid fa-address-card" aria-hidden="true"></i> Liên hệ</h4>
           <ul class="footer-contact">
             <li><i class="fa-solid fa-location-dot"></i><span>Tầng 4, Tòa nhà LND Galaxy, Số 3 đường Galaxy 6, Phường Hà Đông, TP. Hà Nội</span></li>
             <li><i class="fa-solid fa-phone"></i><a href="tel:+842438123456">(024) 3812 3456</a></li>
