@@ -63,7 +63,7 @@ PROJECTS = [
     {
         "title": "Khảo sát Cao tốc Bắc–Nam (Đoạn Hà Nội – Đà Nẵng)",
         "description": "Triển khai hệ thống Road Vision AI khảo sát toàn tuyến Cao tốc Bắc–Nam đoạn Hà Nội – Đà Nẵng, tổng chiều dài hơn 560 km. Hệ thống phát hiện và phân loại hư hỏng mặt đường, tự động lập bản đồ nhiệt và báo cáo PCI đề xuất phương án bảo trì.",
-        "image_url": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=80",
+        "image_url": "/static/images/du_an_1.png",
         "tags": "Road Vision AI, GIS, PCI, Cao tốc",
         "order": 1,
         "is_active": True,
@@ -71,7 +71,7 @@ PROJECTS = [
     {
         "title": "Giám sát Quốc lộ 1A — Đà Nẵng đến Quảng Ngãi",
         "description": "Dự án số hóa toàn bộ tài sản hạ tầng và đánh giá tình trạng mặt đường trên 130 km Quốc lộ 1A. Kết quả được tích hợp trực tiếp vào hệ thống GIS của Sở GTVT Đà Nẵng và Quảng Ngãi, phục vụ lập kế hoạch bảo trì năm 2026–2027.",
-        "image_url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+        "image_url": "/static/images/du_an_2.png",
         "tags": "Road Vision AI, Kiểm kê tài sản, GIS, Quốc lộ",
         "order": 2,
         "is_active": True,
@@ -79,7 +79,7 @@ PROJECTS = [
     {
         "title": "ATS Camera System — Nút giao Trung tâm Hà Nội",
         "description": "Lắp đặt và vận hành 48 camera AI tại 12 nút giao thông trọng điểm ở trung tâm Hà Nội. Hệ thống tự động đếm lưu lượng, phân loại phương tiện, phát hiện vi phạm và kết nối với Trung tâm Điều hành Giao thông Đô thị Hà Nội (TOC).",
-        "image_url": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=80",
+        "image_url": "/static/images/du_an_3.png",
         "tags": "ATS Camera, ITS, Giao thông đô thị, Hà Nội",
         "order": 3,
         "is_active": True,
@@ -87,7 +87,7 @@ PROJECTS = [
     {
         "title": "Số hóa Hạ tầng Cầu Thuận Phước — Đà Nẵng",
         "description": "Kiểm định và số hóa toàn bộ kết cấu Cầu Thuận Phước dài 1.856m bằng công nghệ quét 3D LiDAR kết hợp AI. Xây dựng hồ sơ Digital Twin cầu, bao gồm lịch sử bảo trì, tình trạng kết cấu và kế hoạch sửa chữa định kỳ tích hợp với phần mềm BMS.",
-        "image_url": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=80",
+        "image_url": "/static/images/du_an_4.png",
         "tags": "Digital Twin, LiDAR, BMS, Cầu đường",
         "order": 4,
         "is_active": True,
