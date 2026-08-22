@@ -192,6 +192,9 @@
     <a href="{% url 'cms-contact-list' %}" class="sidebar__link {% if 'contact' in request.resolver_match.url_name %}active{% endif %}">
       <i class="fa-solid fa-inbox"></i> Liên hệ
     </a>
+    <a href="{% url 'cms-vanban-list' %}" class="sidebar__link {% if 'vanban' in request.resolver_match.url_name %}active{% endif %}">
+      <i class="fa-solid fa-scale-balanced"></i> Văn bản pháp lý
+    </a>
     {% if profile.is_admin %}
     <div class="sidebar__group">Quản trị</div>
     <a href="{% url 'user-list' %}" class="sidebar__link {% if 'user' in request.resolver_match.url_name %}active{% endif %}">

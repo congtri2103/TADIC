@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'home',
     'career',
     'contact',
+    'legalvb',
 ]
 
 MIDDLEWARE = [

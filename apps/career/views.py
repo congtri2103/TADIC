@@ -9,6 +9,7 @@ from .forms import LoginForm, ProductForm, NewsArticleForm, ProjectForm, UserCre
 from .models import EmployeeProfile
 from home.models import Product, NewsArticle, Project
 from contact.models import ContactSubmission
+from legalvb.models import VanBanPhapLuat
 
 
 class CustomLoginView(LoginView):
@@ -312,6 +313,34 @@ def contact_delete(request, pk):
     get_object_or_404(ContactSubmission, pk=pk).delete()
     messages.success(request, 'Đã xóa liên hệ.')
     return redirect('cms-contact-list')
+
+
+# ==================== VĂN BẢN PHÁP LUẬT ====================
+
+@login_required
+@role_required('reviewer')
+def vanban_list(request):
+    profile = _get_profile(request.user)
+    van_bans = VanBanPhapLuat.objects.all()
+    return render(request, 'career/cms/vanban_list.html', {'profile': profile, 'van_bans': van_bans})
+
+
+@login_required
+@role_required('editor')
+def vanban_toggle_hien_thi(request, pk):
+    vb = get_object_or_404(VanBanPhapLuat, pk=pk)
+    vb.hien_thi = not vb.hien_thi
+    vb.save(update_fields=['hien_thi'])
+    messages.success(request, 'Đã cập nhật trạng thái hiển thị.')
+    return redirect('cms-vanban-list')
+
+
+@login_required
+@role_required('admin')
+def vanban_delete(request, pk):
+    get_object_or_404(VanBanPhapLuat, pk=pk).delete()
+    messages.success(request, 'Đã xóa văn bản.')
+    return redirect('cms-vanban-list')
 
 
 # ==================== USER MANAGEMENT ====================

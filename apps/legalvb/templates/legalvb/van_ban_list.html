@@ -1,0 +1,55 @@
+{% extends 'home/base.html' %}
+{% block title %}Văn bản pháp lý — TADIC{% endblock %}
+{% block meta_desc %}{{ page_desc }}{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}"><i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a><i class="fa-solid fa-chevron-right"></i><span>Văn bản pháp lý</span>
+    </nav>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero__grid" aria-hidden="true"></div>
+  <div class="container page-hero__inner text-center reveal">
+    <p class="eyebrow"><i class="fa-solid fa-scale-balanced"></i> Cập nhật pháp lý</p>
+    <h1>Văn bản pháp lý</h1>
+    <p>{{ page_desc }}</p>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="van-ban-list">
+      {% for vb in van_bans %}
+      <article class="van-ban-card reveal">
+        <div class="van-ban-card__head">
+          <span class="badge {% if vb.trang_thai_hieu_luc == 'con_hieu_luc' %}badge--success{% elif vb.trang_thai_hieu_luc == 'het_hieu_luc' %}badge--danger{% else %}badge--muted{% endif %}">
+            {{ vb.get_trang_thai_hieu_luc_display }}
+          </span>
+          {% if vb.uu_tien %}<span class="badge badge--primary"><i class="fa-solid fa-star"></i> Ưu tiên TADIC</span>{% endif %}
+        </div>
+        <h2>{{ vb.so_hieu }}</h2>
+        <p>{{ vb.trich_yeu }}</p>
+        <div class="van-ban-card__meta">
+          {% if vb.loai_vb %}<span><i class="fa-regular fa-file-lines"></i> {{ vb.loai_vb }}</span>{% endif %}
+          {% if vb.co_quan_ban_hanh %}<span><i class="fa-regular fa-building"></i> {{ vb.co_quan_ban_hanh }}</span>{% endif %}
+          {% if vb.ngay_ban_hanh %}<span><i class="fa-regular fa-calendar"></i> Ban hành {{ vb.ngay_ban_hanh|date:"d/m/Y" }}</span>{% endif %}
+          {% if vb.ngay_hieu_luc %}<span><i class="fa-regular fa-circle-check"></i> Hiệu lực {{ vb.ngay_hieu_luc|date:"d/m/Y" }}</span>{% endif %}
+        </div>
+        <div class="van-ban-card__links">
+          {% if vb.url_goc %}<a href="{{ vb.url_goc }}" target="_blank" rel="noopener" class="link-arrow">Xem văn bản gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}
+          {% if vb.url_file %}<a href="{{ vb.url_file }}" target="_blank" rel="noopener" class="link-arrow">Tải file đính kèm <i class="fa-solid fa-file-arrow-down"></i></a>{% endif %}
+        </div>
+      </article>
+      {% empty %}
+      <div class="empty-state empty-state--wide"><i class="fa-regular fa-folder-open"></i><p>Chưa có văn bản nào được cập nhật.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

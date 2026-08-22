@@ -32,6 +32,11 @@ urlpatterns = [
     path('cms/contacts/', views.contact_list, name='cms-contact-list'),
     path('cms/contacts/<int:pk>/delete/', views.contact_delete, name='cms-contact-delete'),
 
+    # CMS: Văn bản pháp luật
+    path('cms/vanban/', views.vanban_list, name='cms-vanban-list'),
+    path('cms/vanban/<int:pk>/toggle/', views.vanban_toggle_hien_thi, name='cms-vanban-toggle'),
+    path('cms/vanban/<int:pk>/delete/', views.vanban_delete, name='cms-vanban-delete'),
+
     # User Management
     path('users/', views.user_list, name='user-list'),
     path('users/add/', views.user_create, name='user-create'),

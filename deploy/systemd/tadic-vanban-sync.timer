@@ -1,0 +1,10 @@
+[Unit]
+Description=Chạy tadic-vanban-sync mỗi 6 giờ
+
+[Timer]
+OnCalendar=*-*-* 0/6:00:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
