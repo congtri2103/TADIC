@@ -15,7 +15,7 @@ NEWS = [
         "title": "AI và Thị giác máy tính đang thay đổi ngành khảo sát đường bộ ra sao?",
         "date": date(2026, 6, 15),
         "author": "Đội ngũ R&D TADIC",
-        "image_url": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&q=80",
+        "image_url": "/static/images/tintuc3.jpg",
         "summary": "Từ nhân công đi bộ dọc tuyến đến camera AI 4K xử lý 60 FPS — công nghệ thị giác máy tính đang cách mạng hóa hoàn toàn công tác kiểm định mặt đường tại Việt Nam.",
         "content": """<p>Trước đây, công tác khảo sát chất lượng mặt đường tại Việt Nam chủ yếu dựa vào lực lượng nhân công đi bộ dọc tuyến đường hoặc di chuyển bằng ô tô với tốc độ chậm để quan sát bằng mắt thường. Phương pháp này không chỉ tốn kém thời gian, chi phí mà còn tiềm ẩn nguy cơ mất an toàn giao thông rất lớn cho cán bộ kiểm định.</p>
 <h3>Ứng dụng mô hình Deep Learning YOLOv8 trong phát hiện hư hỏng</h3>
@@ -30,7 +30,7 @@ NEWS = [
         "title": "Lộ trình số hóa 100% dữ liệu tài sản hạ tầng giao thông đến năm 2030",
         "date": date(2026, 5, 28),
         "author": "Ban Tư vấn Chuyển đổi số TADIC",
-        "image_url": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=900&q=80",
+        "image_url": "/static/images/tintuc2.jpg",
         "summary": "Chiến lược chuyển đổi số ngành GTVT đặt mục tiêu số hóa toàn bộ hệ thống đường bộ, cầu và hầm. TADIC đồng hành cùng Sở GTVT xây dựng Digital Twin hạ tầng quốc gia.",
         "content": """<p>Quyết định của Chính phủ và Bộ GTVT về Chiến lược Chuyển đổi số ngành Giao thông vận tải đặt ra mục tiêu số hóa toàn bộ hệ thống đường bộ, cầu, hầm và tài sản hạ tầng trên toàn quốc. Việc sở hữu một Cơ sở dữ liệu số tập trung (Digital Twin) là nền tảng cốt lõi cho Đô thị thông minh.</p>
 <h3>Xây dựng mô hình Song sinh số (Digital Twin) đường bộ</h3>
@@ -45,7 +45,7 @@ NEWS = [
         "title": "TADIC mở rộng triển khai hệ thống ATS Camera System tại 5 tỉnh thành",
         "date": date(2026, 5, 10),
         "author": "Phòng Dự án ITS TADIC",
-        "image_url": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=80",
+        "image_url": "/static/images/tintuc1.jpg",
         "summary": "Sau giai đoạn thử nghiệm thành công tại Hà Nội và TP. HCM, TADIC mở rộng ký kết ATS Camera System cho 5 tỉnh: Đà Nẵng, Quảng Ninh, Bình Dương, Đồng Nai và Hải Phòng.",
         "content": """<p>Sau giai đoạn thử nghiệm thành công tại Hà Nội và TP. Hồ Chí Minh, TADIC chính thức mở rộng ký kết triển khai hệ thống <strong>ATS Camera System</strong> cho 5 tỉnh thành trọng điểm gồm Đà Nẵng, Quảng Ninh, Bình Dương, Đồng Nai và Hải Phòng.</p>
 <h3>Cảnh báo tức thời sự cố và tắc nghẽn giao thông</h3>
