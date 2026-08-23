@@ -1,0 +1,16 @@
+[Unit]
+Description=TADIC — Đồng bộ văn bản pháp luật (Legal Doc Sync)
+After=network.target postgresql.service
+
+[Service]
+Type=oneshot
+User=tadic
+Group=www-data
+WorkingDirectory=/var/www/tadic
+EnvironmentFile=/var/www/tadic/.env
+Environment=PYTHONUNBUFFERED=1
+
+ExecStart=/var/www/tadic/.venv/bin/python manage.py sync_vanban
+
+NoNewPrivileges=true
+PrivateTmp=true

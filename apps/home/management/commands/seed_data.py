@@ -15,7 +15,7 @@ NEWS = [
         "title": "AI và Thị giác máy tính đang thay đổi ngành khảo sát đường bộ ra sao?",
         "date": date(2026, 6, 15),
         "author": "Đội ngũ R&D TADIC",
-        "image_url": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&q=80",
+        "image_url": "/static/images/tintuc3.jpg",
         "summary": "Từ nhân công đi bộ dọc tuyến đến camera AI 4K xử lý 60 FPS — công nghệ thị giác máy tính đang cách mạng hóa hoàn toàn công tác kiểm định mặt đường tại Việt Nam.",
         "content": """<p>Trước đây, công tác khảo sát chất lượng mặt đường tại Việt Nam chủ yếu dựa vào lực lượng nhân công đi bộ dọc tuyến đường hoặc di chuyển bằng ô tô với tốc độ chậm để quan sát bằng mắt thường. Phương pháp này không chỉ tốn kém thời gian, chi phí mà còn tiềm ẩn nguy cơ mất an toàn giao thông rất lớn cho cán bộ kiểm định.</p>
 <h3>Ứng dụng mô hình Deep Learning YOLOv8 trong phát hiện hư hỏng</h3>
@@ -30,7 +30,7 @@ NEWS = [
         "title": "Lộ trình số hóa 100% dữ liệu tài sản hạ tầng giao thông đến năm 2030",
         "date": date(2026, 5, 28),
         "author": "Ban Tư vấn Chuyển đổi số TADIC",
-        "image_url": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=900&q=80",
+        "image_url": "/static/images/tintuc2.jpg",
         "summary": "Chiến lược chuyển đổi số ngành GTVT đặt mục tiêu số hóa toàn bộ hệ thống đường bộ, cầu và hầm. TADIC đồng hành cùng Sở GTVT xây dựng Digital Twin hạ tầng quốc gia.",
         "content": """<p>Quyết định của Chính phủ và Bộ GTVT về Chiến lược Chuyển đổi số ngành Giao thông vận tải đặt ra mục tiêu số hóa toàn bộ hệ thống đường bộ, cầu, hầm và tài sản hạ tầng trên toàn quốc. Việc sở hữu một Cơ sở dữ liệu số tập trung (Digital Twin) là nền tảng cốt lõi cho Đô thị thông minh.</p>
 <h3>Xây dựng mô hình Song sinh số (Digital Twin) đường bộ</h3>
@@ -45,7 +45,7 @@ NEWS = [
         "title": "TADIC mở rộng triển khai hệ thống ATS Camera System tại 5 tỉnh thành",
         "date": date(2026, 5, 10),
         "author": "Phòng Dự án ITS TADIC",
-        "image_url": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=80",
+        "image_url": "/static/images/tintuc1.jpg",
         "summary": "Sau giai đoạn thử nghiệm thành công tại Hà Nội và TP. HCM, TADIC mở rộng ký kết ATS Camera System cho 5 tỉnh: Đà Nẵng, Quảng Ninh, Bình Dương, Đồng Nai và Hải Phòng.",
         "content": """<p>Sau giai đoạn thử nghiệm thành công tại Hà Nội và TP. Hồ Chí Minh, TADIC chính thức mở rộng ký kết triển khai hệ thống <strong>ATS Camera System</strong> cho 5 tỉnh thành trọng điểm gồm Đà Nẵng, Quảng Ninh, Bình Dương, Đồng Nai và Hải Phòng.</p>
 <h3>Cảnh báo tức thời sự cố và tắc nghẽn giao thông</h3>
@@ -63,7 +63,7 @@ PROJECTS = [
     {
         "title": "Khảo sát Cao tốc Bắc–Nam (Đoạn Hà Nội – Đà Nẵng)",
         "description": "Triển khai hệ thống Road Vision AI khảo sát toàn tuyến Cao tốc Bắc–Nam đoạn Hà Nội – Đà Nẵng, tổng chiều dài hơn 560 km. Hệ thống phát hiện và phân loại hư hỏng mặt đường, tự động lập bản đồ nhiệt và báo cáo PCI đề xuất phương án bảo trì.",
-        "image_url": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=80",
+        "image_url": "/static/images/du_an_1.png",
         "tags": "Road Vision AI, GIS, PCI, Cao tốc",
         "order": 1,
         "is_active": True,
@@ -71,7 +71,7 @@ PROJECTS = [
     {
         "title": "Giám sát Quốc lộ 1A — Đà Nẵng đến Quảng Ngãi",
         "description": "Dự án số hóa toàn bộ tài sản hạ tầng và đánh giá tình trạng mặt đường trên 130 km Quốc lộ 1A. Kết quả được tích hợp trực tiếp vào hệ thống GIS của Sở GTVT Đà Nẵng và Quảng Ngãi, phục vụ lập kế hoạch bảo trì năm 2026–2027.",
-        "image_url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+        "image_url": "/static/images/du_an_2.png",
         "tags": "Road Vision AI, Kiểm kê tài sản, GIS, Quốc lộ",
         "order": 2,
         "is_active": True,
@@ -79,7 +79,7 @@ PROJECTS = [
     {
         "title": "ATS Camera System — Nút giao Trung tâm Hà Nội",
         "description": "Lắp đặt và vận hành 48 camera AI tại 12 nút giao thông trọng điểm ở trung tâm Hà Nội. Hệ thống tự động đếm lưu lượng, phân loại phương tiện, phát hiện vi phạm và kết nối với Trung tâm Điều hành Giao thông Đô thị Hà Nội (TOC).",
-        "image_url": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=80",
+        "image_url": "/static/images/du_an_3.png",
         "tags": "ATS Camera, ITS, Giao thông đô thị, Hà Nội",
         "order": 3,
         "is_active": True,
@@ -87,7 +87,7 @@ PROJECTS = [
     {
         "title": "Số hóa Hạ tầng Cầu Thuận Phước — Đà Nẵng",
         "description": "Kiểm định và số hóa toàn bộ kết cấu Cầu Thuận Phước dài 1.856m bằng công nghệ quét 3D LiDAR kết hợp AI. Xây dựng hồ sơ Digital Twin cầu, bao gồm lịch sử bảo trì, tình trạng kết cấu và kế hoạch sửa chữa định kỳ tích hợp với phần mềm BMS.",
-        "image_url": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=80",
+        "image_url": "/static/images/du_an_4.png",
         "tags": "Digital Twin, LiDAR, BMS, Cầu đường",
         "order": 4,
         "is_active": True,

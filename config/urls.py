@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('contact/', include('contact.urls')),
     path('career/', include('career.urls')),
+    path('van-ban-phap-ly/', include('legalvb.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

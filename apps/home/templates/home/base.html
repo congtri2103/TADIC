@@ -98,6 +98,7 @@
             </li>
             <li><a href="{% url 'du_an' %}" class="nav__link {% if '/du-an/' in request.path %}active{% endif %}">Dự án</a></li>
             <li><a href="{% url 'tin_tuc_list' %}" class="nav__link {% if '/tin-tuc/' in request.path %}active{% endif %}">Tin tức</a></li>
+            <li><a href="{% url 'van_ban_list' %}" class="nav__link {% if '/van-ban-phap-ly/' in request.path %}active{% endif %}">Văn bản pháp lý</a></li>
             <li class="nav__cta-item">
               <a href="{% url 'lien_he' %}" class="btn btn--primary btn--sm" data-contact-modal>Liên hệ <i class="fa-solid fa-arrow-right"></i></a>
             </li>
@@ -134,6 +135,7 @@
             <li><a href="{% url 've_tadic' %}">Tầm nhìn &amp; Sứ mệnh</a></li>
             <li><a href="{% url 'du_an' %}">Dự án tiêu biểu</a></li>
             <li><a href="{% url 'tin_tuc_list' %}">Tin tức &amp; Công nghệ</a></li>
+            <li><a href="{% url 'van_ban_list' %}">Văn bản pháp lý</a></li>
           </ul>
         </div>
 

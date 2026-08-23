@@ -1,0 +1,44 @@
+{% extends 'career/cms_base.html' %}
+{% block title %}Văn bản pháp lý — TADIC CMS{% endblock %}
+{% block page_title %}Văn bản pháp lý{% endblock %}
+{% block breadcrumb %}CMS / Văn bản pháp lý{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card__header">
+    <span class="card__title">{{ van_bans|length }} văn bản (đồng bộ tự động)</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Số hiệu</th><th>Trích yếu</th><th>Ngày ban hành</th><th>Trạng thái</th><th>Ưu tiên</th><th>Nguồn</th><th>Hiển thị</th><th></th></tr></thead>
+      <tbody>
+        {% for vb in van_bans %}
+        <tr>
+          <td><strong>{{ vb.so_hieu }}</strong></td>
+          <td style="max-width:280px;"><span title="{{ vb.trich_yeu }}">{{ vb.trich_yeu|truncatewords:12 }}</span></td>
+          <td style="white-space:nowrap;">{{ vb.ngay_ban_hanh|date:"d/m/Y"|default:"—" }}</td>
+          <td><span class="badge badge--blue">{{ vb.get_trang_thai_hieu_luc_display }}</span></td>
+          <td>{% if vb.uu_tien %}<i class="fa-solid fa-star" style="color:var(--warning);"></i>{% else %}—{% endif %}</td>
+          <td>{{ vb.get_nguon_display }}</td>
+          <td>
+            <form method="post" action="{% url 'cms-vanban-toggle' vb.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn--sm {% if vb.hien_thi %}btn--outline{% else %}btn--primary{% endif %}">
+                {% if vb.hien_thi %}Đang hiện{% else %}Đang ẩn{% endif %}
+              </button>
+            </form>
+          </td>
+          <td>
+            {% if profile.can_delete %}
+            <a href="{% url 'cms-vanban-delete' vb.pk %}" class="btn btn--danger btn--sm" onclick="return confirm('Xóa văn bản này?')"><i class="fa-solid fa-trash"></i></a>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">Chưa có văn bản nào được đồng bộ</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
