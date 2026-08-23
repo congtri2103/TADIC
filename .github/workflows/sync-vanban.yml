@@ -1,0 +1,50 @@
+# Đồng bộ văn bản pháp lý mỗi 6 giờ.
+#
+# Vì sao không dùng Vercel Cron cho chu kỳ này: gói Hobby giới hạn cron 1
+# lần/ngày, lịch dày hơn sẽ fail ngay lúc deploy. Vercel Cron trong vercel.json
+# vẫn giữ làm lưới an toàn (1 lần/ngày) phòng khi workflow này bị tắt.
+#
+# Hai điều kiện để lịch chạy được:
+#   1. File này phải nằm trên NHÁNH MẶC ĐỊNH của repo — GitHub chỉ kích hoạt
+#      `schedule` từ nhánh mặc định, nằm ở nhánh khác sẽ không bao giờ chạy.
+#   2. Repo phải có secret CRON_SECRET trùng với biến cùng tên trên Vercel
+#      (Settings → Secrets and variables → Actions). Tạo secret cần quyền admin.
+#
+# Lưu ý: với repo public, GitHub tự tắt scheduled workflow sau 60 ngày không có
+# hoạt động nào — cần vào tab Actions bật lại.
+
+name: Đồng bộ văn bản pháp lý
+
+on:
+  schedule:
+    # Giờ UTC → 07:00, 13:00, 19:00, 01:00 giờ VN. GitHub chạy theo kiểu
+    # best-effort, giờ cao điểm có thể trễ vài chục phút.
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: sync-vanban
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Gọi endpoint đồng bộ
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SYNC_URL: https://tadic.vercel.app/van-ban-phap-ly/cron/sync/
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "::error::Chưa có secret CRON_SECRET trong repo này."
+            exit 1
+          fi
+          curl --fail-with-body --silent --show-error \
+               --retry 3 --retry-delay 20 --retry-all-errors \
+               --max-time 120 \
+               -H "Authorization: Bearer $CRON_SECRET" \
+               "$SYNC_URL" | tee response.json
+          echo
