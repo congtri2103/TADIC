@@ -1,3 +1,8 @@
+import hmac
+import io
+import os
+
+from django.core.management import call_command
 from django.http import JsonResponse
 from django.shortcuts import render
 from home.models import Product
@@ -59,3 +64,34 @@ def van_ban_api(request):
         for v in qs
     ]
     return JsonResponse({'count': len(data), 'results': data})
+
+
+def cron_sync(request):
+    """Endpoint cho Vercel Cron gọi định kỳ (xem `crons` trong vercel.json).
+
+    Vercel không có systemd timer như VPS, nên lịch đồng bộ được chạy bằng
+    Cron Job của Vercel — nó gọi URL này kèm header `Authorization: Bearer
+    $CRON_SECRET`. Bắt buộc phải có CRON_SECRET: nếu không, đây là một endpoint
+    mở cho phép bất kỳ ai kích hoạt fetch mạng + ghi DB + gửi cảnh báo.
+    """
+    secret = os.getenv('CRON_SECRET', '').strip()
+    if not secret:
+        return JsonResponse(
+            {'error': 'CRON_SECRET chưa được cấu hình trên môi trường này.'},
+            status=503,
+        )
+
+    if not hmac.compare_digest(request.headers.get('Authorization', ''), f'Bearer {secret}'):
+        return JsonResponse({'error': 'unauthorized'}, status=401)
+
+    out = io.StringIO()
+    try:
+        call_command('sync_vanban', stdout=out, stderr=out)
+    except Exception as exc:  # noqa: BLE001 — cron không được phép 500 vì lỗi nguồn
+        return JsonResponse({'ok': False, 'error': str(exc)}, status=502)
+
+    return JsonResponse({
+        'ok': True,
+        'total': VanBanPhapLuat.objects.count(),
+        'output': out.getvalue().strip().splitlines(),
+    })

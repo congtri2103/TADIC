@@ -21,13 +21,16 @@ def _ssl_context():
     return ctx
 
 
+# Feed "Giới thiệu văn bản mới" chính thức của Bộ Xây dựng. Là URL công khai,
+# không phải secret — để mặc định ngay trong code để mọi môi trường (VPS,
+# Vercel, máy dev) chạy được mà không cần khai báo thêm biến môi trường.
+DEFAULT_RSS_URL = 'https://moc.gov.vn/rss/1196/gioi-thieu-van-ban-moi.rss'
+
+
 def fetch_rss() -> list[dict]:
-    """Đọc RSS Bộ Xây dựng từ MOC_RSS_URL (env). Không raise — trả [] nếu
-    chưa cấu hình URL hoặc feed không đọc được (đổi cấu trúc/đổi URL)."""
-    url = os.getenv('MOC_RSS_URL', '').strip()
-    if not url:
-        logger.info('fetch_rss: MOC_RSS_URL chưa cấu hình, bỏ qua nguồn RSS.')
-        return []
+    """Đọc RSS Bộ Xây dựng (ghi đè bằng env MOC_RSS_URL nếu feed đổi địa chỉ).
+    Không raise — trả [] nếu feed không đọc được (đổi cấu trúc/đổi URL)."""
+    url = os.getenv('MOC_RSS_URL', '').strip() or DEFAULT_RSS_URL
 
     # Tự tải bytes bằng urllib (nhanh, ổn định) rồi mới đưa cho feedparser
     # parse thuần túy — để feedparser tự fetch qua http(s) rất chậm/không ổn
