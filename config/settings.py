@@ -115,6 +115,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+TEST_RUNNER = 'config.test_runner.AppsDiscoverRunner'
+
 LOGIN_URL = '/career/login/'
 LOGIN_REDIRECT_URL = '/career/dashboard/'
 LOGOUT_REDIRECT_URL = '/'

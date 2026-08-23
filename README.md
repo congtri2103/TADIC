@@ -452,6 +452,103 @@ certbot --nginx -d tadic.vn -d www.tadic.vn
 
 
 
+### Deploy lên Vercel (tadic.vercel.app)
+
+Vercel tự nhận diện Django và **tự chạy `collectstatic`**, nhưng **không chạy
+`migrate`**. Trước đây điều này làm trang `/van-ban-phap-ly/` trả về lỗi 500
+(`relation "legalvb_vanbanphapluat" does not exist`) sau khi thêm app `legalvb`.
+
+Nay bước migrate được gắn vào chính build của Vercel:
+
+| File | Vai trò |
+|------|---------|
+| `vercel.json` | khai báo `buildCommand: python vercel_build.py` |
+| `vercel_build.py` | `migrate --noinput` (lỗi ⇒ build fail, không deploy bản hỏng) + seed dữ liệu cho bảng rỗng |
+
+`vercel_build.py` chỉ seed những bảng **chưa có bản ghi nào**:
+
+- `seed_products` — khi có `key` trong seeder chưa tồn tại trong DB;
+- `seed_data` (NewsArticle, Project, Testimonial, Partner, Stat) — chỉ khi cả 5 bảng đều rỗng.
+
+Các lệnh seed dùng `update_or_create`, chạy vô điều kiện mỗi lần deploy sẽ **ghi
+đè nội dung biên tập viên sửa trong CMS**. Cổng "chỉ seed khi rỗng" khiến chúng
+tự tắt ngay sau lần khởi tạo đầu tiên — không bao giờ đụng vào dữ liệu đã có.
+
+```bash
+vercel --prod          # build sẽ tự chạy migrate lên DB production
+```
+
+**Không thể chạy migrate từ máy cá nhân**: biến `DATABASE_URL` trên Vercel được
+đánh dấu *Sensitive*, nên `vercel env pull` chỉ trả về `[SENSITIVE]`. Muốn chạy
+tay thì phải lấy connection string trực tiếp từ dashboard của nhà cung cấp
+PostgreSQL, rồi:
+
+```bash
+export DATABASE_URL='postgresql://...'
+python manage.py migrate
+```
+
+#### Đồng bộ văn bản pháp lý trên Vercel
+
+Nguồn dữ liệu là RSS chính thức "Giới thiệu văn bản mới" của Bộ Xây dựng
+(`https://moc.gov.vn/rss/1196/gioi-thieu-van-ban-moi.rss`) — đặt sẵn làm mặc định
+trong `apps/legalvb/fetch_rss.py`, chỉ cần khai báo env `MOC_RSS_URL` khi feed
+đổi địa chỉ. Nguồn thứ hai `ws.vbpl.vn` hiện không phản hồi (timeout ~20s mỗi
+lần gọi) nhưng không làm hỏng đồng bộ.
+
+Vercel không có systemd timer như VPS (`deploy/systemd/tadic-vanban-sync.timer`),
+nên lịch chạy dùng **Vercel Cron Job** khai báo trong `vercel.json`:
+
+```json
+"crons": [{ "path": "/van-ban-phap-ly/cron/sync/", "schedule": "0 1 * * *" }]
+```
+
+Endpoint `legalvb.views.cron_sync` bắt buộc header `Authorization: Bearer $CRON_SECRET`
+— Vercel tự gửi header này khi biến `CRON_SECRET` tồn tại. Không có secret thì
+endpoint trả 503, sai secret trả 401; nếu để mở, bất kỳ ai cũng kích hoạt được
+fetch mạng + ghi DB + gửi cảnh báo email/Zalo.
+
+```bash
+# Đặt secret (chỉ cần làm một lần)
+vercel env add CRON_SECRET production
+
+# Chạy tay khi cần
+curl -H "Authorization: Bearer $CRON_SECRET"      https://tadic.vercel.app/van-ban-phap-ly/cron/sync/
+```
+
+> **Giới hạn theo gói**: Hobby chỉ cho cron **1 lần/ngày** và sai số ±59 phút —
+> lịch dày hơn (VD `0 */6 * * *`) sẽ **fail ngay lúc deploy**.
+
+Vì vậy chu kỳ 6 giờ (giống `tadic-vanban-sync.timer` trên VPS) do **GitHub Actions**
+đảm nhiệm: `.github/workflows/sync-vanban.yml`. Cron của Vercel giữ nguyên 1
+lần/ngày làm lưới an toàn — endpoint idempotent nên chạy trùng không sao.
+
+Hai điều kiện để workflow chạy được:
+
+1. File phải nằm trên **nhánh mặc định** — GitHub chỉ kích hoạt `schedule` từ
+   nhánh mặc định, để ở nhánh khác sẽ không bao giờ chạy.
+2. Repo phải có secret `CRON_SECRET` (Settings → Secrets and variables → Actions)
+   trùng với biến cùng tên trên Vercel. **Tạo secret cần quyền admin repo** —
+   quyền push thôi là không đủ.
+
+Nếu không có quyền admin trên repo này, đặt cùng file đó vào một repo bạn sở hữu
+cũng chạy được — workflow chỉ gọi HTTP ra ngoài, không đụng gì tới mã nguồn.
+
+Chạy tay bất cứ lúc nào: tab **Actions → Đồng bộ văn bản pháp lý → Run workflow**
+(đã bật `workflow_dispatch`).
+
+> Với repo **public**, GitHub tự tắt scheduled workflow sau **60 ngày** không có
+> hoạt động nào; vào tab Actions bật lại.
+
+Lần deploy đầu tiên vào một DB trống, `vercel_build.py` cũng tự chạy `sync_vanban`
+một lần để không phải chờ tới lượt cron.
+
+> Checklist trước mỗi lần deploy: `python manage.py makemigrations --check --dry-run`
+> để chắc chắn không còn thay đổi model nào chưa tạo migration.
+
+---
+
+
 ## 📊 Dữ liệu sau khi seed
 
 | Model | Số bản ghi |
