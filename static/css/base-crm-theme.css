@@ -74,9 +74,19 @@ h1, h2 { font-weight: 800; }
 
 /* Header — compact, clean navigation like the reference page. */
 .utility-bar { display: none; }
+/* FIX: backdrop-filter đặt trực tiếp trên .header khiến nó trở thành
+   "containing block" cho MỌI phần tử con position:fixed (kể cả .nav — menu
+   mobile) — .nav bị định vị lệch theo khung .header thay vì theo cả màn
+   hình, khiến menu mobile mất tích khi mở. Chuyển blur/nền sang pseudo-
+   element ::before để .header không còn tác dụng phụ này. */
 .header {
-  background: rgba(255, 255, 255, .96);
   border-bottom: 1px solid rgba(0, 14, 30, .08);
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, .96);
   backdrop-filter: blur(16px);
 }
 .header.is-scrolled { box-shadow: 0 8px 28px rgba(0, 14, 30, .07); }
