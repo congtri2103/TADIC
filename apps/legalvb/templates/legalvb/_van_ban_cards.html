@@ -1,0 +1,22 @@
+{% for vb in van_ban_list %}
+<article class="van-ban-card reveal">
+  <div class="van-ban-card__head">
+    <span class="badge {% if vb.trang_thai_hieu_luc == 'con_hieu_luc' %}badge--success{% elif vb.trang_thai_hieu_luc == 'het_hieu_luc' %}badge--danger{% else %}badge--muted{% endif %}">
+      {{ vb.get_trang_thai_hieu_luc_display }}
+    </span>
+    {% if vb.uu_tien %}<span class="badge badge--primary"><i class="fa-solid fa-star"></i> Ưu tiên TADIC</span>{% endif %}
+  </div>
+  <h3>{{ vb.so_hieu }}</h3>
+  <p>{{ vb.trich_yeu }}</p>
+  <div class="van-ban-card__meta">
+    {% if vb.loai_vb %}<span><i class="fa-regular fa-file-lines"></i> {{ vb.loai_vb }}</span>{% endif %}
+    {% if vb.co_quan_ban_hanh %}<span><i class="fa-regular fa-building"></i> {{ vb.co_quan_ban_hanh }}</span>{% endif %}
+    {% if vb.ngay_ban_hanh %}<span><i class="fa-regular fa-calendar"></i> Ban hành {{ vb.ngay_ban_hanh|date:"d/m/Y" }}</span>{% endif %}
+    {% if vb.ngay_hieu_luc %}<span><i class="fa-regular fa-circle-check"></i> Hiệu lực {{ vb.ngay_hieu_luc|date:"d/m/Y" }}</span>{% endif %}
+  </div>
+  <div class="van-ban-card__links">
+    {% if vb.url_goc %}<a href="{{ vb.url_goc }}" target="_blank" rel="noopener" class="link-arrow">Xem văn bản gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}
+    {% if vb.url_file %}<a href="{{ vb.url_file }}" target="_blank" rel="noopener" class="link-arrow">Tải file đính kèm <i class="fa-solid fa-file-arrow-down"></i></a>{% endif %}
+  </div>
+</article>
+{% endfor %}

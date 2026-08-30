@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from legalvb import notify_email, notify_zalo
 from legalvb.fetch_rss import fetch_rss
 from legalvb.fetch_vbpl_api import fetch_vbpl
-from legalvb.filters import khop_tu_khoa, la_van_ban_bxd
+from legalvb.filters import khop_tu_khoa, la_van_ban_bxd, phan_nhom
 from legalvb.models import VanBanPhapLuat
 from legalvb.normalize import map_trang_thai
 
@@ -36,6 +36,8 @@ class Command(BaseCommand):
                 continue
 
             uu_tien = khop_tu_khoa(r['trich_yeu'])
+            nhom = phan_nhom(f"{r['trich_yeu']} {r['linh_vuc']}")
+            nhom_nghiep_vu_id, nhom_nghiep_vu_label = nhom if nhom else (None, None)
             obj, created = VanBanPhapLuat.objects.update_or_create(
                 so_hieu=r['so_hieu'],
                 ngay_ban_hanh=r['ngay_ban_hanh'],
@@ -50,6 +52,8 @@ class Command(BaseCommand):
                     'url_file': r['url_file'],
                     'nguon': r['nguon'],
                     'uu_tien': uu_tien,
+                    'nhom_nghiep_vu_id': nhom_nghiep_vu_id,
+                    'nhom_nghiep_vu_label': nhom_nghiep_vu_label,
                 },
             )
             if created:

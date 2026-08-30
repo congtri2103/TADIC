@@ -26,6 +26,8 @@ class VanBanPhapLuat(models.Model):
     url_file             = models.URLField(max_length=500, blank=True)
     nguon                = models.CharField(max_length=20, choices=NGUON_CHOICES)
     uu_tien              = models.BooleanField(default=False)
+    nhom_nghiep_vu_id     = models.CharField(max_length=50, blank=True, null=True)
+    nhom_nghiep_vu_label  = models.CharField(max_length=100, blank=True, null=True)
     hien_thi             = models.BooleanField(default=True)
     da_canh_bao          = models.BooleanField(default=False)
     ngay_thu_thap        = models.DateTimeField(auto_now_add=True)
@@ -38,6 +40,7 @@ class VanBanPhapLuat(models.Model):
         indexes = [
             models.Index(fields=['linh_vuc']),
             models.Index(fields=['-ngay_ban_hanh']),
+            models.Index(fields=['nhom_nghiep_vu_id']),
         ]
 
     def __str__(self):

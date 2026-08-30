@@ -21,35 +21,34 @@
   </div>
 </section>
 
-<section class="section section--soft">
+{% for nhom in nhom_list %}
+<section class="section vbpl-nhom {% cycle 'section--white' 'section--navy' %}" id="nhom-{{ nhom.id }}">
   <div class="container">
-    <div class="van-ban-list">
-      {% for vb in van_bans %}
-      <article class="van-ban-card reveal">
-        <div class="van-ban-card__head">
-          <span class="badge {% if vb.trang_thai_hieu_luc == 'con_hieu_luc' %}badge--success{% elif vb.trang_thai_hieu_luc == 'het_hieu_luc' %}badge--danger{% else %}badge--muted{% endif %}">
-            {{ vb.get_trang_thai_hieu_luc_display }}
-          </span>
-          {% if vb.uu_tien %}<span class="badge badge--primary"><i class="fa-solid fa-star"></i> Ưu tiên TADIC</span>{% endif %}
-        </div>
-        <h2>{{ vb.so_hieu }}</h2>
-        <p>{{ vb.trich_yeu }}</p>
-        <div class="van-ban-card__meta">
-          {% if vb.loai_vb %}<span><i class="fa-regular fa-file-lines"></i> {{ vb.loai_vb }}</span>{% endif %}
-          {% if vb.co_quan_ban_hanh %}<span><i class="fa-regular fa-building"></i> {{ vb.co_quan_ban_hanh }}</span>{% endif %}
-          {% if vb.ngay_ban_hanh %}<span><i class="fa-regular fa-calendar"></i> Ban hành {{ vb.ngay_ban_hanh|date:"d/m/Y" }}</span>{% endif %}
-          {% if vb.ngay_hieu_luc %}<span><i class="fa-regular fa-circle-check"></i> Hiệu lực {{ vb.ngay_hieu_luc|date:"d/m/Y" }}</span>{% endif %}
-        </div>
-        <div class="van-ban-card__links">
-          {% if vb.url_goc %}<a href="{{ vb.url_goc }}" target="_blank" rel="noopener" class="link-arrow">Xem văn bản gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}
-          {% if vb.url_file %}<a href="{{ vb.url_file }}" target="_blank" rel="noopener" class="link-arrow">Tải file đính kèm <i class="fa-solid fa-file-arrow-down"></i></a>{% endif %}
-        </div>
-      </article>
-      {% empty %}
-      <div class="empty-state empty-state--wide"><i class="fa-regular fa-folder-open"></i><p>Chưa có văn bản nào được cập nhật.</p></div>
-      {% endfor %}
+    {% if nhom.la_khac %}
+    <details class="vbpl-nhom__details">
+      <summary class="section-head vbpl-nhom__summary">
+        <h2>{{ nhom.label }} <span class="vbpl-nhom__count">({{ nhom.van_ban_list|length }})</span></h2>
+      </summary>
+      <div class="van-ban-list">
+        {% include 'legalvb/_van_ban_cards.html' with van_ban_list=nhom.van_ban_list %}
+      </div>
+    </details>
+    {% else %}
+    <div class="section-head">
+      <h2>{{ nhom.label }} <span class="vbpl-nhom__count">({{ nhom.van_ban_list|length }})</span></h2>
     </div>
+    <div class="van-ban-list">
+      {% include 'legalvb/_van_ban_cards.html' with van_ban_list=nhom.van_ban_list %}
+    </div>
+    {% endif %}
   </div>
 </section>
+{% empty %}
+<section class="section section--soft">
+  <div class="container">
+    <div class="empty-state empty-state--wide"><i class="fa-regular fa-folder-open"></i><p>Chưa có văn bản nào được cập nhật.</p></div>
+  </div>
+</section>
+{% endfor %}
 
 {% endblock %}

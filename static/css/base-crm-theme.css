@@ -4,26 +4,27 @@
    ========================================================================== */
 
 :root {
-  --primary: #116633;
-  --primary-rgb: 17, 102, 51;
-  --primary-dark: #0a4f27;
-  --primary-light: #8fffcc;
-  --primary-light-rgb: 143, 255, 204;
-  --primary-soft: #ebf7f0;
-  --accent: #116633;
-  --accent-rgb: 17, 102, 51;
-  --accent-dark: #0a4f27;
-  --accent-soft: #ebf7f0;
+  /* Màu brand — đổi từ xanh lá sang xanh dương #2559D8 theo mục 14.4 */
+  --primary: #2559D8;
+  --primary-rgb: 37, 89, 216;
+  --primary-dark: #1e47b0;
+  --primary-light: #a7c6ff;
+  --primary-light-rgb: 167, 198, 255;
+  --primary-soft: #eaf1fe;
+  --accent: #2559D8;
+  --accent-rgb: 37, 89, 216;
+  --accent-dark: #1e47b0;
+  --accent-soft: #eaf1fe;
   /* FIX: các section "tối" trong theme này dùng biến --navy/--navy-2/--navy-3
-     làm nền — trước đây là navy/đen (#000e1e...) nên dù đổi --primary sang
-     xanh lá, mọi section tối (hero, stats, page-hero, footer, icon nền tối...)
-     vẫn hiển thị đen/navy chứ không phải xanh lá. Đổi 3 biến này sang các sắc
-     xanh lá đậm để nhất quán với --primary, tự động áp dụng cho toàn bộ nơi
+     làm nền — trước đây là navy/đen (#000e1e...) nên dù đổi --primary, mọi
+     section tối (hero, stats, page-hero, footer, icon nền tối...) vẫn hiển
+     thị đen/navy chứ không phải màu brand. Đổi 3 biến này sang các sắc xanh
+     dương đậm để nhất quán với --primary, tự động áp dụng cho toàn bộ nơi
      đang dùng var(--navy)/var(--navy-2)/var(--navy-3) mà không cần sửa từng dòng. */
-  --navy: #0a4f27;
-  --navy-2: #073a1c;
-  --navy-3: #116633;
-  --blue: #116633;
+  --navy: #142f66;
+  --navy-2: #0b1d40;
+  --navy-3: #2559D8;
+  --blue: #2559D8;
   --surface: #ffffff;
   --surface-soft: #f6f7f5;
   --surface-blue: #f0f6f3;

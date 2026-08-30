@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 from django.test import TestCase
 
-from .filters import khop_tu_khoa, la_van_ban_bxd
+from .filters import khop_tu_khoa, la_van_ban_bxd, phan_nhom
 from .models import VanBanPhapLuat
 from .normalize import extract_so_hieu, from_rss_entry, map_trang_thai
 
@@ -23,6 +23,24 @@ class FiltersTest(TestCase):
 
     def test_khop_tu_khoa_khong_khop(self):
         self.assertFalse(khop_tu_khoa('Quy định về thuế thu nhập cá nhân'))
+
+
+class PhanNhomTest(TestCase):
+    def test_uu_tien_nhom_dung_bo_khi_khop_nhieu_nhom(self):
+        # Khớp cả duong_bo_cau lẫn bao_tri_tai_san -> chọn nhóm đứng trước.
+        self.assertEqual(
+            phan_nhom('Thông tư quy định về bảo trì đường bộ'),
+            ('duong_bo_cau', 'Đường bộ & Cầu'),
+        )
+
+    def test_nhom_tieu_chuan_quy_chuan(self):
+        self.assertEqual(
+            phan_nhom('Quy chuẩn kỹ thuật quốc gia QCVN...'),
+            ('tieu_chuan_quy_chuan', 'Tiêu chuẩn – Quy chuẩn (TCVN/QCVN)'),
+        )
+
+    def test_khong_khop_nhom_nao(self):
+        self.assertIsNone(phan_nhom('Nghị định về đầu tư công'))
 
 
 class NormalizeTest(TestCase):

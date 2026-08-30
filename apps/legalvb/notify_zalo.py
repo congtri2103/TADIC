@@ -20,7 +20,10 @@ def send_alert(records) -> None:
     if not records:
         return
 
-    lines = [f"{r.so_hieu} — {r.trich_yeu}" for r in records]
+    lines = [
+        f"{r.so_hieu} [{r.nhom_nghiep_vu_label or 'Khác'}] — {r.trich_yeu}"
+        for r in records
+    ]
     message = 'Văn bản pháp luật mới:\n' + '\n'.join(lines)
 
     webhook = os.getenv('ZALO_OA_WEBHOOK_URL', '').strip()
