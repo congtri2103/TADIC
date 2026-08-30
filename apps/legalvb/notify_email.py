@@ -16,7 +16,8 @@ def send_alert(records) -> None:
     lines = []
     for r in records:
         lines.append(
-            f"- {r.so_hieu} | {r.trich_yeu} | Ban hành: {r.ngay_ban_hanh or '?'} "
+            f"- {r.so_hieu} | Nhóm: {r.nhom_nghiep_vu_label or 'Khác'} | {r.trich_yeu} "
+            f"| Ban hành: {r.ngay_ban_hanh or '?'} "
             f"| Hiệu lực: {r.ngay_hieu_luc or '?'} | {r.url_goc or ''}"
         )
     body = 'Các văn bản pháp luật mới khớp từ khoá theo dõi của TADIC:\n\n' + '\n'.join(lines)

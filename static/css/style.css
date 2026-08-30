@@ -1031,10 +1031,19 @@ html.js .reveal.active { opacity: 1; transform: translateY(0); }
 .van-ban-card { padding: 24px 28px; border: 1px solid var(--border-soft); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-xs); transition: border-color var(--transition), box-shadow var(--transition); }
 .van-ban-card:hover { border-color: rgba(var(--primary-rgb), .38); box-shadow: var(--shadow-sm); }
 .van-ban-card__head { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-.van-ban-card h2 { margin-bottom: 8px; font-size: 1.15rem; color: var(--text-heading); }
+.van-ban-card h3 { margin-bottom: 8px; font-size: 1.15rem; color: var(--text-heading); }
 .van-ban-card__meta { display: flex; flex-wrap: wrap; gap: 14px; margin: 12px 0; font-size: .86rem; color: var(--text-muted); }
 .van-ban-card__meta i { margin-right: 5px; color: var(--primary); }
 .van-ban-card__links { display: flex; flex-wrap: wrap; gap: 20px; }
+
+/* Nhóm nghiệp vụ trên trang /van-ban-phap-ly (mục 6.1, 8) ---------------- */
+.vbpl-nhom__count { font-size: .55em; font-weight: 600; opacity: .65; }
+.vbpl-nhom__details summary { cursor: pointer; list-style: none; }
+.vbpl-nhom__details summary::-webkit-details-marker { display: none; }
+.vbpl-nhom__summary { display: flex; align-items: center; gap: 10px; }
+.vbpl-nhom__summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: .8rem; opacity: .6; transition: transform var(--transition); }
+.vbpl-nhom__details[open] .vbpl-nhom__summary::after { transform: rotate(180deg); }
+.vbpl-nhom__details .van-ban-list { margin-top: 24px; }
 .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: var(--radius-pill); font-size: .78rem; font-weight: 600; background: var(--surface-soft); color: var(--text-muted); }
 .badge--success { background: rgba(10, 159, 114, .12); color: var(--success); }
 .badge--danger { background: rgba(214, 32, 47, .1); color: var(--danger); }
