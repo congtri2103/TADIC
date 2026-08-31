@@ -3,7 +3,7 @@
   "buildCommand": "python vercel_build.py",
   "crons": [
     {
-      "path": "/van-ban-phap-ly/cron/sync/",
+      "path": "/van-ban-lien-quan/cron/sync/",
       "schedule": "0 1 * * *"
     }
   ]

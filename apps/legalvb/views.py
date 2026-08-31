@@ -52,7 +52,7 @@ def van_ban_list(request):
     ctx = _base_ctx()
     ctx.update({
         'nhom_list':  nhom_list,
-        'page_title': 'Văn bản pháp lý',
+        'page_title': 'Văn bản liên quan',
         'page_desc':  'Cập nhật Thông tư, Nghị định, QCVN, TCVN... liên quan đến đường bộ và hạ tầng giao thông do Bộ Xây dựng ban hành, gom theo từng nhóm nghiệp vụ.',
     })
     return render(request, 'legalvb/van_ban_list.html', ctx)
