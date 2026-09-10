@@ -34,7 +34,7 @@ NHOM_NGHIEP_VU = [
 ]
 NHOM_KHAC_ID, NHOM_KHAC_LABEL = "khac", "Khác"
 
-# Thứ tự hiển thị các section trên trang /van-ban-phap-ly.
+# Thứ tự hiển thị các section trên trang /van-ban-lien-quan.
 # "khac" luôn để cuối cùng.
 THU_TU_HIEN_THI_NHOM = [nhom_id for nhom_id, _, _ in NHOM_NGHIEP_VU] + [NHOM_KHAC_ID]
 

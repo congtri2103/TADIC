@@ -43,62 +43,55 @@
 
         <nav class="nav" aria-label="Điều hướng chính">
           <ul class="nav__list" id="navList">
-            <li><a href="{% url 'home' %}" class="nav__link {% if request.path == '/' %}active{% endif %}">Trang chủ</a></li>
-            <li><a href="{% url 've_tadic' %}" class="nav__link {% if request.path == '/ve-tadic/' %}active{% endif %}">Về chúng tôi</a></li>
-            <li class="has-dropdown has-dropdown--mega">
+            <li><a href="{% url 've_tadic' %}" class="nav__link {% if request.path == '/' or request.path == '/ve-tadic/' %}active{% endif %}">Giới thiệu</a></li>
+            <li class="has-dropdown">
               <div class="nav__item-wrap">
-                <a href="{% url 'giai_phap_list' %}" class="nav__link {% if '/giai-phap/' in request.path %}active{% endif %}">Giải pháp</a>
+                <a href="{% url 'giai_phap_list' %}" class="nav__link {% if '/giai-phap/' in request.path %}active{% endif %}">Giải pháp ứng dụng AI</a>
                 <button class="dropdown-toggle" type="button" aria-label="Mở danh mục giải pháp" aria-expanded="false">
                   <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
               </div>
-              <div class="dropdown dropdown--mega">
-                <div class="mega-grid">
-                  {% regroup nav_solutions by category_group as nav_groups %}
-                  {% for group in nav_groups %}
-                  <div class="mega-col">
-                    <p class="mega-col__head">
-                      <i class="fa-solid {% if group.grouper == 'road_network' %}fa-road{% elif group.grouper == 'road_safety' %}fa-shield-halved{% else %}fa-gears{% endif %}"></i>
-                      {% if group.grouper == 'road_network' %}Giám sát Mạng lưới Đường bộ{% elif group.grouper == 'road_safety' %}An toàn Giao thông{% else %}Tự động hóa Quy trình{% endif %}
-                    </p>
-                    <ul class="mega-col__list">
-                      {% for p in group.list %}
-                      <li><a href="{{ p.get_absolute_url }}">{{ p.title }}<span>{{ p.subtitle|truncatechars:46 }}</span></a></li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                  {% endfor %}
-                </div>
-                <div class="mega-dropdown__footer">
-                  <a href="{% url 'giai_phap_list' %}" class="btn btn--outline btn--sm">Xem toàn bộ 11 giải pháp <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-            </li>
-            <li class="has-dropdown">
-              <div class="nav__item-wrap">
-                <a href="{% url 'san_pham_list' %}" class="nav__link {% if '/san-pham/' in request.path %}active{% endif %}">Sản phẩm</a>
-                <button class="dropdown-toggle" type="button" aria-label="Mở danh mục sản phẩm" aria-expanded="false">
-                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-                </button>
-              </div>
               <div class="dropdown">
-                {% for p in nav_products %}
-                <a href="{{ p.get_absolute_url }}" class="dropdown__solution">
-                  <span class="dropdown__solution-icon"><i class="fa-solid {{ p.icon }}"></i></span>
-                  <span class="dropdown__solution-copy"><strong>{{ p.title }}</strong><small>{{ p.subtitle|truncatechars:55 }}</small></span>
+                <a href="{% url 'san_pham_detail' 'road-vision-ai' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-road-circle-exclamation"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Khảo sát và quản lý bảo trì đường bộ</strong><small>Nền tảng quản lý tài sản đường bộ tích hợp AI, GIS và dữ liệu khảo sát</small></span>
                   <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
                 </a>
-                {% endfor %}
-                <a href="{% url 'san_pham_vroad' %}" class="dropdown__solution">
-                  <span class="dropdown__solution-icon"><i class="fa-solid fa-road"></i></span>
-                  <span class="dropdown__solution-copy"><strong>Phần mềm quản lý tài sản</strong><small>VRoad.AI — Better roads, better future.</small></span>
+                <a href="{% url 'giai_phap_detail' 'road-bound' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-signs-post"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Thu thập và quản lý tài sản đường bộ</strong><small>Nền tảng định vị &amp; quản lý ranh giới hành lang an toàn giao thông</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'san_pham_detail' 'ats-camera' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-car-burst"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Giám sát lưu lượng và phân loại phương tiện đường bộ</strong><small>Phân tích lưu lượng và vận hành giao thông từ camera CCTV/IP</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'giai_phap_detail' 'road-beauty' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-broom"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Giám sát vệ sinh và mỹ quan đường phố</strong><small>Giám sát vệ sinh đô thị và mỹ quan đường phố bằng AI</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'giai_phap_detail' 'construction-monitoring' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-hard-hat"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Giám sát công trình xây dựng và nhà máy</strong><small>Theo dõi tiến độ và chất lượng thi công đường bộ</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'giai_phap_detail' 'contract-intelligence' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-scale-balanced"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Quản trị doanh nghiệp vừa và nhỏ</strong><small>Rà soát và quản lý hợp đồng xây dựng thông minh</small></span>
+                  <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'san_pham_detail' 'ai-inspection' %}" class="dropdown__solution">
+                  <span class="dropdown__solution-icon"><i class="fa-solid fa-file-contract"></i></span>
+                  <span class="dropdown__solution-copy"><strong>Số hóa và quản lý hồ sơ</strong><small>AI.DMS — số hóa và quản lý hồ sơ, báo cáo kiểm định tự động</small></span>
                   <i class="fa-solid fa-arrow-right dropdown__solution-arrow" aria-hidden="true"></i>
                 </a>
               </div>
             </li>
-            <li><a href="{% url 'du_an' %}" class="nav__link {% if '/du-an/' in request.path %}active{% endif %}">Dự án</a></li>
-            <li><a href="{% url 'tin_tuc_list' %}" class="nav__link {% if '/tin-tuc/' in request.path %}active{% endif %}">Tin tức</a></li>
-            <li><a href="{% url 'van_ban_list' %}" class="nav__link {% if '/van-ban-phap-ly/' in request.path %}active{% endif %}">Văn bản pháp lý</a></li>
+            <li><a href="{% url 'home' %}#video" class="nav__link">Video</a></li>
+            <li><a href="{% url 'tin_tuc_list' %}" class="nav__link {% if '/tin-tuc/' in request.path %}active{% endif %}">Tin tức &amp; sự kiện</a></li>
+            <li><a href="{% url 'van_ban_list' %}" class="nav__link {% if '/van-ban-lien-quan/' in request.path %}active{% endif %}">Văn bản liên quan</a></li>
             <li class="nav__cta-item">
               <a href="{% url 'lien_he' %}" class="btn btn--primary btn--sm" data-contact-modal>Liên hệ <i class="fa-solid fa-arrow-right"></i></a>
             </li>
@@ -135,7 +128,7 @@
             <li><a href="{% url 've_tadic' %}">Tầm nhìn &amp; Sứ mệnh</a></li>
             <li><a href="{% url 'du_an' %}">Dự án tiêu biểu</a></li>
             <li><a href="{% url 'tin_tuc_list' %}">Tin tức &amp; Công nghệ</a></li>
-            <li><a href="{% url 'van_ban_list' %}">Văn bản pháp lý</a></li>
+            <li><a href="{% url 'van_ban_list' %}">Văn bản liên quan</a></li>
           </ul>
         </div>
 

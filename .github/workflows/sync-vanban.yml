@@ -36,7 +36,7 @@ jobs:
       - name: Gọi endpoint đồng bộ
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
-          SYNC_URL: https://tadic.vercel.app/van-ban-phap-ly/cron/sync/
+          SYNC_URL: https://tadic.vercel.app/van-ban-lien-quan/cron/sync/
         run: |
           if [ -z "$CRON_SECRET" ]; then
             echo "::error::Chưa có secret CRON_SECRET trong repo này."
